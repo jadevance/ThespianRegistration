@@ -6,7 +6,7 @@
     "start": "node ./bin/www",
     "db:drop": "dropdb ThespianRegistration",
     "db:create": "createdb ThespianRegistration",
-    "db:schema": "clear; node tasks/load_schema.js",
+    "db:schema": "clear; node tasks/loadSchema.js",
     "db:seed": "clear; node tasks/seed.js",
     "db:reset": "npm run db:drop; npm run db:create; npm run db:schema;"
   },
@@ -23,7 +23,7 @@
     "express-session": "^1.14.0",
     "jade": "~1.11.0",
     "jquery": "^3.1.0",
-    "massive": "^3.2.1",
+    "massive": "~2.4.0",
     "morgan": "~1.8.1",
     "nodemon": "^1.10.0",
     "passport": "^0.3.2",
