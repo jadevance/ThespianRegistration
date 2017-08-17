@@ -12,7 +12,12 @@ var config = require("./config.js");
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-var app = express();
+var db = massive.connectSync({connectionString: config.connectionString});
+var app = module.exports = express();
+// var app = express();
+
+// database
+app.set('db', db);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

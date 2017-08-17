@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "db:drop": "dropdb AspirationalVegetables",
-    "db:create": "createdb AspirationalVegetables",
+    "db:drop": "dropdb ThespianRegistration",
+    "db:create": "createdb ThespianRegistration",
     "db:schema": "clear; node tasks/load_schema.js",
     "db:seed": "clear; node tasks/seed.js",
-    "db:reset": "npm run db:drop; npm run db:create; npm run db:schema; npm run db:seed"
+    "db:reset": "npm run db:drop; npm run db:create; npm run db:schema;"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
