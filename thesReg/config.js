@@ -1,7 +1,9 @@
 var config = module.exports = {};
 
 var node_env = process.env.NODE_ENV || "development";
+console.log('anything')
 if (node_env === "development") {
+    console.log('something')
     var dotenv = require('dotenv').config();
     config.connectionString = "postgres://localhost/ThespianRegistration";
     config.facebookReturn = "http://localhost:3000/login/facebook/return"
