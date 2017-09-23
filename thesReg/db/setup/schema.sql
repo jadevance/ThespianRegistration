@@ -5,10 +5,10 @@ CREATE TABLE users(
   last_name text,
   email text,
   phone integer,
-  teacher_type text -- high school or middle school
+  teacher_type text
 );
 
-DROP TABLE IF EXISTS school:
+DROP TABLE IF EXISTS school;
 CREATE TABLE school(
   id serial PRIMARY KEY,
   teacher_id integer,
@@ -21,6 +21,7 @@ CREATE TABLE school(
   finance_person_email text,
   finance_person_phone integer
 );
+
 
 DROP TABLE IF EXISTS student;
 CREATE TABLE student(
@@ -41,7 +42,7 @@ CREATE TABLE individual_event(
   partner_id integer,
   piece_name text,
   piece_author text,
-  piece_publisher text,
+  piece_publisher text
 );
 
 DROP TABLE IF EXISTS conference;
@@ -71,9 +72,8 @@ CREATE TABLE room(
 DROP TABLE IF EXISTS event;
 CREATE TABLE event(
   id serial PRIMARY KEY,
-  event_type text, --performance, technical, audition, workshop
-  number_participating integer -- 1 (solo musical, monologue, stage managing, etc), 2 (duet musical, duo scene),
-                               -- 3 (group musical) 3 will indicate number participating is >= 3
+  event_type text,
+  number_participating integer
 );
 
 DROP TABLE IF EXISTS invoice;

@@ -12,11 +12,12 @@ var config = require("./config.js");
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-var db = massive.connectSync({connectionString: config.connectionString});
 var app = module.exports = express();
 // var app = express();
 
 // database
+var connectionString = "postgres://localhost/ThespianRegistration";
+var db = massive.connectSync({connectionString: connectionString});
 app.set('db', db);
 
 // view engine setup
