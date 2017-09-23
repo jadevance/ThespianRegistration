@@ -1,5 +1,5 @@
 var massive = require('massive');
-var config = require("../config.js")
+var config = require("../config.js");
 
 var db = massive.connectSync({connectionString : config.connectionString});
 
