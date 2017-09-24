@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var userController = require('../controllers/users.js');
 
 router.get('/auth/google',
   passport.authenticate('google', {
@@ -18,5 +19,7 @@ router.get('/auth/google/callback',
     // Successful authentication, redirect home.
     res.redirect('/');
   });
+
+router.get('/logout', userController.getLogout);
 
 module.exports = router;

@@ -9,9 +9,11 @@
     <p>Welcome to <%= title %></p>
 
     <ul>
-      <li><a href="/auth/google">Sign In</a></li>
-
+      <% if (loggedIn) { %>
       <li><a href="/logout">Sign Out</a></li>
+      <% } else { %>
+      <li><a href="/auth/google">Sign In</a></li>
+      <% } %>
     </ul>
   </body>
 </html>
