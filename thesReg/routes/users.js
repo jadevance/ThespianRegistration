@@ -6,7 +6,7 @@ router.get('/auth/google',
   passport.authenticate('google', {
     successRedirect: '/',
     failureRedirect: '/',
-    scope: ['profile']
+    scope: ['email']
   }));
 
 router.get('/auth/google/callback',
