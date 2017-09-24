@@ -6,9 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var passport = require('passport');
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var massive = require('massive');
 var config = require("./config.js");
-var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 var app = module.exports = express();
 
@@ -16,12 +16,7 @@ var app = module.exports = express();
 var db = massive.connectSync({connectionString: config.connectionString});
 app.set('db', db);
 
-// routes
-var index = require('./routes/index.js');
-var users = require('./routes/users.js');
-app.use('/', index);
-app.use('/', users);
-
+var usersModel = require('./models/users.js');
 // Google passport auth
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -29,23 +24,11 @@ passport.use(new GoogleStrategy({
     callbackURL: config.googleReturn
   },
   function(accessToken, refreshToken, profile, cb) {
-    db.users.findOne({google_id: profile.id}, function(error, user) {
-      if (error) {
-        cb(error, undefined)
-      } else if (!user) {
-        db.users.save({google_id: profile.id}, function(error, newUser) {
-          if (error || !newUser) {
-            cb(error, undefined)
-          } else {
-            cb(null, newUser)
-          }
-        })
-      } else {
-        cb(null, user)
-      }
+    usersModel.findOrMakeUser(profile, function (error, user_info) {
+      return cb(null, user_info)
     })
   })
-);
+)
 
 passport.serializeUser(function(user, cb) {
   cb(null, user.id);
@@ -57,14 +40,14 @@ passport.deserializeUser(function(id, cb) {
   })
 });
 
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(session({
   secret: process.env.APPSECRET,
   resave: false,
   saveUninitialized: true,
   cookie: { secure: 'auto' }}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -78,6 +61,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// routes
+var index = require('./routes/index.js');
+var users = require('./routes/users.js');
+
+app.use('/', index);
+app.use('/', users);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -85,15 +75,28 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// error handlers
 
-  // render the error page
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 module.exports = app;

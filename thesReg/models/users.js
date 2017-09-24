@@ -4,7 +4,6 @@ var db = app.get("db");
 var Users = function() {};
 
 Users.findOrMakeUser = function(userSessionInfo, callback) {
-	console.log('boop')
 	db.users.findOne({google_id: userSessionInfo.id}, function(error, user) {
 		if (error) {
 			callback(error, undefined)
