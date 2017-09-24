@@ -11,7 +11,8 @@ Users.findOrMakeUser = function(userSessionInfo, callback) {
 			db.users.save({google_id: userSessionInfo.id,
 											email: userSessionInfo.emails[0].value,
 											first_name: userSessionInfo.name.givenName,
-											last_name: userSessionInfo.name.familyName},
+											last_name: userSessionInfo.name.familyName,
+											complete_profile: false},
 				function(error, newUser) {
 					if (error || !newUser) {
 						callback(error, undefined)
@@ -20,7 +21,7 @@ Users.findOrMakeUser = function(userSessionInfo, callback) {
 					}
 				})
 		} else {
-			callback(null, user)
+			callback(null, user, false)
 		}
 	})
 };

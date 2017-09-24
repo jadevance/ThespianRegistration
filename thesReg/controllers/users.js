@@ -6,6 +6,16 @@ var UsersController = {
     request.logout();
     request.session.destroy();
     response.redirect('/');
+  },
+
+  completeProfile: function(request, response) {
+    if (!request.user.complete_profile) {
+      console.log('incomplete direct to completer page')
+      response.redirect('/');
+    } else {
+      console.log('totes complete')
+      response.redirect('/');
+    }
   }
 
   // getProfile: function(request, response) {

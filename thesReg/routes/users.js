@@ -11,14 +11,7 @@ router.get('/auth/google',
   }));
 
 router.get('/auth/google/callback',
-  passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/'
-  }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+  passport.authenticate('google'), userController.completeProfile);
 
 router.get('/logout', userController.getLogout);
 
