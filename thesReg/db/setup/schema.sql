@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users;
 CREATE TABLE users(
   id serial PRIMARY KEY,
+  google_id text,
   first_name text,
   last_name text,
   email text,
