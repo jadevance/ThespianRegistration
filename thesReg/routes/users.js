@@ -15,4 +15,8 @@ router.get('/auth/google/callback',
 
 router.get('/logout', userController.getLogout);
 
+router.get('/profile', userController.getProfile);
+
+router.post('/profile', userController.updateProfile);
+
 module.exports = router;

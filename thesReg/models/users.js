@@ -26,4 +26,25 @@ Users.findOrMakeUser = function(userSessionInfo, callback) {
 	})
 };
 
+Users.updateProfile = function(formData, userData, callback) {
+	db.users.findOne({id: userData.id}, function(error, user) {
+		if (error) {
+			callback(error, undefined)
+		} else {
+			db.users.save({id: user.id,
+										first_name: formData.first_name,
+										last_name: formData.last_name,
+										phone: formData.phone,
+										teacher_type: formData.teacher_type, complete_profile: true},
+				function(error, updatedUser) {
+				if (error) {
+					callback(error, undefined);
+				} else {
+					callback(null, updatedUser);
+				}
+			})
+		}
+	})
+}
+
 module.exports = Users;

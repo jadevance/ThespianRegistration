@@ -1,4 +1,5 @@
 var passport = require('passport');
+var userModel = require('../models/users');
 
 var UsersController = {
 
@@ -8,31 +9,37 @@ var UsersController = {
     response.redirect('/');
   },
 
-  completeProfile: function(request, response) {
-    if (!request.user.complete_profile) {
-      console.log('incomplete direct to completer page')
-      response.redirect('/');
+  getProfile: function(request, response) {
+    if(request.user) {
+      response.render('profile', {
+        user: request.user,
+        loggedIn: true
+      });
     } else {
       response.redirect('/');
     }
-  }
+  },
 
-  // getProfile: function(request, response) {
-  //   Fridge.findOrMakeFridge(request.user.id, function(error, fridge_info) {
-  //     if(error) {
-  //       var err = new Error;
-  //       err.status = 500;
-  //       err.error = "Error retrieving user's fridge.";
-  //       response.json(err)
-  //     } else {
-  //       response.render('profile', {
-  //         user: request.user,
-  //         fridge_id: fridge_info.fridge_id,
-  //         items: fridge_info.items
-  //       })
-  //     }
-  //   })
-  // }
+  completeProfile: function(request, response) {
+    if (!request.user.complete_profile) {
+      response.redirect('/profile')
+    } else {
+      response.redirect('/');
+    }
+  },
+
+  updateProfile: function(request, response) {
+    userModel.updateProfile(request.body, request.user, function(error, user) {
+      if(error) {
+        var err = new Error;
+        err.status = 500;
+        err.error = "Error updating user profile";
+        response.json(err)
+      } else {
+        response.redirect('/');
+      }
+    })
+  }
 }
 
-module.exports = UsersController
+module.exports = UsersController;
