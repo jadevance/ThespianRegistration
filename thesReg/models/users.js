@@ -8,11 +8,13 @@ Users.findOrMakeUser = function(userSessionInfo, callback) {
 		if (error) {
 			callback(error, undefined)
 		} else if (!user) {
+			const userLevel = Users.userLevel(userSessionInfo.emails[0].value);
 			db.users.save({google_id: userSessionInfo.id,
 											email: userSessionInfo.emails[0].value,
 											first_name: userSessionInfo.name.givenName,
 											last_name: userSessionInfo.name.familyName,
-											complete_profile: false},
+											complete_profile: false,
+											user_level: userLevel},
 				function(error, newUser) {
 					if (error || !newUser) {
 						callback(error, undefined)
@@ -21,7 +23,7 @@ Users.findOrMakeUser = function(userSessionInfo, callback) {
 					}
 				})
 		} else {
-			callback(null, user, false)
+			callback(null, user)
 		}
 	})
 };
@@ -45,6 +47,14 @@ Users.updateProfile = function(formData, userData, callback) {
 			})
 		}
 	})
-}
+},
+
+	Users.userLevel = function(email) {
+		if (email === process.env.ADMIN1 || email === process.env.ADMIN2) {
+			return 1
+		} else {
+			return 2
+		}
+	}
 
 module.exports = Users;
