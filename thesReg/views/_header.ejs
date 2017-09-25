@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Washington State Thespians Registration</title>
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/4.1.1/normalize.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<div class="container">
+  <nav class="navbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="glyphicon glyphicon-align-justify"></span>
+        </button>
+        <a class="navbar-brand" href="/"><strong>Washington State Thespians Registration</strong></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if (!loggedIn) { %>
+            <li>
+              <a href="/auth/google"><span class="glyphicon glyphicon-user"></span>Sign In</a>
+            </li>
+          <% } else { %>
+            <li>
+              <a href="/logout">Sign Out</a>
+            </li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>

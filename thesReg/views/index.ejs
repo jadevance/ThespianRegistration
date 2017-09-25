@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+<%- include('./_header') %>
 
-    <ul>
-      <% if (loggedIn) { %>
-      <li><a href="/logout">Sign Out</a></li>
-      <% } else { %>
-      <li><a href="/auth/google">Sign In</a></li>
-      <% } %>
-    </ul>
-  </body>
-</html>
+<p>Other stuff</p>
+
+<%- include('./_footer') %>
