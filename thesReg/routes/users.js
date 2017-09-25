@@ -19,4 +19,6 @@ router.get('/profile', userController.getProfile);
 
 router.post('/profile', userController.updateProfile);
 
+router.get('/profile/edit', userController.editProfile);
+
 module.exports = router;

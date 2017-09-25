@@ -9,23 +9,38 @@ var UsersController = {
     response.redirect('/');
   },
 
-  getProfile: function(request, response) {
-    if(request.user) {
-      response.render('profile', {
-        user: request.user,
-        loggedIn: true
-      });
-    } else {
-      response.redirect('/');
-    }
-  },
-
   completeProfile: function(request, response) {
     if (!request.user.complete_profile) {
       response.redirect('/profile')
     } else {
       response.redirect('/');
     }
+  },
+
+  getProfile: function(request, response) {
+    if(request.user && !request.user.complete_profile) {
+      response.render('profile', {
+        user: request.user,
+        loggedIn: true,
+        editing: true
+      });
+    } else if (request.user) {
+      response.render('profile', {
+        user: request.user,
+        loggedIn: true,
+        editing: false
+      });
+    } else {
+      response.redirect('/');
+    }
+  },
+
+  editProfile: function(request, response) {
+    response.render('profile', {
+      user: request.user,
+      loggedIn: true,
+      editing: true
+    })
   },
 
   updateProfile: function(request, response) {

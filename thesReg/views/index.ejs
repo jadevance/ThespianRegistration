@@ -1,5 +1,9 @@
 <%- include('./_header') %>
 
-  <p>Other stuff</p>
+<% if (!loggedIn) { %>
+  <p>Welcome to Washington State Thespians Registration! To continue, please <a href="auth/google">sign in</a>.</p>
+<% } else { %>
+  SIGNED IN STUFF GOES HERE
+<% } %>
 
 <%- include('./_footer') %>
