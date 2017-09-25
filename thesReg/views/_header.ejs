@@ -17,10 +17,11 @@
         <a class="navbar-brand" href="/"><strong>Washington State Thespians Registration</strong></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li><a href="/">Home</a></li>
-          <li><a href="profile">Profile</a></li>
-        </ul>
+        <% if (loggedIn) { %>
+          <ul class="nav navbar-nav">
+            <li><a href="profile/<%=user.id%>">Profile</a></li>
+          </ul>
+        <% } %>
         <ul class="nav navbar-nav navbar-right">
           <% if (!loggedIn) { %>
             <li>

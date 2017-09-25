@@ -15,10 +15,10 @@ router.get('/auth/google/callback',
 
 router.get('/logout', userController.getLogout);
 
-router.get('/profile', userController.getProfile);
+router.get('/profile/:userId', userController.getProfile);
 
-router.post('/profile', userController.updateProfile);
+router.post('/profile/:userId', userController.updateProfile);
 
-router.get('/profile/edit', userController.editProfile);
+router.get('/profile/:userId/edit', userController.editProfile);
 
 module.exports = router;

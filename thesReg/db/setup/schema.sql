@@ -48,6 +48,7 @@ CREATE TABLE individual_event(
   piece_publisher text
 );
 
+-- Admins only:
 DROP TABLE IF EXISTS conference;
 CREATE TABLE conference(
   id serial PRIMARY KEY,

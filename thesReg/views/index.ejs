@@ -3,7 +3,17 @@
 <% if (!loggedIn) { %>
   <p>Welcome to Washington State Thespians Registration! To continue, please <a href="auth/google">sign in</a>.</p>
 <% } else { %>
-  SIGNED IN STUFF GOES HERE
+  <% if (user.user_level === 1) { %>
+    <p>Admin stuff goes here.</p>
+    <div>
+      <p>This will be a box, that lists all conferences, and links to edit each individual conference</p>
+      <p>There will also be a link to add a conference</p>
+    </div>
+  <% } %>
+  <p>Regular user stuff goes here.</p>
+  <div>
+    <p>This will be a box that lists all conferences that a user could registered for, as well as a link to register</p>
+  </div>
 <% } %>
 
 <%- include('./_footer') %>

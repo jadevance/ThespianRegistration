@@ -12,11 +12,11 @@
     <div class="col-md-9 personal-info">
       <h3>Personal info</h3>
         <% if (!editing) { %>
-          <a href="/profile/edit">Edit Profile</a>
+          <a href="/profile/<%=user.id%>/edit">Edit Profile</a>
         <% } else if (editing && user.complete_profile) { %>
-          <a href="/profile">Cancel Editing</a>
+          <a href="/profile/<%=user.id%>">Cancel Editing</a>
         <% } %>
-      <form class="form-horizontal" role="form" action="/profile" method="post">
+      <form class="form-horizontal" role="form" action="/profile/<%=user.id%>" method="post">
         <div class="form-group">
           <label class="col-lg-3 control-label">First name:</label>
           <div class="col-lg-8">
