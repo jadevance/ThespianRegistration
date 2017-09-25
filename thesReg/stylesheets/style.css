@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    text-align: center;
+    background: #e5e3df;
+    font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+    color: #737373;
+}
+
+.navbar {
+    background-color: #d3d4f3;
+    border-radius: 0px;
+    margin-bottom: 50px;
+}
+
+#main-content {
+    background-color: #d3d4f3;
+    border-radius: 0px;
+    margin: 50px;
+}
+
+.footer {
+    margin: 50px 0px 0px 0px;
+    font-size: 10px;
+}

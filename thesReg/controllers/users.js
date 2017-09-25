@@ -11,7 +11,7 @@ var UsersController = {
   completeProfile: function(request, response) {
     if (!request.user.complete_profile) {
       console.log('incomplete direct to completer page')
-      response.render('/');
+      response.redirect('/');
     } else {
       response.redirect('/');
     }
