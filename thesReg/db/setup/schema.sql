@@ -7,7 +7,8 @@ CREATE TABLE users(
   email text,
   phone integer,
   teacher_type text,
-  complete_profile boolean
+  complete_profile boolean,
+  user_level integer
 );
 
 DROP TABLE IF EXISTS school;
