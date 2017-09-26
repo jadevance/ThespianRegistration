@@ -3,19 +3,59 @@
 <% if (!loggedIn) { %>
   <p>Welcome to Washington State Thespians Registration! To continue, please <a href="auth/google">sign in</a>.</p>
 <% } else { %>
-  <% if (user.user_level === 1) { %>
-    <p>Admin stuff goes here.</p>
-    <div class="conference-list">
-      <% if (conferences.length === 0) { %>
-        <p>There are no conferences to list, so there will be a message prompting the admin user to create a conference with the handy link.</p>
+  <div class="conference-list">
+    <% if (conferences.length === 0 && user.user_level === 1) { %>
+      <div class="container no-conferences admin">
+        <p>There are no conferences at this time, add some by selecting the link below.</p>
         <a href="/conferences/new">Create a Conference</a>
-      <% } else { %>
-        <p>This will be a box, that lists all conferences, and links to view/edit each individual conference</p>
-        <a href="/conferences/new">Create a Conference</a>
-      <% } %>
-    </div>
-  <% } %>
-  <p>Regular user stuff goes here.</p>
+      </div>
+    <% } else if (conferences.length === 0 && user.user_level === 2) { %>
+      <div class="container no-conferences teacher">
+        <p>There are no conferences at this time, check back at a later date.</p>
+      </div>
+    <% } else { %>
+      <div class="container all-conferences">
+        <table class="table table-striped">
+          <h2 class="table-head">Current Conferences:</h2>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Year</th>
+              <th>Registration Status</th>
+              <th>
+                <% if (user.user_level === 1) { %>
+                  View/Edit
+                <% } else { %>
+                  Register
+                <% } %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (var i=0; i<conferences.length; i++) { %>
+              <tr>
+                <td><%= conferences[i].title %></td>
+                <td><%= conferences[i].year %></td>
+                <td><%= conferences[i].registration_status %></td>
+                <td>
+                  <% if (user.user_level === 1) { %>
+                    <a href="/conferences/<%=conferences[i].id%>">View</a>/<a href="conferences/<%=conferences[i].id%>/edit">Edit</a>
+                  <% } else if (conferences[i].registration_status === "open") { %>
+                    <a href="/conferences/<%=conferences[i].id%>/register">Register for this Conference</a>
+                  <% } else { %>
+                    Check back soon to register!
+                  <% } %>
+                </td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+        <% if (user.user_level === 1) { %>
+          <a href="/conferences/new">Create a Conference</a>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
 <% } %>
 
 <%- include('./_footer') %>

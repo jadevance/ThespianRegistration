@@ -66,14 +66,16 @@ DROP TABLE IF EXISTS session;
 CREATE TABLE session(
   id serial PRIMARY KEY,
   conference_id integer,
-  session_time time(0)
+  start_time text,
+  end_time text
 );
 
 DROP TABLE IF EXISTS room;
 CREATE TABLE room(
   id serial PRIMARY KEY,
+  conference_id integer,
   session_id integer,
-  event_id integer,
+  event_type_id integer,
   room_name text,
   max_allowed integer
 );

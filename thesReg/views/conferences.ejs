@@ -1,7 +1,6 @@
 <%- include('./_header') %>
 
 <h1>Conferences</h1>
-
   <div class="container">
     <hr>
     <div class="row">
@@ -91,5 +90,11 @@
   </div>
 <hr>
 
+<% if (conference.id !== null) { %>
+  <div class="container sessions">
+    Sessions Go here
+    <a href="/conferences/<%=conference.id%>/newSession">Add new session</a>
+  </div>
+<% } %>
 
 <%- include('./_footer') %>
