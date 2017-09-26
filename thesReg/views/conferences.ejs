@@ -1,5 +1,95 @@
 <%- include('./_header') %>
 
-CONFERENCES
+<h1>Conferences</h1>
+
+  <div class="container">
+    <hr>
+    <div class="row">
+      <div class="col-md-9 personal-info">
+        <% if (!isNew && !editing) { %>
+          <h3>View Conference</h3>
+          <a href="/conferences/<%=conference.id%>/edit">Edit Conference</a>
+          <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/edit" method="post">
+        <% } else if (editing && !isNew) { %>
+          <h3>Edit Conference</h3>
+          <a href="/conferences/<%=conference.id%>">Cancel Editing</a>
+          <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/edit" method="post">
+        <% } else if (isNew) { %>
+          <h3>Create Conference</h3>
+          <form class="form-horizontal" role="form" action="/conferences/new" method="post">
+        <% } %>
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Conference title:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" name="conference_title" value="<%= conference.title %>" required="true" <%if (!editing) { %> disabled <% } %>>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Location name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" name="location_name" value="<%= conference.location_name %>" required="true" <%if (!editing) { %> disabled <% } %>>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Address:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" name="location_address" value="<%= conference.location_address %>" required="true" <%if (!editing) { %> disabled <% } %>>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">City:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" name="location_city" value="<%= conference.location_city %>" required="true" <%if (!editing) { %> disabled <% } %>>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">State:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" name="location_state" value="WA" required="true" disabled>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Zip:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="number" name="location_zip" value="<%= conference.location_zip %>" required="true" <%if (!editing) { %> disabled <% } %>>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Year:</label>
+            <div class="col-lg-8">
+              <div class="ui-select">
+                <select name="year" class="form-control" required="true" <%if (!editing) { %> disabled <% } %>>
+                  <% for (i=0; i<yearOptions.length; i++) { %>
+                    <option value="<%=yearOptions[i]%>" <% if (conference.year === yearOptions[i]) { %> selected <% } %>><%= yearOptions[i] %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Status:</label>
+            <div class="col-lg-8">
+              <div class="ui-select">
+                <select name="registration_status" class="form-control" required="true" <%if (!editing) { %> disabled <% } %>>
+                  <option value="closed" <% if (conference.registration_status === "closed") { %> selected <% } %>>Closed for Registration</option>
+                  <option value="open" <% if (conference.registration_status === "open") { %> selected <% } %>>Open for Registration</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <% if (editing) { %>
+              <div class="col-md-8">
+                <input type="submit" class="btn btn-primary" value="Save Changes">
+              </div>
+            <% } %>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<hr>
+
 
 <%- include('./_footer') %>
