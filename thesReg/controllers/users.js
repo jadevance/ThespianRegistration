@@ -1,5 +1,5 @@
 var passport = require('passport');
-var userModel = require('../models/users');
+var userModel = require('../models/users.js');
 
 var UsersController = {
 
@@ -55,6 +55,6 @@ var UsersController = {
       }
     })
   }
-}
+};
 
 module.exports = UsersController;

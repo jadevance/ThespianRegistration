@@ -1,4 +1,5 @@
 
+
 var IndexController = {
   getIndex: function(request, response) {
     if(request.user) {

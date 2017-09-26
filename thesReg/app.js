@@ -64,9 +64,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes
 var index = require('./routes/index.js');
 var users = require('./routes/users.js');
+var conferences = require('./routes/conferences.js');
 
 app.use('/', index);
 app.use('/', users);
+app.use('/', conferences);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
