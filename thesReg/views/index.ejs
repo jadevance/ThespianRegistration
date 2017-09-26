@@ -6,11 +6,11 @@
   <% if (user.user_level === 1) { %>
     <p>Admin stuff goes here.</p>
     <div class="conference-list">
-      <% if (conferences.length !== 0) { %>
+      <% if (conferences.length === 0) { %>
+        <p>There are no conferences to list, so there will be a message prompting the admin user to create a conference with a handy link.</p>
+      <% } else { %>
         <p>This will be a box, that lists all conferences, and links to view/edit each individual conference</p>
         <p>There will also be a link to add a conference.</p>
-      <% } else { %>
-        <p>There are no conferences to list, so there will be a message prompting the admin user to create a conference with a handy link.</p>
       <% } %>
     </div>
   <% } %>
