@@ -11,7 +11,7 @@ var UsersController = {
 
   completeProfile: function(request, response) {
     if (!request.user.complete_profile) {
-      response.redirect('/profile')
+      response.redirect('/profile/' + request.user.id);
     } else {
       response.redirect('/');
     }

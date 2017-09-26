@@ -49,8 +49,8 @@ CREATE TABLE individual_event(
 );
 
 -- Admins only:
-DROP TABLE IF EXISTS conference;
-CREATE TABLE conference(
+DROP TABLE IF EXISTS conferences;
+CREATE TABLE conferences(
   id serial PRIMARY KEY,
   title text,
   year integer,

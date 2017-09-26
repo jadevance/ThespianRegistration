@@ -1,6 +1,10 @@
-var conferencesModel = reuquire('../models/conferences.js');
+var conferencesModel = require('../models/conferences.js');
 
 var ConferencesController = {
+
+  getAllConferences: function(request, response) {
+    console.log('do something')
+  }
 
 };
 
