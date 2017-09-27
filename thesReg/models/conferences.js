@@ -1,5 +1,7 @@
 var app = require('../app.js');
 var db = app.get('db');
+var Promise = require('bluebird');
+var common = require('../controllers/commonFunctions.js');
 
 var Conferences = function() {};
 
@@ -18,9 +20,46 @@ Conferences.getAllConferences = function(callback) {
 Conferences.getSingleConference = function(conferenceId, callback) {
   db.conferences.findOne({id: conferenceId}, function(error, conference) {
     if (error) {
-      callback(error, undefined)
+      callback(error, undefined, undefined)
     } else {
-      callback(null, conference)
+      db.sessions.find({conference_id: conference.id}, function(error, sessions) {
+        if (error) {
+          callback(error, undefined, undefined)
+        } else if (sessions.length === 0) {
+          sessions = [common.getEmptySession()]
+          callback(null, conference, sessions)
+        } else {
+          var sessionsPromises = [];
+          for (var i=0; i<sessions.length; i++) {
+            (function(i) {
+              var promise = new Promise(function(resolve, reject) {
+                db.rooms.find({session_id: sessions[i].id}, function(error, rooms) {
+                  if (error) {
+                    reject(error)
+                  } else {
+                    if (rooms.length === 0) {
+                      var emptyRoom = common.getEmptyRoom();
+                      rooms.push(emptyRoom)
+                    }
+                    sessions[i].rooms = rooms;
+                    resolve()
+                  }
+                })
+              })
+              sessionsPromise.push(promise)
+            })(i)
+          }
+
+          Promise.all(sessionsPromises).then(
+            function() {
+              callback(null, conference, sessions)
+            },
+            function(error) {
+              callback(error, undefined, undefined)
+            }
+          )
+        }
+      }.bind(conference))
     }
   })
 };

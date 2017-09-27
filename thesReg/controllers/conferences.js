@@ -1,4 +1,5 @@
 var conferencesModel = require('../models/conferences.js');
+var common = require('./commonFunctions.js');
 
 var ConferencesController = {
 
@@ -9,7 +10,7 @@ var ConferencesController = {
   getSingleConference: function(request, response) {
     const loggedIn = request.isAuthenticated();
     if (loggedIn && (request.user.user_level === 1)) {
-      conferencesModel.getSingleConference(request.params.conferenceId, function(error, conference) {
+      conferencesModel.getSingleConference(request.params.conferenceId, function(error, conference, sessions) {
         if(error) {
           var err = new Error;
           err.status = 500;
@@ -19,10 +20,11 @@ var ConferencesController = {
           response.render('conferences', {
             user: request.user,
             loggedIn: loggedIn,
-            isNew: false,
-            editing: false,
+            isNewConference: false,
+            editingConference: false,
             conference: conference,
-            yearOptions: ConferencesController.getYear()
+            sessions: sessions,
+            yearOptions: common.getYear()
           })
         }
       })
@@ -37,19 +39,11 @@ var ConferencesController = {
       response.render('conferences', {
         loggedIn: loggedIn,
         user: request.user,
-        isNew: true,
-        editing: true,
-        conference: {
-          title: null,
-          year: null,
-          registration_status: null,
-          location_name: null,
-          location_address: null,
-          location_city: null,
-          location_state: null,
-          location_zip: null
-        },
-        yearOptions: ConferencesController.getYear()
+        isNewConference: true,
+        editingConference: true,
+        conference: common.getEmptyConference(),
+        sessions: common.getEmptySession(),
+        yearOptions: common.getYear()
       })
     } else {
       response.redirect('/')
@@ -82,10 +76,10 @@ var ConferencesController = {
           response.render('conferences', {
             user: request.user,
             loggedIn: loggedIn,
-            isNew: false,
-            editing: true,
+            isNewConference: false,
+            editingConference: true,
             conference: conference,
-            yearOptions: ConferencesController.getYear()
+            yearOptions: common.getYear()
           })
         }
       })
@@ -105,19 +99,7 @@ var ConferencesController = {
         response.redirect('/conferences/' + conference.id)
       }
     })
-  },
-
-  getYear: function() {
-    var now = new Date().getFullYear();
-    const yearOptions = [now];
-
-    for (i=0; i<4; i++) {
-      now += 1;
-      yearOptions.push(now);
-    }
-    return yearOptions;
   }
-
 };
 
 module.exports = ConferencesController;

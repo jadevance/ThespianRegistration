@@ -62,16 +62,16 @@ CREATE TABLE conferences(
   location_zip integer
 );
 
-DROP TABLE IF EXISTS session;
-CREATE TABLE session(
+DROP TABLE IF EXISTS sessions;
+CREATE TABLE sessions(
   id serial PRIMARY KEY,
   conference_id integer,
   start_time text,
   end_time text
 );
 
-DROP TABLE IF EXISTS room;
-CREATE TABLE room(
+DROP TABLE IF EXISTS rooms;
+CREATE TABLE rooms(
   id serial PRIMARY KEY,
   conference_id integer,
   session_id integer,
