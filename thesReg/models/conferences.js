@@ -46,7 +46,7 @@ Conferences.getSingleConference = function(conferenceId, callback) {
                   }
                 })
               })
-              sessionsPromise.push(promise)
+              sessionsPromises.push(promise)
             })(i)
           }
 

@@ -22,6 +22,8 @@ var ConferencesController = {
             loggedIn: loggedIn,
             isNewConference: false,
             editingConference: false,
+            isNewSession: false,
+            editingSession: false,
             conference: conference,
             sessions: sessions,
             yearOptions: common.getYear()

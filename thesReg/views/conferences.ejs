@@ -92,8 +92,39 @@
 
 <% if ((conference.id !== null) && !editingConference) { %>
   <div class="container sessions">
-    Sessions Go here
-    <a href="/conferences/<%=conference.id%>/newSession">Add new session</a>
+    <% if (sessions[0].id === null && !editingSession) { %>
+      There are no sessions for this conference. Select Add a Session below to begin adding sessions.
+    <% } else { %>
+      <table class="table table-striped">
+        <h2 class="table-head">Sessions:</h2>
+        <thead>
+          <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i=0; i<sessions.length; i++) { %>
+          <%console.log(sessions[i])%>
+            <tr>
+              <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/new-session" method="post">
+                <td>
+                  <input class="form-control" type="text" name="start_time" value="<%= sessions[i].start_time %>" required="true" <%if (!editingSession) { %> disabled <% } %>>
+                </td>
+                <td>
+                  <input class="form-control" type="text" name="end_time" value="<%= sessions[i].end_time %>" required="true" <%if (!editingSession) { %> disabled <% } %>>
+                </td>
+                <td>
+                  <input type="submit" class="btn btn-primary" value="Save Session">
+                </td>
+              </form>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    <% } %>
+    <a href="/conferences/<%=conference.id%>/new-session">Add new session</a>
   </div>
 <% } %>
 
