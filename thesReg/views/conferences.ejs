@@ -101,30 +101,60 @@
           <tr>
             <th>Start Time</th>
             <th>End Time</th>
-            <th>Action</th>
+            <th>Room Actions</th>
+            <th>Session Actions</th>
           </tr>
         </thead>
         <tbody>
           <% for (var i=0; i<sessions.length; i++) { %>
-          <%console.log(sessions[i])%>
             <tr>
-              <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/new-session" method="post">
+              <% if (sessions[i].id === null) { %>
+                <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/sessions/new" method="post">
+                  <fieldset>
+                    <td>
+                      <input class="form-control" type="text" name="start_time" value="<%= sessions[i].start_time %>" required="true">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" name="end_time" value="<%= sessions[i].end_time %>" required="true">
+                    </td>
+                    <td></td>
+                    <td>
+                      <input type="submit" class="btn btn-primary" value="Save Session">  <a href="/conferences/<%=conference.id%>" class="btn btn-primary">Cancel</a>
+                    </td>
+                  </fieldset>
+                </form>
+              <% } else if (sessions[i].id == params.sessionId) { %>
+                <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/edit" method="post">
+                  <fieldset>
+                    <td>
+                      <input class="form-control" type="text" name="start_time" value="<%= sessions[i].start_time %>" required="true">
+                    </td>
+                    <td>
+                      <input class="form-control" type="text" name="end_time" value="<%= sessions[i].end_time %>" required="true">
+                    </td>
+                    <td></td>
+                    <td>
+                      <input type="submit" class="btn btn-primary" value="Save">  <a href="/conferences/<%=conference.id%>" class="btn btn-primary">Cancel</a>
+                    </td>
+                  </fieldset>
+                </form>
+              <% } else { %>
+                <td><%= sessions[i].start_time %></td>
+                <td><%= sessions[i].end_time %></td>
+                <td>View Rooms / Add Rooms</td>
                 <td>
-                  <input class="form-control" type="text" name="start_time" value="<%= sessions[i].start_time %>" required="true" <%if (!editingSession) { %> disabled <% } %>>
+                  <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/edit">Edit</a> /
+                  <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/delete">Delete</a>
                 </td>
-                <td>
-                  <input class="form-control" type="text" name="end_time" value="<%= sessions[i].end_time %>" required="true" <%if (!editingSession) { %> disabled <% } %>>
-                </td>
-                <td>
-                  <input type="submit" class="btn btn-primary" value="Save Session">
-                </td>
-              </form>
+              <% } %>
             </tr>
           <% } %>
         </tbody>
       </table>
     <% } %>
-    <a href="/conferences/<%=conference.id%>/new-session">Add new session</a>
+    <% if (!editingSession) { %>
+      <a href="/conferences/<%=conference.id%>/sessions/new">Add new session</a>
+    <% } %>
   </div>
 <% } %>
 

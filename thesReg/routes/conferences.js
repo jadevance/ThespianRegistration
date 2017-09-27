@@ -12,8 +12,12 @@ router.get('/conferences/:conferenceId', conferencesController.getSingleConferen
 router.get('/conferences/:conferenceId/edit', conferencesController.editConference);
 router.post('/conferences/:conferenceId/edit', conferencesController.updateConference);
 
-router.get('/conferences/:conferenceId/new-session', sessionsController.newSessionForm);
-router.post('/conferences/:conferenceId/new-session', sessionsController.createNewSession);
+router.get('/conferences/:conferenceId/sessions/new', sessionsController.newSessionForm);
+router.post('/conferences/:conferenceId/sessions/new', sessionsController.createNewSession);
+
+router.get('/conferences/:conferenceId/sessions/:sessionId/edit', sessionsController.editSession);
+router.post('/conferences/:conferenceId/sessions/:sessionId/edit', sessionsController.updateSession);
+router.get('/conferences/:conferenceId/sessions/:sessionId/delete', sessionsController.deleteSession);
 
 
 module.exports = router;

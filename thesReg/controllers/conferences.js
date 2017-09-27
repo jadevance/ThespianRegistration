@@ -26,6 +26,7 @@ var ConferencesController = {
             editingSession: false,
             conference: conference,
             sessions: sessions,
+            params: request.params,
             yearOptions: common.getYear()
           })
         }
@@ -45,6 +46,7 @@ var ConferencesController = {
         editingConference: true,
         conference: common.getEmptyConference(),
         sessions: common.getEmptySession(),
+        params: request.params,
         yearOptions: common.getYear()
       })
     } else {
@@ -81,6 +83,7 @@ var ConferencesController = {
             isNewConference: false,
             editingConference: true,
             conference: conference,
+            params: request.params,
             yearOptions: common.getYear()
           })
         }
