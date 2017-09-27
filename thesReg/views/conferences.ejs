@@ -123,7 +123,7 @@
                     </td>
                   </fieldset>
                 </form>
-              <% } else if (sessions[i].id == params.sessionId) { %>
+              <% } else if (sessions[i].editing) { %>
                 <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/edit" method="post">
                   <fieldset>
                     <td>
@@ -139,13 +139,38 @@
                   </fieldset>
                 </form>
               <% } else { %>
-                <td><%= sessions[i].start_time %></td>
-                <td><%= sessions[i].end_time %></td>
-                <td>View Rooms / Add Rooms</td>
+                <td>
+                  <%= sessions[i].start_time %>
+                </td>
+                <td>
+                  <%= sessions[i].end_time %>
+                </td>
+                <td>
+                  <% if ((!sessions[i].show_rooms) && (sessions[i].rooms.length > 1) && (sessions[i].rooms[0].id !== null)) { %>
+                    <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms">View Rooms</a> / <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms/new">Add Rooms</a>
+                  <% } else if (!sessions[i].show_rooms) { %>
+                    <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms/new">Add Rooms</a>
+                  <% } %>
+                </td>
                 <td>
                   <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/edit">Edit</a> /
                   <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/delete">Delete</a>
                 </td>
+                <% if (sessions[i].show_rooms) { %>
+                  <tr>
+                    <td colspan="4">
+                      <table class="table">
+                        <tbody>
+                          <% for (var j=0; j<sessions[i].rooms.length; j++) { %>
+                            <tr>
+                              <td><%=sessions[i].rooms[j].id%></td>
+                            </tr>
+                          <% } %>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                <% } %>
               <% } %>
             </tr>
           <% } %>

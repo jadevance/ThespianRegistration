@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var conferencesController = require('../controllers/conferences.js');
 var sessionsController = require('../controllers/sessions.js');
+var roomsController = require('../controllers/rooms.js');
 
 // router.get('/conferences', conferencesController.getAllConferences);
 
@@ -18,6 +19,16 @@ router.post('/conferences/:conferenceId/sessions/new', sessionsController.create
 router.get('/conferences/:conferenceId/sessions/:sessionId/edit', sessionsController.editSession);
 router.post('/conferences/:conferenceId/sessions/:sessionId/edit', sessionsController.updateSession);
 router.get('/conferences/:conferenceId/sessions/:sessionId/delete', sessionsController.deleteSession);
+
+router.get('/conferences/:conferenceId/sessions/:sessionId/rooms', roomsController.showRooms);
+router.get('/conferences/:conferenceId/sessions/:sessionId/rooms/new', roomsController.newRoomsForm);
+router.post("/conferences/:conferenceId/sessions/:sessionId/rooms/new", roomsController.createNewRoom);
+
+router.get('/conferences/:conferenceId/sessions/:sessionId/rooms/:roomId/edit', roomsController.editRoom);
+router.post('/conferences/:conferenceId/sessions/:sessionId/rooms/:roomId/edit', roomsController.updateRoom);
+router.get('/conferences/:conferenceId/sessions/:sessionId/rooms/:roomId/delete', roomsController.deleteRoom);
+
+
 
 
 module.exports = router;
