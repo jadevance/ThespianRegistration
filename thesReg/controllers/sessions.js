@@ -60,7 +60,7 @@ var SessionsController = {
       conferencesModel.getSingleConference(request.params.conferenceId, function(error, conference, sessions) {
 
         for (var i=0; i<sessions.length; i++) {
-          if (sessions[i].id === request.params.sessionId) {
+          if (sessions[i].id == request.params.sessionId) {
             sessions[i].editing = true;
           } else {
             sessions[i].editing = false;

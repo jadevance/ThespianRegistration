@@ -147,10 +147,11 @@
                 </td>
                 <td>
                   <% if ((!sessions[i].show_rooms) && (sessions[i].rooms.length > 1) && (sessions[i].rooms[0].id !== null)) { %>
-                    <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms">View Rooms</a> / <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms/new">Add Rooms</a>
-                  <% } else if (!sessions[i].show_rooms) { %>
-                    <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms/new">Add Rooms</a>
+                    <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms">View Rooms</a> /
+                  <% } else if (sessions[i].show_rooms) { %>
+                  <a href="/conferences/<%=conference.id%>">Hide Rooms</a> /
                   <% } %>
+                  <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms/new">Add Rooms</a>
                 </td>
                 <td>
                   <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/edit">Edit</a> /
@@ -160,11 +161,63 @@
                   <tr>
                     <td colspan="4">
                       <table class="table">
+                        <thead>
+                        <tr>
+                          <th>Room Name</th>
+                          <th>Maximum Students for Scheduling</th>
+                          <th>Event</th>
+                          <th>Room Actions</th>
+                        </tr>
+                        </thead>
                         <tbody>
                           <% for (var j=0; j<sessions[i].rooms.length; j++) { %>
-                            <tr>
-                              <td><%=sessions[i].rooms[j].id%></td>
-                            </tr>
+                            <% if (sessions[i].rooms[j].isEditing) { %>
+                              <% if (!sessions[i].rooms[j].id) { %>
+                                no ide
+                                <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms/new" method="post">
+                              <% } else { %>
+                                <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms/<%=sessions[i].rooms[j].id%>/edit" method="post">
+                              <% } %>
+                                <fieldset>
+                                  <tr>
+                                    <td>
+                                      <input class="form-control" type="text" name="room_name" value="<%=sessions[i].rooms[j].room_name%>" required="true">
+                                    </td>
+                                    <td>
+                                      <input class="form-control" type="text" name="max_allowed" value="<%=sessions[i].rooms[j].max_allowed%>" required="true">
+                                    </td>
+                                    <td>
+                                      <select name="event_type_id" class="form-control" required="true" <%if (!sessions[i].rooms[j].isEditing) { %> disabled <% } %>>
+                                        <option value="1" <% if (sessions[i].rooms[j].event_type_id == "1") { %> selected <% } %>>One</option>
+                                        <option value="2" <% if (sessions[i].rooms[j].event_type_id == "2") { %> selected <% } %>>Two</option>
+                                      </select>
+                                    </td>
+                                    <td>
+                                      <input type="submit" class="btn btn-primary" value="Save">  <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms" class="btn btn-primary">Cancel</a>
+                                    </td>
+                                  </tr>
+                                </fieldset>
+                              </form>
+                            <% } else { %>
+                              <tr>
+                                <td>
+                                  <%=sessions[i].rooms[j].room_name%>
+                                </td>
+                                <td>
+                                  <%=sessions[i].rooms[j].max_allowed%>
+                                </td>
+                                <td>
+                                  <select name="event_type_id" class="form-control" required="true" disabled>
+                                    <option value="1" <% if (sessions[i].rooms[j].event_type_id == "1") { %> selected <% } %>>One</option>
+                                    <option value="2" <% if (sessions[i].rooms[j].event_type_id == "2") { %> selected <% } %>>Two</option>
+                                  </select>
+                                </td>
+                                <td>
+                                  <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms/<%=sessions[i].rooms[j].id%>/edit">Edit</a> /
+                                  <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms/<%=sessions[i].rooms[j].id%>/delete">Delete</a>
+                                </td>
+                              </tr>
+                            <% } %>
                           <% } %>
                         </tbody>
                       </table>

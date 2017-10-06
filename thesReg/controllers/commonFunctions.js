@@ -45,7 +45,8 @@ var commonFunctions = {
       session_id: null,
       event_type_id: null,
       room_name: null,
-      max_allowed: null
+      max_allowed: null,
+      isEditing: true
     }
 
     return room;

@@ -10,8 +10,13 @@ var RoomsController = {
       conferencesModel.getSingleConference(request.params.conferenceId, function(error, conference, sessions) {
 
         for (var i=0; i<sessions.length; i++) {
-          if (sessions[i].id === request.params.sessionId) {
+          if (sessions[i].id == request.params.sessionId) {
             sessions[i].show_rooms = true;
+
+            var roomsArray = sessions[i].rooms;
+            for (var j=0; j<roomsArray.length; j++) {
+              sessions[i].rooms[j].isEditing = false;
+            }
           } else {
             sessions[i].show_rooms = false;
           }
@@ -50,9 +55,20 @@ var RoomsController = {
         for (var i=0; i<sessions.length; i++) {
           if (sessions[i].id == request.params.sessionId) {
             sessions[i].show_rooms = true;
-            if ((sessions[i].rooms.length > 1) || (sessions[i].rooms[0].id !== null)) {
-              sessions[i].rooms.push(common.getEmptyRoom())
+
+            var roomsArray = sessions[i].rooms;
+            if ((roomsArray.length > 1) || (roomsArray[0].id !== null)) {
+              sessions[i].rooms.push(common.getEmptyRoom());
             }
+
+            for (var j=0; j<roomsArray.length; j++) {
+              if (roomsArray[j].id === null) {
+                sessions[i].rooms[j].isEditing = true;
+              } else {
+                sessions[i].rooms[j].isEditing = false;
+              }
+            }
+
           } else {
             sessions[i].show_rooms = false;
           }
@@ -90,10 +106,10 @@ var RoomsController = {
         if (error) {
           var err = new Error;
           err.status = 500;
-          err.error = "Error saving session";
+          err.error = "Error saving room";
           response.json(err)
         } else {
-          response.redirect('/conferences/' + request.params.conferenceId)
+          response.redirect('/conferences/' + request.params.conferenceId + '/sessions/' + request.params.sessionId + '/rooms')
         }
       })
     } else {
@@ -105,6 +121,24 @@ var RoomsController = {
     const loggedIn = request.isAuthenticated();
     if (loggedIn && (request.user.user_level === 1)) {
       conferencesModel.getSingleConference(request.params.conferenceId, function(error, conference, sessions) {
+
+        for (var i=0; i<sessions.length; i++) {
+          if (sessions[i].id == request.params.sessionId) {
+            sessions[i].show_rooms = true;
+
+            var roomsArray = sessions[i].rooms;
+            for (var j=0; j<roomsArray.length; j++) {
+              if (roomsArray[j].id == request.params.roomId) {
+                sessions[i].rooms[j].isEditing = true;
+              } else {
+                sessions[i].rooms[j].isEditing = false;
+              }
+            }
+          } else {
+            sessions[i].show_rooms = false;
+          }
+        }
+
         if(error) {
           var err = new Error;
           err.status = 500;
@@ -140,7 +174,7 @@ var RoomsController = {
           err.error = "Error saving session";
           response.json(err)
         } else {
-          response.redirect('/conferences/' + request.params.conferenceId)
+          response.redirect('/conferences/' + request.params.conferenceId + '/sessions/' + request.params.sessionId + '/rooms')
         }
       })
     } else {
