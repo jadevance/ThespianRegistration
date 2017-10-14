@@ -146,7 +146,7 @@
                   <%= sessions[i].end_time %>
                 </td>
                 <td>
-                  <% if ((!sessions[i].show_rooms) && (sessions[i].rooms.length > 1) && (sessions[i].rooms[0].id !== null)) { %>
+                  <% if ((!sessions[i].show_rooms) && (sessions[i].rooms.length > 0) && (sessions[i].rooms[0].id !== null)) { %>
                     <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms">View Rooms</a> /
                   <% } else if (sessions[i].show_rooms) { %>
                   <a href="/conferences/<%=conference.id%>">Hide Rooms</a> /
@@ -187,8 +187,9 @@
                                     </td>
                                     <td>
                                       <select name="event_type_id" class="form-control" required="true" <%if (!sessions[i].rooms[j].isEditing) { %> disabled <% } %>>
-                                        <option value="1" <% if (sessions[i].rooms[j].event_type_id == "1") { %> selected <% } %>>One</option>
-                                        <option value="2" <% if (sessions[i].rooms[j].event_type_id == "2") { %> selected <% } %>>Two</option>
+                                        <% for (var k=0; k<sessions[i].rooms[j].events.length; k++) { %>
+                                          <option value="<%sessions[i].rooms[j].events[k].id%>" <% if (sessions[i].rooms[j].event_type_id == sessions[i].rooms[j].events[k].id) { %> selected <% } %>>"<%=sessions[i].rooms[j].events[k].event_name%>"</option>
+                                        <% } %>
                                       </select>
                                     </td>
                                     <td>
