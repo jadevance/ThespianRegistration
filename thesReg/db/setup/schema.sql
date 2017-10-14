@@ -80,8 +80,8 @@ CREATE TABLE rooms(
   max_allowed integer
 );
 
-DROP TABLE IF EXISTS event;
-CREATE TABLE event(
+DROP TABLE IF EXISTS events;
+CREATE TABLE events(
   id serial PRIMARY KEY,
   event_name text,
   event_type text

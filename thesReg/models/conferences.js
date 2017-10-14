@@ -26,38 +26,44 @@ Conferences.getSingleConference = function(conferenceId, callback) {
         if (error) {
           callback(error, undefined, undefined)
         } else if (sessions.length === 0) {
-          sessions = [common.getEmptySession()]
+          sessions = [common.getEmptySession()];
           callback(null, conference, sessions)
         } else {
-          var sessionsPromises = [];
-          for (var i=0; i<sessions.length; i++) {
-            (function(i) {
-              var promise = new Promise(function(resolve, reject) {
-                db.rooms.find({session_id: sessions[i].id}, function(error, rooms) {
-                  if (error) {
-                    reject(error)
-                  } else {
-                    if (rooms.length === 0) {
-                      var emptyRoom = common.getEmptyRoom();
-                      rooms.push(emptyRoom)
-                    }
-                    sessions[i].rooms = rooms;
-                    resolve()
-                  }
-                })
-              })
-              sessionsPromises.push(promise)
-            })(i)
-          }
+          db.run("select * from events", function(error, events) {
+            var sessionsPromises = [];
+            for (var i=0; i<sessions.length; i++) {
+              (function(i, events) {
+                var promise = new Promise(function(resolve, reject) {
+                  db.rooms.find({session_id: sessions[i].id}, function(error, rooms) {
+                    if (error) {
+                      reject(error)
+                    } else {
+                      if (rooms.length === 0) {
+                        var emptyRoom = common.getEmptyRoom();
+                        rooms.push(emptyRoom)
+                      }
 
-          Promise.all(sessionsPromises).then(
-            function() {
-              callback(null, conference, sessions)
-            },
-            function(error) {
-              callback(error, undefined, undefined)
+                      for (var j=0; j<rooms.length; j++) {
+                        rooms[j].events = events;
+                      }
+                      sessions[i].rooms = rooms;
+                      resolve()
+                    }
+                  })
+                })
+                sessionsPromises.push(promise)
+              })(i, events)
             }
-          )
+
+            Promise.all(sessionsPromises).then(
+              function() {
+                callback(null, conference, sessions)
+              },
+              function(error) {
+                callback(error, undefined, undefined)
+              }
+            )
+          })
         }
       }.bind(conference))
     }

@@ -6,7 +6,7 @@ var ies = ie_seeds.length;
 
 var make = function(){
   for (var ie of ie_seeds) {
-    db.event.save(ie, function(err, res) {
+    db.events.save(ie, function(err, res) {
       console.log("saved: ", JSON.stringify(res));
       ies--
       if (ies <= 0) {
