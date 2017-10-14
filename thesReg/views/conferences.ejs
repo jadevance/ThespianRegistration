@@ -173,7 +173,6 @@
                           <% for (var j=0; j<sessions[i].rooms.length; j++) { %>
                             <% if (sessions[i].rooms[j].isEditing) { %>
                               <% if (!sessions[i].rooms[j].id) { %>
-                                no ide
                                 <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms/new" method="post">
                               <% } else { %>
                                 <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms/<%=sessions[i].rooms[j].id%>/edit" method="post">

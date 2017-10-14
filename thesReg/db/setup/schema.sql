@@ -83,8 +83,8 @@ CREATE TABLE rooms(
 DROP TABLE IF EXISTS event;
 CREATE TABLE event(
   id serial PRIMARY KEY,
-  event_type text,
-  number_participating integer
+  event_name text,
+  event_type text
 );
 
 DROP TABLE IF EXISTS invoice;

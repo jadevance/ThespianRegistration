@@ -8,7 +8,7 @@
     "db:create": "createdb ThespianRegistration",
     "db:schema": "clear; node tasks/loadSchema.js",
     "db:seed": "clear; node tasks/seed.js",
-    "db:reset": "npm run db:drop; npm run db:create; npm run db:schema;"
+    "db:reset": "npm run db:drop; npm run db:create; npm run db:schema; npm run db:seed"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",

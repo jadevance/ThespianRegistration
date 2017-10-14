@@ -1,0 +1,58 @@
+[
+  {
+    "event_name": "Monologue",
+    "event_type": "performance"
+  },
+  {
+    "event_name": "Duo Scene",
+    "event_type": "performance"
+  },
+  {
+    "event_name": "Group Acting",
+    "event_type": "performance"
+  },
+  {
+    "event_name": "Solo Musical",
+    "event_type": "performance"
+  },
+  {
+    "event_name": "Duet Musical",
+    "event_type": "performance"
+  },
+  {
+    "event_name": "Group Musical",
+    "event_type": "performance"
+  },
+  {
+    "event_name": "Costume Design",
+    "event_type": "technical"
+  },
+  {
+    "event_name": "Costume Construction",
+    "event_type": "technical"
+  },
+  {
+    "event_name": "Lighting Design",
+    "event_type": "technical"
+  },
+  {
+    "event_name": "Scenic Design",
+    "event_type": "technical"
+  },
+  {
+    "event_name": "Sound Design",
+    "event_type": "technical"
+  },
+  {
+    "event_name": "Stage Management",
+    "event_type": "technical"
+  },
+  {
+    "event_name": "Theatre Marketing",
+    "event_type": "technical"
+  },
+  {
+    "event_name": "All Technical Events",
+    "event_type": "technical"
+  }
+]
