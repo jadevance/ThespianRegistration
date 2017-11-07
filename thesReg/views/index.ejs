@@ -24,7 +24,7 @@
               <th>Registration Status</th>
               <th>
                 <% if (user.user_level === 1) { %>
-                  View/Edit
+                  View / Edit
                 <% } else { %>
                   Register
                 <% } %>
@@ -39,7 +39,7 @@
                 <td><%= conferences[i].registration_status %></td>
                 <td>
                   <% if (user.user_level === 1) { %>
-                    <a href="/conferences/<%=conferences[i].id%>">View</a>/<a href="conferences/<%=conferences[i].id%>/edit">Edit</a>
+                    <a href="/conferences/<%=conferences[i].id%>">View </a>/<a href="conferences/<%=conferences[i].id%>/edit"> Edit</a>
                   <% } else if (conferences[i].registration_status === "open") { %>
                     <a href="/conferences/<%=conferences[i].id%>/register">Register for this Conference</a>
                   <% } else { %>

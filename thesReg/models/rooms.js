@@ -4,6 +4,8 @@ var db = app.get('db');
 var Rooms = function() {};
 
 Rooms.createNewRoom = function(formData, params, callback) {
+  console.log('createNewRoom')
+  console.log(formData)
   db.rooms.save({conference_id: params.conferenceId,
                   session_id: params.sessionId,
                   event_type_id: formData.event_type_id,

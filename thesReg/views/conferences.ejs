@@ -188,7 +188,7 @@
                                     <td>
                                       <select name="event_type_id" class="form-control" required="true" <%if (!sessions[i].rooms[j].isEditing) { %> disabled <% } %>>
                                         <% for (var k=0; k<sessions[i].rooms[j].events.length; k++) { %>
-                                          <option value="<%sessions[i].rooms[j].events[k].id%>" <% if (sessions[i].rooms[j].event_type_id == sessions[i].rooms[j].events[k].id) { %> selected <% } %>>"<%=sessions[i].rooms[j].events[k].event_name%>"</option>
+                                          <option value=<%=sessions[i].rooms[j].events[k].id%> <% if (sessions[i].rooms[j].event_type_id == sessions[i].rooms[j].events[k].id) { %> selected <% } %>><%=sessions[i].rooms[j].events[k].event_name%></option>
                                         <% } %>
                                       </select>
                                     </td>
@@ -208,8 +208,9 @@
                                 </td>
                                 <td>
                                   <select name="event_type_id" class="form-control" required="true" disabled>
-                                    <option value="1" <% if (sessions[i].rooms[j].event_type_id == "1") { %> selected <% } %>>One</option>
-                                    <option value="2" <% if (sessions[i].rooms[j].event_type_id == "2") { %> selected <% } %>>Two</option>
+                                    <% for (var k=0; k<sessions[i].rooms[j].events.length; k++) { %>
+                                      <option value=<%=sessions[i].rooms[j].events[k].id%> <% if (sessions[i].rooms[j].event_type_id == sessions[i].rooms[j].events[k].id) { %> selected <% } %>><%=sessions[i].rooms[j].events[k].event_name%></option>
+                                    <% } %>
                                   </select>
                                 </td>
                                 <td>
