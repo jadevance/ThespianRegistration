@@ -1,3 +1,6 @@
+var app = require('../app.js');
+var db = app.get('db');
+
 var commonFunctions = {
   getYear: function() {
     var now = new Date().getFullYear();
@@ -46,9 +49,9 @@ var commonFunctions = {
       event_type_id: null,
       room_name: null,
       max_allowed: null,
+      events: [],
       isEditing: true
-    }
-
+    };
     return room;
   }
 };

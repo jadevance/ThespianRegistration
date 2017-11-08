@@ -57,13 +57,18 @@ var RoomsController = {
             sessions[i].show_rooms = true;
 
             var roomsArray = sessions[i].rooms;
+            var eventsArray;
             if ((roomsArray.length > 1) || (roomsArray[0].id !== null)) {
+              eventsArray = roomsArray[0].events;
               sessions[i].rooms.push(common.getEmptyRoom());
             }
 
             for (var j=0; j<roomsArray.length; j++) {
               if (roomsArray[j].id === null) {
                 sessions[i].rooms[j].isEditing = true;
+                if (sessions[i].rooms[j].events.length === 0) {
+                  sessions[i].rooms[j].events = eventsArray;
+                }
               } else {
                 sessions[i].rooms[j].isEditing = false;
               }

@@ -1,0 +1,625 @@
+[
+  {
+    "school_name": "Assumption-St. Bridget School",
+    "school_address": "6220 32nd Ave NE",
+    "school_city": "Seattle",
+    "school_state": "WA",
+    "school_zip": 98115
+  },
+  {
+    "school_name": "Auburn High School",
+    "school_address": "711 East Main Street",
+    "school_city": "Auburn",
+    "school_state": "WA",
+    "school_zip": 98002
+  },
+  {
+    "school_name": "Auburn Mountainview High School",
+    "school_address": "28900 124th Ave. S.E.",
+    "school_city": "Auburn",
+    "school_state": "WA",
+    "school_zip": 98092
+  },
+  {
+    "school_name": "Auburn Riverside High School",
+    "school_address": "501 Oravetz Rd.",
+    "school_city": "Auburn",
+    "school_state": "WA",
+    "school_zip": 98092
+  },
+  {
+    "school_name": "Ballard High School",
+    "school_address": "1418 NW 65th Street",
+    "school_city": "Seattle",
+    "school_state": "WA",
+    "school_zip": 98117
+  },
+  {
+    "school_name": "Bishop Blanchet High School",
+    "school_address": "8200 Wallingford Ave. N.",
+    "school_city": "Seattle",
+    "school_state": "WA",
+    "school_zip": 98103
+  },
+  {
+    "school_name": "Bonney Lake High School",
+    "school_address": "10920 199th AVE CT E",
+    "school_city": "Bonney Lake",
+    "school_state": "WA",
+    "school_zip": 98391
+  },
+  {
+    "school_name": "Bothell High School",
+    "school_address": "9130 NE 180th St",
+    "school_city": "Bothell",
+    "school_state": "WA",
+    "school_zip": 98011
+  },
+  {
+    "school_name": "Bremerton High School",
+    "school_address": "1500 13th St",
+    "school_city": "Bremerton",
+    "school_state": "WA",
+    "school_zip": 98337
+  },
+  {
+    "school_name": "Burlington-Edison High School",
+    "school_address": "301 N Burlington Blvd",
+    "school_city": "Burlington",
+    "school_state": "WA",
+    "school_zip": 98233
+  },
+  {
+    "school_name": "Camas High School",
+    "school_address": "26900 SE 15th Street",
+    "school_city": "Camas",
+    "school_state": "WA",
+    "school_zip": 98607
+  },
+  {
+    "school_name": "Capital High School",
+    "school_address": "2707 Conger Ave NW",
+    "school_city": "Olympia",
+    "school_state": "WA",
+    "school_zip": 98501
+  },
+  {
+    "school_name": "Cedarcrest High School",
+    "school_address": "29000 NE 150th Street",
+    "school_city": "Duvall",
+    "school_state": "WA",
+    "school_zip": 98019
+  },
+  {
+    "school_name": "Clover Park High School",
+    "school_address": "11023 Gravelly Lake Drive SW",
+    "school_city": "Lakewood",
+    "school_state": "WA",
+    "school_zip": 98499
+  },
+  {
+    "school_name": "Crosspoint High School",
+    "school_address": "4012 Chico Way NW",
+    "school_city": "Bremerton",
+    "school_state": "WA",
+    "school_zip": 98312
+  },
+  {
+    "school_name": "DeKalb County Fine Arts Academy & Technology Center",
+    "school_address": "",
+    "school_city": "",
+    "school_state": "WA",
+    "school_zip": 0
+  },
+  {
+    "school_name": "Dwight D. Eisenhower High School",
+    "school_address": "611 S. 44th Avenue",
+    "school_city": "Yakima",
+    "school_state": "WA",
+    "school_zip": 98902
+  },
+  {
+    "school_name": "East Valley High School",
+    "school_address": "1900 Beaudry Rd",
+    "school_city": "Yakima",
+    "school_state": "WA",
+    "school_zip": 98901
+  },
+  {
+    "school_name": "Eastlake High School",
+    "school_address": "400 228th Ave. N.E.",
+    "school_city": "Sammamish",
+    "school_state": "WA",
+    "school_zip": 98074
+  },
+  {
+    "school_name": "Edmonds Heights K-12",
+    "school_address": "23200-100th Ave. W.",
+    "school_city": "Edmonds",
+    "school_state": "WA",
+    "school_zip": 98020
+  },
+  {
+    "school_name": "Enumclaw High School",
+    "school_address": "226 Semanski St. South",
+    "school_city": "Enumclaw",
+    "school_state": "WA",
+    "school_zip": 98022
+  },
+  {
+    "school_name": "Friday Harbor High School",
+    "school_address": "",
+    "school_city": "",
+    "school_state": "WA",
+    "school_zip": 0
+  },
+  {
+    "school_name": "Hanford High School",
+    "school_address": "450 Hanford St",
+    "school_city": "Richland",
+    "school_state": "WA",
+    "school_zip": 99354
+  },
+  {
+    "school_name": "Harlan High School",
+    "school_address": "14350 Old Farm to Market Rd",
+    "school_city": "San Antonio",
+    "school_state": "TX",
+    "school_zip": 78253
+  },
+  {
+    "school_name": "Harrison Preparatory",
+    "school_address": "9103 Lakewood Dr SW",
+    "school_city": "Lakewood",
+    "school_state": "WA",
+    "school_zip": 98499
+  },
+  {
+    "school_name": "Hockinson High School",
+    "school_address": "16819 NE 159th St.",
+    "school_city": "Brush Prairie",
+    "school_state": "WA",
+    "school_zip": 98606
+  },
+  {
+    "school_name": "Holy Names Academy",
+    "school_address": "728 21st Ave East",
+    "school_city": "Seattle",
+    "school_state": "WA",
+    "school_zip": 98112
+  },
+  {
+    "school_name": "Inglemoor High School",
+    "school_address": "15500 Simonds Rd NE",
+    "school_city": "Kenmore",
+    "school_state": "WA",
+    "school_zip": 98028
+  },
+  {
+    "school_name": "Interlake High School",
+    "school_address": "16245 N.E. 24th St.",
+    "school_city": "Bellevue",
+    "school_state": "WA",
+    "school_zip": 98008
+  },
+  {
+    "school_name": "International Community School",
+    "school_address": "11133 NE 65th St",
+    "school_city": "Kirkland",
+    "school_state": "WA",
+    "school_zip": 98033
+  },
+  {
+    "school_name": "International School",
+    "school_address": "445 128th Ave. SE",
+    "school_city": "Bellevue",
+    "school_state": "WA",
+    "school_zip": 98005
+  },
+  {
+    "school_name": "Issaquah High School",
+    "school_address": "700 2nd Avenue SE",
+    "school_city": "Issaquah",
+    "school_state": "WA",
+    "school_zip": 98027
+  },
+  {
+    "school_name": "James A. Garfield High School",
+    "school_address": "400 23rd Ave",
+    "school_city": "Seattle",
+    "school_state": "WA",
+    "school_zip": 98122
+  },
+  {
+    "school_name": "Joel E. Ferris High School",
+    "school_address": "200 N. Bernard",
+    "school_city": "Spokane",
+    "school_state": "WA",
+    "school_zip": 99201
+  },
+  {
+    "school_name": "John F Kennedy Catholic High School",
+    "school_address": "140 South 140th St",
+    "school_city": "Burien",
+    "school_state": "WA",
+    "school_zip": 98168
+  },
+  {
+    "school_name": "Juanita High School",
+    "school_address": "10601 NE 132nd",
+    "school_city": "Kirkland",
+    "school_state": "WA",
+    "school_zip": 98034
+  },
+  {
+    "school_name": "Kamiak High School",
+    "school_address": "10801 Harbor Pt. Blvd.",
+    "school_city": "Mukilteo",
+    "school_state": "WA",
+    "school_zip": 98275
+  },
+  {
+    "school_name": "Kamiakin High School",
+    "school_address": "600 N. Arthur St",
+    "school_city": "Kennewick",
+    "school_state": "WA",
+    "school_zip": 99336
+  },
+  {
+    "school_name": "Kelso High School",
+    "school_address": "",
+    "school_city": "",
+    "school_state": "WA",
+    "school_zip": 0
+  },
+  {
+    "school_name": "Kingston High School",
+    "school_address": "26201 Siyaya Ave NE",
+    "school_city": "Kingston",
+    "school_state": "WA",
+    "school_zip": 98346
+  },
+  {
+    "school_name": "La Conner High School",
+    "school_address": "305 N 6th St PO Box 2103",
+    "school_city": "La Conner",
+    "school_state": "WA",
+    "school_zip": 98257
+  },
+  {
+    "school_name": "Lakes High School",
+    "school_address": "10320 Farwest Dr SW",
+    "school_city": "Lakewood",
+    "school_state": "WA",
+    "school_zip": 98498
+  },
+  {
+    "school_name": "Lewis and Clark High School",
+    "school_address": "521 W 4th",
+    "school_city": "Spokane",
+    "school_state": "WA",
+    "school_zip": 99201
+  },
+  {
+    "school_name": "Liberty High School",
+    "school_address": "16655 SE 136th St",
+    "school_city": "Renton",
+    "school_state": "WA",
+    "school_zip": 98059
+  },
+  {
+    "school_name": "Mead Senior High School",
+    "school_address": "302 W Hastings Rd",
+    "school_city": "Spokane",
+    "school_state": "WA",
+    "school_zip": 99218
+  },
+  {
+    "school_name": "Mercer Island High School",
+    "school_address": "9100 SE 42nd Street",
+    "school_city": "Mercer Island",
+    "school_state": "WA",
+    "school_zip": 98040
+  },
+  {
+    "school_name": "Meadowdale High School",
+    "school_address": "",
+    "school_city": "",
+    "school_state": "WA",
+    "school_zip": 0
+  },
+  {
+    "school_name": "Moses Lake High School",
+    "school_address": "803 Sharon Ave. E",
+    "school_city": "Moses Lake",
+    "school_state": "WA",
+    "school_zip": 98837
+  },
+  {
+    "school_name": "Mountlake Terrace High School",
+    "school_address": "21801 44th  Ave. W.",
+    "school_city": "Mountlake Terrace",
+    "school_state": "WA",
+    "school_zip": 98043
+  },
+  {
+    "school_name": "Mt. Spokane High School",
+    "school_address": "6015 East Mt. Spokane Park Drive",
+    "school_city": "Mead",
+    "school_state": "WA",
+    "school_zip": 99021
+  },
+  {
+    "school_name": "Nathan Hale High School",
+    "school_address": "10750 30th Ave NE",
+    "school_city": "Seattle",
+    "school_state": "WA",
+    "school_zip": 98125
+  },
+  {
+    "school_name": "Newport High School",
+    "school_address": "4333 Factoria Blvd. S.E.",
+    "school_city": "Bellevue",
+    "school_state": "WA",
+    "school_zip": 98006
+  },
+  {
+    "school_name": "North Mason High School",
+    "school_address": "150 E. North Mason School Road",
+    "school_city": "Belfair",
+    "school_state": "WA",
+    "school_zip": 98528
+  },
+  {
+    "school_name": "North Thurston High School",
+    "school_address": "600 Sleater Kinney NE",
+    "school_city": "Lacey",
+    "school_state": "WA",
+    "school_zip": 98506
+  },
+  {
+    "school_name": "Oak Harbor High School",
+    "school_address": "#1 Wildcat Way",
+    "school_city": "Oak Harbor",
+    "school_state": "WA",
+    "school_zip": 98277
+  },
+  {
+    "school_name": "Odle Middle School",
+    "school_address": "",
+    "school_city": "",
+    "school_state": "WA",
+    "school_zip": 0
+  },
+  {
+    "school_name": "Oliver M. Hazen High School",
+    "school_address": "1101 Hoquiam Ave. N.E.",
+    "school_city": "Renton",
+    "school_state": "WA",
+    "school_zip": 98059
+  },
+  {
+    "school_name": "Olympia High School",
+    "school_address": "1302 North Street",
+    "school_city": "Olympia",
+    "school_state": "WA",
+    "school_zip": 98501
+  },
+  {
+    "school_name": "Port Angeles High School",
+    "school_address": "304 E. Park",
+    "school_city": "Port Angeles",
+    "school_state": "WA",
+    "school_zip": 98362
+  },
+  {
+    "school_name": "R.A. Long High School - Mainstage Theatre",
+    "school_address": "2903 Nichols Blvd.",
+    "school_city": "Longview",
+    "school_state": "WA",
+    "school_zip": 98632
+  },
+  {
+    "school_name": "Rainier Beach High School",
+    "school_address": "8815 Seward Park Ave. S",
+    "school_city": "Seattle",
+    "school_state": "WA",
+    "school_zip": 98118
+  },
+  {
+    "school_name": "Redmond High School",
+    "school_address": "17272 N.E. 104th St.",
+    "school_city": "Redmond",
+    "school_state": "WA",
+    "school_zip": 98052
+  },
+  {
+    "school_name": "Renaissance School of Art and Reasoning",
+    "school_address": "400 228th Ave NE",
+    "school_city": "Sammamish",
+    "school_state": "WA",
+    "school_zip": 98074
+  },
+  {
+    "school_name": "River Ridge High School",
+    "school_address": "",
+    "school_city": "",
+    "school_state": "WA",
+    "school_zip": 0
+  },
+  {
+    "school_name": "Rogers High School",
+    "school_address": "12801 86th Ave E",
+    "school_city": "Puyallup",
+    "school_state": "WA",
+    "school_zip": 98373
+  },
+  {
+    "school_name": "Roosevelt High School",
+    "school_address": "1410 NE 66th St",
+    "school_city": "Seattle",
+    "school_state": "WA",
+    "school_zip": 98115
+  },
+  {
+    "school_name": "Sammamish High School",
+    "school_address": "100 140th Ave. SE",
+    "school_city": "Bellevue",
+    "school_state": "WA",
+    "school_zip": 98005
+  },
+  {
+    "school_name": "Seattle Academy of Arts & Sciences",
+    "school_address": "",
+    "school_city": "",
+    "school_state": "WA",
+    "school_zip": 0
+  },
+  {
+    "school_name": "Seattle Preparatory School",
+    "school_address": "2400 11th Ave. E",
+    "school_city": "Seattle",
+    "school_state": "WA",
+    "school_zip": 98102
+  },
+  {
+    "school_name": "Sehome High School",
+    "school_address": "2700 Bill McDonald Pkwy.",
+    "school_city": "Bellingham",
+    "school_state": "WA",
+    "school_zip": 98225
+  },
+  {
+    "school_name": "Shorewood High School",
+    "school_address": "17300 Fremont Ave. N.",
+    "school_city": "Shoreline",
+    "school_state": "WA",
+    "school_zip": 98133
+  },
+  {
+    "school_name": "Skyline High School",
+    "school_address": "1122 228th Ave. S.E.",
+    "school_city": "Sammamish",
+    "school_state": "WA",
+    "school_zip": 98075
+  },
+  {
+    "school_name": "Snohomish High School",
+    "school_address": "",
+    "school_city": "",
+    "school_state": "WA",
+    "school_zip": 0
+  },
+  {
+    "school_name": "Squalicum High School",
+    "school_address": "3773 E. McLeod Rd.",
+    "school_city": "Bellingham",
+    "school_state": "WA",
+    "school_zip": 98226
+  },
+  {
+    "school_name": "St. Aloysius Gonzaga Catholic School",
+    "school_address": "611 E Mission Ave",
+    "school_city": "Spokane",
+    "school_state": "WA",
+    "school_zip": 99207
+  },
+  {
+    "school_name": "St. Anne School",
+    "school_address": "101 West Lee Street",
+    "school_city": "Seattle",
+    "school_state": "WA",
+    "school_zip": 98119
+  },
+  {
+    "school_name": "Sumner High School",
+    "school_address": "1707 Main Street",
+    "school_city": "Sumner",
+    "school_state": "WA",
+    "school_zip": 98390
+  },
+  {
+    "school_name": "Tahoma Senior High School",
+    "school_address": "23499 Tahoma Way SE",
+    "school_city": "Maple Valley",
+    "school_state": "WA",
+    "school_zip": 98038
+  },
+  {
+    "school_name": "The Overlake School",
+    "school_address": "20301 NE 108th St",
+    "school_city": "Redmond",
+    "school_state": "WA",
+    "school_zip": 98053
+  },
+  {
+    "school_name": "Timberline High School",
+    "school_address": "6120 Mullen Rd S.E.",
+    "school_city": "Lacey",
+    "school_state": "WA",
+    "school_zip": 98503
+  },
+  {
+    "school_name": "Tumwater High School",
+    "school_address": "700 Israel Rd.",
+    "school_city": "Tumwater",
+    "school_state": "WA",
+    "school_zip": 98501
+  },
+  {
+    "school_name": "Union High School",
+    "school_address": "",
+    "school_city": "",
+    "school_state": "WA",
+    "school_zip": 0
+  },
+  {
+    "school_name": "University High School",
+    "school_address": "12420 E 32nd Ave",
+    "school_city": "Spokane Valley",
+    "school_state": "WA",
+    "school_zip": 99206
+  },
+  {
+    "school_name": "Vancouver School of Arts & Academics",
+    "school_address": "3101 Main Street",
+    "school_city": "Vancouver",
+    "school_state": "WA",
+    "school_zip": 98663
+  },
+  {
+    "school_name": "Vashon Island High School",
+    "school_address": "",
+    "school_city": "",
+    "school_state": "WA",
+    "school_zip": 0
+  },
+  {
+    "school_name": "Wenatchee High School",
+    "school_address": "1101 Millerdale Ave",
+    "school_city": "Wenatchee",
+    "school_state": "WA",
+    "school_zip": 98801
+  },
+  {
+    "school_name": "West Sound Academy",
+    "school_address": "16571 Creative Drive NE Box 807",
+    "school_city": "Poulsbo",
+    "school_state": "WA",
+    "school_zip": 98370
+  },
+  {
+    "school_name": "Woodinville High School",
+    "school_address": "19819 136th Pl NE",
+    "school_city": "Woodinville",
+    "school_state": "WA",
+    "school_zip": 98072
+  },
+  {
+    "school_name": "Yelm High School",
+    "school_address": "1315 W Yelm Ave",
+    "school_city": "Yelm",
+    "school_state": "WA",
+    "school_zip": 98597
+  }
+]

@@ -37,7 +37,8 @@ Users.updateProfile = function(formData, userData, callback) {
 										first_name: formData.first_name,
 										last_name: formData.last_name,
 										phone: formData.phone,
-										teacher_type: formData.teacher_type, complete_profile: true},
+										teacher_type: formData.teacher_type,
+										complete_profile: true},
 				function(error, updatedUser) {
 				if (error) {
 					callback(error, undefined);

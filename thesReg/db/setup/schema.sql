@@ -7,22 +7,22 @@ CREATE TABLE users(
   email text,
   phone integer,
   teacher_type text,
+  school_id integer,
+  finance_person_name text,
+  finance_person_email text,
+  finance_person_phone integer,
   complete_profile boolean,
   user_level integer
 );
 
-DROP TABLE IF EXISTS school;
-CREATE TABLE school(
+DROP TABLE IF EXISTS schools;
+CREATE TABLE schools(
   id serial PRIMARY KEY,
-  teacher_id integer,
   school_name text,
   school_address text,
   school_city text,
   school_state text,
-  school_zip integer,
-  finance_person_name text,
-  finance_person_email text,
-  finance_person_phone integer
+  school_zip integer
 );
 
 
@@ -66,6 +66,7 @@ DROP TABLE IF EXISTS sessions;
 CREATE TABLE sessions(
   id serial PRIMARY KEY,
   conference_id integer,
+  session_name text,
   start_time text,
   end_time text
 );

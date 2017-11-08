@@ -99,6 +99,7 @@
         <h2 class="table-head">Sessions:</h2>
         <thead>
           <tr>
+            <th>Session Name</th>
             <th>Start Time</th>
             <th>End Time</th>
             <th>Room Actions</th>
@@ -111,6 +112,9 @@
               <% if (sessions[i].id === null) { %>
                 <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/sessions/new" method="post">
                   <fieldset>
+                    <td>
+                      <input class="form-control" type="text" name="session_name" value="<%= sessions[i].session_name %>" required="true">
+                    </td>
                     <td>
                       <input class="form-control" type="text" name="start_time" value="<%= sessions[i].start_time %>" required="true">
                     </td>
@@ -127,6 +131,9 @@
                 <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/edit" method="post">
                   <fieldset>
                     <td>
+                      <input class="form-control" type="text" name="session_name" value="<%= sessions[i].session_name %>" required="true">
+                    </td>
+                    <td>
                       <input class="form-control" type="text" name="start_time" value="<%= sessions[i].start_time %>" required="true">
                     </td>
                     <td>
@@ -139,6 +146,9 @@
                   </fieldset>
                 </form>
               <% } else { %>
+                <td>
+                  <%= sessions[i].session_name %>
+                </td>
                 <td>
                   <%= sessions[i].start_time %>
                 </td>
@@ -231,9 +241,7 @@
         </tbody>
       </table>
     <% } %>
-    <% if (!editingSession) { %>
-      <a href="/conferences/<%=conference.id%>/sessions/new">Add new session</a>
-    <% } %>
+    <a href="/conferences/<%=conference.id%>/sessions/new">Add new session</a>
   </div>
 <% } %>
 
