@@ -53,6 +53,37 @@
           </div>
         </div>
         <div class="form-group">
+          <label class="col-lg-3 control-label">School:</label>
+          <div class="col-lg-8">
+            <div class="ui-select">
+              <select name="school_id" class="form-control" <%if (!editing) { %> disabled <% } %>>
+                <% for (var i=0; i<schools.length; i++) { %>
+                  <option value=<%=schools[i].id %> <% if (user.school_id === schools[i].id) { %> selected <% } %>><%=schools[i].school_name%></option>
+                <% } %>
+              </select>
+              <p>If your school is not listed, please email kcummins@osd.wednet.edu to have it added.</p>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">School's Financial Coordinator:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" name="finance_person_name" value="<%= user.finance_person_name %>" required="true" <%if (!editing) { %> disabled <% } %>>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Financial Coordinator's Email:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" name="finance_person_email" value="<%= user.finance_person_email %>" required="true" <%if (!editing) { %> disabled <% } %>>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Financial Coordinator's Phone Number:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="number" name="finance_person_phone" value="<%= user.finance_person_phone %>" required="true" <%if (!editing) { %> disabled <% } %>>
+          </div>
+        </div>
+        <div class="form-group">
           <% if (editing) { %>
             <div class="col-md-8">
               <input type="submit" class="btn btn-primary" value="Save Changes">

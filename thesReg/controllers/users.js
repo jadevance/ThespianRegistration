@@ -9,6 +9,7 @@ var UsersController = {
   },
 
   completeProfile: function(request, response) {
+    request.session.schools = request.user.schools;
     if (!request.user.complete_profile) {
       response.redirect('/profile/' + request.user.id);
     } else {
@@ -20,12 +21,14 @@ var UsersController = {
     if(request.user && !request.user.complete_profile) {
       response.render('profile', {
         user: request.user,
+        schools: request.session.schools,
         loggedIn: true,
         editing: true
       });
     } else if (request.user) {
       response.render('profile', {
         user: request.user,
+        schools: request.session.schools,
         loggedIn: true,
         editing: false
       });
@@ -37,6 +40,7 @@ var UsersController = {
   editProfile: function(request, response) {
     response.render('profile', {
       user: request.user,
+      schools: request.session.schools,
       loggedIn: true,
       editing: true
     })

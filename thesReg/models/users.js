@@ -19,12 +19,26 @@ Users.findOrMakeUser = function(userSessionInfo, callback) {
 					if (error || !newUser) {
 						callback(error, undefined)
 					} else {
-						callback(null, newUser)
+						db.run("select * from schools", function(error, schools) {
+							if (error) {
+								callback(error, undefined)
+							} else {
+								newUser.schools = schools;
+								callback(null, newUser)
+							}
+						})
 					}
 				})
 		} else {
-			callback(null, user)
-		}
+      db.run("select * from schools", function(error, schools) {
+      	if (error) {
+      		callback(error, undefined)
+				} else {
+      		user.schools = schools;
+          callback(null, user)
+        }
+			})
+    }
 	})
 };
 
@@ -38,7 +52,11 @@ Users.updateProfile = function(formData, userData, callback) {
 										last_name: formData.last_name,
 										phone: formData.phone,
 										teacher_type: formData.teacher_type,
-										complete_profile: true},
+										complete_profile: true,
+										school_id: formData.school_id,
+										finance_person_name: formData.finance_person_name,
+										finance_person_email: formData.finance_person_email,
+										finance_person_phone: formData.finance_person_phone},
 				function(error, updatedUser) {
 				if (error) {
 					callback(error, undefined);
