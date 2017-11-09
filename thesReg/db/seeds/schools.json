@@ -105,13 +105,6 @@
     "school_zip": 98312
   },
   {
-    "school_name": "DeKalb County Fine Arts Academy & Technology Center",
-    "school_address": "",
-    "school_city": "",
-    "school_state": "WA",
-    "school_zip": 0
-  },
-  {
     "school_name": "Dwight D. Eisenhower High School",
     "school_address": "611 S. 44th Avenue",
     "school_city": "Yakima",
@@ -148,10 +141,10 @@
   },
   {
     "school_name": "Friday Harbor High School",
-    "school_address": "",
-    "school_city": "",
+    "school_address": "45 Blair Ave",
+    "school_city": "Friday Harbor",
     "school_state": "WA",
-    "school_zip": 0
+    "school_zip": 98250
   },
   {
     "school_name": "Hanford High School",
@@ -159,13 +152,6 @@
     "school_city": "Richland",
     "school_state": "WA",
     "school_zip": 99354
-  },
-  {
-    "school_name": "Harlan High School",
-    "school_address": "14350 Old Farm to Market Rd",
-    "school_city": "San Antonio",
-    "school_state": "TX",
-    "school_zip": 78253
   },
   {
     "school_name": "Harrison Preparatory",
@@ -267,10 +253,10 @@
   },
   {
     "school_name": "Kelso High School",
-    "school_address": "",
-    "school_city": "",
+    "school_address": "1904 Allen St.",
+    "school_city": "Kelso",
     "school_state": "WA",
-    "school_zip": 0
+    "school_zip": 98626
   },
   {
     "school_name": "Kingston High School",
@@ -323,10 +309,10 @@
   },
   {
     "school_name": "Meadowdale High School",
-    "school_address": "",
-    "school_city": "",
+    "school_address": "6002 168th St SW",
+    "school_city": "Lynnwood",
     "school_state": "WA",
-    "school_zip": 0
+    "school_zip": 98037
   },
   {
     "school_name": "Moses Lake High School",
@@ -385,13 +371,6 @@
     "school_zip": 98277
   },
   {
-    "school_name": "Odle Middle School",
-    "school_address": "",
-    "school_city": "",
-    "school_state": "WA",
-    "school_zip": 0
-  },
-  {
     "school_name": "Oliver M. Hazen High School",
     "school_address": "1101 Hoquiam Ave. N.E.",
     "school_city": "Renton",
@@ -442,10 +421,10 @@
   },
   {
     "school_name": "River Ridge High School",
-    "school_address": "",
-    "school_city": "",
+    "school_address": "350 River Ridge Dr SE",
+    "school_city": "Olympia",
     "school_state": "WA",
-    "school_zip": 0
+    "school_zip": 98513
   },
   {
     "school_name": "Rogers High School",
@@ -470,10 +449,10 @@
   },
   {
     "school_name": "Seattle Academy of Arts & Sciences",
-    "school_address": "",
-    "school_city": "",
+    "school_address": "1432 15th Ave",
+    "school_city": "Seattle",
     "school_state": "WA",
-    "school_zip": 0
+    "school_zip": 98122
   },
   {
     "school_name": "Seattle Preparatory School",
@@ -505,10 +484,10 @@
   },
   {
     "school_name": "Snohomish High School",
-    "school_address": "",
-    "school_city": "",
+    "school_address": "1316 5th St",
+    "school_city": "Snohomish",
     "school_state": "WA",
-    "school_zip": 0
+    "school_zip": 98290
   },
   {
     "school_name": "Squalicum High School",
@@ -568,10 +547,10 @@
   },
   {
     "school_name": "Union High School",
-    "school_address": "",
-    "school_city": "",
+    "school_address": "6201 NW Friberg-Strunk St",
+    "school_city": "Camas",
     "school_state": "WA",
-    "school_zip": 0
+    "school_zip": 98607
   },
   {
     "school_name": "University High School",
@@ -589,10 +568,10 @@
   },
   {
     "school_name": "Vashon Island High School",
-    "school_address": "",
-    "school_city": "",
+    "school_address": "9600 SW 204th St",
+    "school_city": "Vashon",
     "school_state": "WA",
-    "school_zip": 0
+    "school_zip": 98070
   },
   {
     "school_name": "Wenatchee High School",
