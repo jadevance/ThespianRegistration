@@ -74,6 +74,7 @@ Conferences.createNewConference = function(formData, callback) {
   db.conferences.save({title: formData.conference_title,
                         year: formData.year,
                         registration_status: formData.registration_status,
+                        registration_deadline: formData.registration_deadline,
                         location_name: formData.location_name,
                         location_address: formData.location_address,
                         location_city: formData.location_city,

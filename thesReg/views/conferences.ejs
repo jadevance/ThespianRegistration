@@ -67,6 +67,12 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="col-lg-3 control-label">Registration Deadline:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" name="registration_deadline" value="<%= conference.registration_deadline %>" required="true" <%if (!editingConference) { %> disabled <% } %>>
+            </div>
+          </div>
+          <div class="form-group">
             <label class="col-lg-3 control-label">Status:</label>
             <div class="col-lg-8">
               <div class="ui-select">

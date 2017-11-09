@@ -55,6 +55,7 @@ CREATE TABLE conferences(
   title text,
   year integer,
   registration_status text,
+  registration_deadline text,
   location_name text,
   location_address text,
   location_city text,
