@@ -15,16 +15,15 @@ CREATE TABLE users(
   user_level integer
 );
 
-DROP TABLE IF EXISTS schools;
-CREATE TABLE schools(
+DROP TABLE IF EXISTS registration;
+CREATE TABLE registration(
   id serial PRIMARY KEY,
-  school_name text,
-  school_address text,
-  school_city text,
-  school_state text,
-  school_zip integer
+  teacher_id integer,
+  conference_id integer,
+  invoice_id integer,
+  conference_name text,
+  status text
 );
-
 
 DROP TABLE IF EXISTS student;
 CREATE TABLE student(
@@ -46,6 +45,18 @@ CREATE TABLE individual_event(
   piece_name text,
   piece_author text,
   piece_publisher text
+);
+
+DROP TABLE IF EXISTS invoice;
+CREATE TABLE invoice(
+  id serial PRIMARY KEY,
+  teacher_id integer,
+  school_id integer,
+  conference_id integer,
+  registration_id integer,
+  total_thespians integer,
+  total_non_thespians integer,
+  total_cost money
 );
 
 -- Admins only:
@@ -82,20 +93,19 @@ CREATE TABLE rooms(
   max_allowed integer
 );
 
+DROP TABLE IF EXISTS schools;
+CREATE TABLE schools(
+  id serial PRIMARY KEY,
+  school_name text,
+  school_address text,
+  school_city text,
+  school_state text,
+  school_zip integer
+);
+
 DROP TABLE IF EXISTS events;
 CREATE TABLE events(
   id serial PRIMARY KEY,
   event_name text,
   event_type text
-);
-
-DROP TABLE IF EXISTS invoice;
-CREATE TABLE invoice(
-  id serial PRIMARY KEY,
-  teacher_id integer,
-  school_id integer,
-  conference_id integer,
-  total_thespians integer,
-  total_non_thespians integer,
-  total_cost money
 );
