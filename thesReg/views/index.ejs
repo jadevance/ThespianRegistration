@@ -58,14 +58,15 @@
   </div>
 
   <div class="registration-list">
-    <% if (registrations.length === 0) { %>
-      <div class="container no-registrations">
-        <p>You have not begun registration for any conferences. Please select a conference above to register for it.</p>
-      </div>
-    <% } else { %>
+    <% if (conferences.length !== 0) { %>
       <div class="container all-registrations">
         <table class="table table-striped">
           <h2 class="table-head">Your Registrations:</h2>
+          <% if (registrations.length === 0) { %>
+            <div class="container no-registrations">
+              <p>You have not begun registration for any conferences. Please select a conference above to register for it.</p>
+            </div>
+          <% } else { %>
           <thead>
             <tr>
               <th>Conference</th>
@@ -88,6 +89,7 @@
               </tr>
             <% } %>
           </tbody>
+          <% } %>
         </table>
       </div>
     <% } %>

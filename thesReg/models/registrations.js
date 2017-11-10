@@ -14,7 +14,7 @@ Registrations.getUserRegistrations = function(userId, callback) {
     } else {
       var registrationPromises = [];
       for (var i=0; i<registrations.length; i++) {
-        (function i, registrations) {
+        (function(i, registrations) {
           var promise = new Promise(function(resolve, reject) {
             db.conferences.find({id: registrations[i].conference_id}, function(error, conference) {
               if (error) {
@@ -26,7 +26,7 @@ Registrations.getUserRegistrations = function(userId, callback) {
             })
           })
           registrationPromises.push(promise)
-        }(i, registrations)
+        })(i, registrations)
       }
 
       Promise.all(registrationPromises).then(
