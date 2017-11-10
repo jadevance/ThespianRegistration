@@ -56,6 +56,42 @@
       </div>
     <% } %>
   </div>
+
+  <div class="registration-list">
+    <% if (registrations.length === 0) { %>
+      <div class="container no-registrations">
+        <p>You have not begun registration for any conferences. Please select a conference above to register for it.</p>
+      </div>
+    <% } else { %>
+      <div class="container all-registrations">
+        <table class="table table-striped">
+          <h2 class="table-head">Your Registrations:</h2>
+          <thead>
+            <tr>
+              <th>Conference</th>
+              <th>Registration Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (var i=0; i<registrations.length; i++) { %>
+              <tr>
+                <td><%= registrations[i].conference_name %></td>
+                <td><%= registrations[i].status %></td>
+                <td>
+                  <% if (registrations[i].ableToRegister === "open") { %>
+                    <a href="">Edit Registration</a>
+                   <% } else { %>
+                    <p>Registration is now closed.</p>
+                  <% } %>
+                </td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
 <%= console.log(registrations) %>
 <% } %>
 
