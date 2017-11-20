@@ -15,18 +15,18 @@ CREATE TABLE users(
   user_level integer
 );
 
-DROP TABLE IF EXISTS registration;
-CREATE TABLE registration(
+DROP TABLE IF EXISTS registrations;
+CREATE TABLE registrations(
   id serial PRIMARY KEY,
   teacher_id integer,
   conference_id integer,
+  conference_year integer,
   invoice_id integer,
-  conference_name text,
   status text
 );
 
-DROP TABLE IF EXISTS student;
-CREATE TABLE student(
+DROP TABLE IF EXISTS students;
+CREATE TABLE students(
   id serial PRIMARY KEY,
   teacher_id integer,
   school_id integer,
@@ -34,6 +34,14 @@ CREATE TABLE student(
   last_name text,
   graduation_year integer,
   thespian_status boolean
+);
+
+DROP TABLE IF EXISTS registered_students;
+CREATE TABLE registered_students(
+  id serial PRIMARY KEY,
+  teacher_id integer,
+  student_id integer,
+  registration_id integer
 );
 
 DROP TABLE IF EXISTS individual_event;

@@ -1,0 +1,15 @@
+<%- include('./_header') %>
+
+<h1>Registration</h1>
+<p>Thank you for starting the registration process for for <%=conference.title%>! Please register individual students below. After a student has been added, you can add up to three individual events per student.</p>
+<p>You can save your progress and come back to edit this registration up until <%=conference.registration_deadline%>. You can do so buy pressing the 'Save' button below. When you are completely finished adding students and their individual events, please press the 'Submit & Generate Invoice' button.</p>
+<p><b>Please note:</b> you will be unable to edit your registration after you have submitted and generated an invoice, and you <b>must</b> press 'Submit & Generate Invoice' before the registration deadline listed above.</p>
+
+<% if (registered_students.length === 0) { %>
+  <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/student/new">Start Adding Students</a>
+<% } else { %>
+<h2>Students:</h2>
+
+
+<% } %>
+<%- include('./_footer') %>

@@ -22,13 +22,7 @@
               <th>Title</th>
               <th>Year</th>
               <th>Registration Status</th>
-              <th>
-                <% if (user.user_level === 1) { %>
-                  View / Edit
-                <% } else { %>
-                  Register
-                <% } %>
-              </th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -40,9 +34,14 @@
                 <td>
                   <% if (user.user_level === 1) { %>
                     <a href="/conferences/<%=conferences[i].id%>">View </a>/<a href="conferences/<%=conferences[i].id%>/edit"> Edit</a>
-                  <% } else if (conferences[i].registration_status === "open") { %>
-                    <a href="/conferences/<%=conferences[i].id%>/register">Register for this Conference</a>
-                  <% } else { %>
+                  <% } else if (conferences[i].registration_status === "open" && !conferences[i].hideActions) { %>
+                    <form method="post" action="/conferences/<%=conferences[i].id%>/registration/new" class="inline">
+                      <input type="hidden" name="register-form">
+                      <button type="submit" class="link-button">
+                        Register for this Conference
+                      </button>
+                    </form>
+                  <% } else if (conferences[i].registration_status === "closed") { %>
                     Check back soon to register!
                   <% } %>
                 </td>
@@ -80,8 +79,8 @@
                 <td><%= registrations[i].conference_name %></td>
                 <td><%= registrations[i].status %></td>
                 <td>
-                  <% if (registrations[i].ableToRegister === "open") { %>
-                    <a href="">Edit Registration</a>
+                  <% if (registrations[i].id) { %>
+                    <a href="/conferences/<%=registrations[i].conference_id%>/registration/<%=registrations[i].id%>/edit">Edit Registration</a>
                    <% } else { %>
                     <p>Registration is now closed.</p>
                   <% } %>
@@ -94,7 +93,6 @@
       </div>
     <% } %>
   </div>
-<%= console.log(registrations) %>
 <% } %>
 
 

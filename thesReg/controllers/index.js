@@ -18,6 +18,14 @@ var IndexController = {
               err.error = "Error finding registrations";
               response.json(err)
             } else {
+              for (var i=0; i<registrations.length; i++) {
+                for (var j=0; j<conferences.length; j++) {
+                  if (registrations[i].conference_id === conferences[j].id) {
+                    registrations[i].conference_name = conferences[j].title;
+                    conferences[j].hideActions = true;
+                  }
+                }
+              }
               response.render('index', {
                 user: request.user,
                 conferences: conferences,

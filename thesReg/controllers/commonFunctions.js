@@ -53,6 +53,19 @@ var commonFunctions = {
       isEditing: true
     };
     return room;
+  },
+
+  getEmptyStudent: function(teacher) {
+    var student = {
+      id: null,
+      teacher_id: teacher.id,
+      schoolId: teacher.school_id,
+      first_name: null,
+      last_name: null,
+      graduation_year: null,
+      thespian_status: null
+    };
+    return student;
   }
 };
 

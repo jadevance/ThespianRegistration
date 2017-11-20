@@ -3,10 +3,6 @@ var common = require('./commonFunctions.js');
 
 var ConferencesController = {
 
-  getAllConferences: function(request, response) {
-    console.log('do something')
-  },
-
   getSingleConference: function(request, response) {
     const loggedIn = request.isAuthenticated();
     if (loggedIn && (request.user.user_level === 1)) {

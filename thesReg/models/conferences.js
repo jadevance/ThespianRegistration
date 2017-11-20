@@ -5,6 +5,16 @@ var common = require('../controllers/commonFunctions.js');
 
 var Conferences = function() {};
 
+Conferences.getSingleConferenceLight = function(conferenceId, callback) {
+  db.conferences.findOne({id: conferenceId}, function(error, conference) {
+    if (error) {
+      callback(error, undefined)
+    } else {
+      callback(null, conference)
+    }
+  })
+};
+
 Conferences.getAllConferences = function(callback) {
   db.run('select * from conferences', function(error, conferences) {
     if (error) {
