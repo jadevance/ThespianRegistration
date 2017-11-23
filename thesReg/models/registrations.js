@@ -1,6 +1,7 @@
 var app = require('../app.js');
 var db = app.get('db');
 var Promise = require('bluebird');
+var _ = require('lodash');
 var moment = require('moment');
 var common = require('../controllers/commonFunctions.js');
 
@@ -77,19 +78,18 @@ Registrations.updateRegisteredStudents = function(userId, registrationId, formDa
     }
 
     for (var i=0; i<formParsed.length; i++) {
-      if (!registeredIds.includes(formParsed[i])) {
+      if (!_.includes(registeredIds, formParsed[i])) {
         add.push(formParsed[i])
       }
     }
 
     for (var i=0; i<registeredIds.length; i++) {
-      if (!formParsed.includes(registeredIds[i])) {
+      if (!_.includes(formParsed, registeredIds[i])) {
         remove.push(registeredIds[i])
       }
     }
 
-    console.log(add)
-    console.log(remove)
+
   })
 };
 
