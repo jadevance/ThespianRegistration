@@ -89,7 +89,43 @@ Registrations.updateRegisteredStudents = function(userId, registrationId, formDa
       }
     }
 
+    var registerStudentPromises = [];
 
+    for (var i=0; i<add.length; i++) {
+      (function(i) {
+        var promise = new Promise(function(resolve, reject) {
+          db.registered_students.save({teacher_id: userId,
+                                       student_id: add[i],
+                                       registration_id: registrationId},
+          function(error, registered_student) {
+            if (error) {
+              reject(error)
+            } else {
+              resolve()
+            }
+          })
+        })
+        registerStudentPromises.push(promise)
+      })(i)
+    }
+
+    for (var j=0; j<remove.length; j++) {
+      (function(j) {
+        var promise = new Promise(function(resolve, reject) {
+          db.registered_students.destroy({teacher_id: userId,
+                                          student_id: remove[j],
+                                          registration_id: registrationId},
+          function(error, deleted_student) {
+            if (error) {
+              reject(error)
+            } else {
+              resolve()
+            }
+          })
+        })
+        registerStudentPromises.push(promise)
+      })(j)
+    }
   })
 };
 

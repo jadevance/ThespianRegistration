@@ -25,11 +25,11 @@
     <tbody>
       <% for (var i=0; i<registered_students.length; i++) { %>
         <tr>
-          <td><%= students[i].last_name %></td>
-          <td><%= students[i].first_name %></td>
-          <td><%= students[i].graduation_year %></td>
+          <td><%= registered_students[i].last_name %></td>
+          <td><%= registered_students[i].first_name %></td>
+          <td><%= registered_students[i].graduation_year %></td>
           <td>
-            <% if (students[i].thespian_status === true) { %>
+            <% if (registered_students[i].thespian_status === true) { %>
               Member
             <% } else { %>
               Non-Member
