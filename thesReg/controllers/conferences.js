@@ -51,16 +51,22 @@ var ConferencesController = {
   },
 
   createNewConference: function(request, response) {
-    conferencesModel.createNewConference(request.body, function(error, conference) {
-      if(error) {
-        var err = new Error;
-        err.status = 500;
-        err.error = "Error saving conference";
-        response.json(err)
-      } else {
-        response.redirect('/conferences/' + conference.id)
-      }
-    })
+    const loggedIn = request.isAuthenticated();
+
+    if (loggedIn) {
+      conferencesModel.createNewConference(request.body, function(error, conference) {
+        if(error) {
+          var err = new Error;
+          err.status = 500;
+          err.error = "Error saving conference";
+          response.json(err)
+        } else {
+          response.redirect('/conferences/' + conference.id)
+        }
+      })
+    } else {
+      response.redirect('/')
+    }
   },
 
   editConference: function(request, response) {

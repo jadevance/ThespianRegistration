@@ -19,7 +19,7 @@ var RegistrationsController = {
             loggedIn: loggedIn,
             conference: conference,
             registration: registration,
-            students: []
+            registered_students: []
           })
         }
       })
@@ -32,7 +32,7 @@ var RegistrationsController = {
     const loggedIn = request.isAuthenticated();
 
     if (loggedIn) {
-      registrationsModel.getRegistration(request.params.registrationId, function(error, registration, conference, students) {
+      registationsModel.getRegistration(request.params.registrationId, function(error, registration, conference, students) {
         if (error) {
           var err = new Error;
           err.status = 500;

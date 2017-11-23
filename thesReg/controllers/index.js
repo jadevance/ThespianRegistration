@@ -1,5 +1,6 @@
 var conferencesModel = require('../models/conferences.js');
 var registrationsModel = require('../models/registrations.js');
+var studentsModel = require('../models/students.js');
 
 var IndexController = {
   getIndex: function(request, response) {
@@ -26,11 +27,22 @@ var IndexController = {
                   }
                 }
               }
-              response.render('index', {
-                user: request.user,
-                conferences: conferences,
-                registrations: registrations,
-                loggedIn: true
+
+              studentsModel.getAllUsersStudents(request.user.id, function(error, students) {
+                if (error) {
+                  var err = new Error;
+                  err.status = 500;
+                  err.error = "Error finding students";
+                  response.json(err)
+                } else {
+                  response.render('index', {
+                    user: request.user,
+                    conferences: conferences,
+                    registrations: registrations,
+                    students: students,
+                    loggedIn: true
+                  })
+                }
               })
             }
           })

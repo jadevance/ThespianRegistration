@@ -39,7 +39,7 @@ Registrations.getRegistration = function(registrationId, callback) {
             if (error) {
               callback(error, undefined)
             } else {
-              callback(null, newRegistration, conference, students)
+              callback(null, registration, conference, students)
             }
           })
         }

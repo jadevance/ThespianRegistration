@@ -1,0 +1,102 @@
+<%- include('./_header') %>
+
+<div class="student-list">
+  <div class="container all-students">
+    <h2 class="table-head">Your Students:</h2>
+    <p>This table contains all of the students that you have added. By adding students here you will be able to easily register them for multiple Thespian events over their academic careers without having to enter and re-enter their information. You can also edit their information if needed.</p>
+    <% if (students.length === 0) { %>
+      <div class="container no-registrations">
+        <p>You have not added any students, please select 'Add Students' below to add students to your virtual classroom.</p>
+      </div>
+    <% } else { %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Graduation Year</th>
+            <th>Thespian Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i=0; i<students.length; i++) { %>
+            <% if (students[i].id === null) { %>
+              <form class="form-horizontal" role="form" action="/students/new" method="post">
+                <fieldset>
+                  <td>
+                    <input class="form-control" type="text" name="last_name" value="<%= students[i].last_name %>" required="true">
+                  </td>
+                  <td>
+                   <input class="form-control" type="text" name="first_name" value="<%= students[i].first_name %>" required="true">
+                  </td>
+                  <td>
+                    <select name="graduation_year" class="form-control" required="true">
+                      <% for (j=0; j<yearOptions.length; j++) { %>
+                        <option value="<%=yearOptions[j]%>" <% if (students[i].graduation_year === yearOptions[j]) { %> selected <% } %>><%= yearOptions[j] %></option>
+                      <% } %>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="thespian_status" class="form-control" required="true">
+                      <option value="true">Member</option>
+                      <option value="false">Non-Member</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="submit" class="btn btn-primary" value="Save Student">  <a href="/students" class="btn btn-primary">Cancel</a>
+                  </td>
+                </fieldset>
+              </form>
+            <% } else if (students[i].isEditing) { %>
+              <form class="form-horizontal" role="form" action="/students/<%=students[i].id%>/edit" method="post">
+                <fieldset>
+                  <td>
+                    <input class="form-control" type="text" name="last_name" value="<%= students[i].last_name %>" required="true">
+                  </td>
+                  <td>
+                    <input class="form-control" type="text" name="first_name" value="<%= students[i].first_name %>" required="true">
+                  </td>
+                  <td>
+                    <select name="graduation_year" class="form-control" required="true">
+                      <% for (j=0; j<yearOptions.length; j++) { %>
+                        <option value="<%=yearOptions[j]%>" <% if (students[i].graduation_year === yearOptions[j]) { %> selected <% } %>><%= yearOptions[j] %></option>
+                      <% } %>
+                    </select>
+                  </td>
+                  <td>
+                    <select name="thespian_status" class="form-control" required="true">
+                      <option value="true" <% if (students[i].thespian_status === true) { %> selected <% } %>>Member</option>
+                      <option value="false" <% if (students[i].thespian_status === false) { %> selected <% } %>>Non-Member</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input type="submit" class="btn btn-primary" value="Save Student">  <a href="/students" class="btn btn-primary">Cancel</a>
+                  </td>
+                </fieldset>
+              </form>
+            <% } else { %>
+              <tr>
+                <td><%= students[i].last_name %></td>
+                <td><%= students[i].first_name %></td>
+                <td><%= students[i].graduation_year %></td>
+                <td>
+                  <% if (students[i].thespian_status === true) { %>
+                    Member
+                  <% } else { %>
+                    Non-Member
+                  <% } %>
+                </td>
+                <td><a href="/students/<%=students[i].id%>/edit">Edit Student Information</a></td>
+              </tr>
+            <% } %>
+          <% } %>
+        </tbody>
+      </table>
+    <% } %>
+  </div>
+  <a href="/students/new">Add Students</a>
+</div>
+
+<%- include('./_footer') %>
+

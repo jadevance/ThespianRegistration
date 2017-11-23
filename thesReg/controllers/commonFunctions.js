@@ -63,7 +63,8 @@ var commonFunctions = {
       first_name: null,
       last_name: null,
       graduation_year: null,
-      thespian_status: null
+      thespian_status: null,
+      isEditing: true
     };
     return student;
   }
