@@ -1,15 +1,87 @@
 <%- include('./_header') %>
 
 <h1>Registration</h1>
-<p>Thank you for starting the registration process for for <%=conference.title%>! Please register individual students below. After a student has been added, you can add up to three individual events per student.</p>
+<p>Thank you for starting the registration process for for <%=conference.title%>! Please register students below by selecting "Add Existing Students". After a student has been added, you can add up to three individual events per student.</p>
 <p>You can save your progress and come back to edit this registration up until <%=conference.registration_deadline%>. You can do so buy pressing the 'Save' button below. When you are completely finished adding students and their individual events, please press the 'Submit & Generate Invoice' button.</p>
 <p><b>Please note:</b> you will be unable to edit your registration after you have submitted and generated an invoice, and you <b>must</b> press 'Submit & Generate Invoice' before the registration deadline listed above.</p>
 
-<% if (registered_students.length === 0) { %>
-  <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/student/new">Start Adding Students</a>
-<% } else { %>
-<h2>Students:</h2>
+<% if (registered_students.length === 0 && !isAddingOrRemoving) { %>
+  <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/editStudents">Add Existing Students</a>
+<% } else if (!isAddingOrRemoving) { %>
+  <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/editStudents">Add or Remove Existing Students</a>
+  <h2>Registered Students</h2>
+  <p>This registration contains the following students. If you would like to add or remove students, please select "Add or Remove Existing Students" above. If you would like to register students that you have not yet added to your Student portal, please add them to your Student portal first, and come back here to register them.</p>
 
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>Graduation Year</th>
+        <th>Thespian Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (var i=0; i<registered_students.length; i++) { %>
+        <tr>
+          <td><%= students[i].last_name %></td>
+          <td><%= students[i].first_name %></td>
+          <td><%= students[i].graduation_year %></td>
+          <td>
+            <% if (students[i].thespian_status === true) { %>
+              Member
+            <% } else { %>
+              Non-Member
+            <% } %>
+          </td>
+          <td>
+            Link to Add Solo / Link to Add Duet / Link to Add Group
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+<% } else if (isAddingOrRemoving) { %>
+  <h2>Add or Remove Students</h2>
+  <p>To register a student check the box next to their name. To remove a student from this registration, uncheck the box. If you remove a student from a registration, any solo or duo individual events (acting, musical, or tech) that a student is registered for will also be deleted. If the student is a part of a Group Musical individual event, the Group Musical event will *not* be deleted, but the student will be removed from the Group Musical event.</p>
+  <p>When you are done adding and removing students, select 'Save' below.</p>
 
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Last Name</th>
+        <th>First Name</th>
+        <th>Graduation Year</th>
+        <th>Thespian Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <form class="form-horizontal" role="form" action="" method="post">
+        <fieldset>
+          <% for (var i=0; i<students.length; i++) { %>
+            <tr>
+              <td>
+                <input id="register-student" type="checkbox" name="register" value="<%=students[i].id%>" <% if (students[i].registered === true) { %> checked <% } %>>
+              </td>
+              <td><%= students[i].last_name %></td>
+              <td><%= students[i].first_name %></td>
+              <td><%= students[i].graduation_year %></td>
+              <td>
+                <% if (students[i].thespian_status === true) { %>
+                  Member
+                <% } else { %>
+                  Non-Member
+                <% } %>
+              </td>
+            </tr>
+          <% } %>
+          <input type="submit" class="btn btn-primary" value="Save">
+        </fieldset>
+      </form>
+    </tbody>
+  </table>
 <% } %>
 <%- include('./_footer') %>

@@ -6,4 +6,7 @@ router.post('/conferences/:conferenceId/registration/new', registrationsControll
 
 router.get('/conferences/:conferenceId/registration/:registrationId/edit', registrationsController.editRegistration);
 
+router.get('/conferences/:conferenceId/registration/:registrationId/editStudents', registrationsController.addOrRemoveStudents);
+router.post('/conferences/:conferenceId/registration/:registrationId/editStudents', registrationsController.saveAddOrRemoveStudents);
+
 module.exports = router;

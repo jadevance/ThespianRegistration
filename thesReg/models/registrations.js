@@ -59,6 +59,38 @@ Registrations.getUserRegistrations = function(userId, callback) {
       callback(null, registrations)
     }
   })
-}
+};
+
+Registrations.updateRegisteredStudents = function(userId, registrationId, formData, callback) {
+  db.registered_students.where("teacher_id=$1 AND registration_id>=$2", [userId, registrationId], function(error, registeredStudents) {
+    const add = [];
+    const remove = [];
+    const formParsed = [];
+    const registeredIds = [];
+
+    for (var i=0; i<formData.register.length; i++) {
+      formParsed.push(parseInt(formData.register[i]))
+    }
+
+    for (var i=0; i<registeredStudents.length; i++) {
+      registeredIds.push(registeredStudents[i].student_id)
+    }
+
+    for (var i=0; i<formParsed.length; i++) {
+      if (!registeredIds.includes(formParsed[i])) {
+        add.push(formParsed[i])
+      }
+    }
+
+    for (var i=0; i<registeredIds.length; i++) {
+      if (!formParsed.includes(registeredIds[i])) {
+        remove.push(registeredIds[i])
+      }
+    }
+
+    console.log(add)
+    console.log(remove)
+  })
+};
 
 module.exports = Registrations;
