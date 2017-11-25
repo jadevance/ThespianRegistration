@@ -5,7 +5,9 @@
 <p>You can save your progress and come back to edit this registration up until <%=conference.registration_deadline%>. You can do so buy pressing the 'Save' button below. When you are completely finished adding students and their individual events, please press the 'Submit & Generate Invoice' button.</p>
 <p><b>Please note:</b> you will be unable to edit your registration after you have submitted and generated an invoice, and you <b>must</b> press 'Submit & Generate Invoice' before the registration deadline listed above.</p>
 
-<% if (registered_students.length === 0 && !isAddingOrRemoving) { %>
+<% if (students.length === 0) { %>
+<p>Before continuing with this registration, please add students to your Student portal by selecting <a href="/students">Students</a> in the navigation bar at the top of this page.</p>
+<% } else if (registered_students.length === 0 && !isAddingOrRemoving) { %>
   <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/editStudents">Add Existing Students</a>
 <% } else if (!isAddingOrRemoving) { %>
   <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/editStudents">Add or Remove Existing Students</a>
@@ -59,7 +61,7 @@
       </tr>
     </thead>
     <tbody>
-      <form class="form-horizontal" role="form" action="" method="post">
+      <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/registration/<%=registration.id%>/editStudents" method="post">
         <fieldset>
           <% for (var i=0; i<students.length; i++) { %>
             <tr>

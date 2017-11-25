@@ -19,6 +19,7 @@ var IndexController = {
               err.error = "Error finding registrations";
               response.json(err)
             } else {
+              console.log(registrations)
               for (var i=0; i<registrations.length; i++) {
                 for (var j=0; j<conferences.length; j++) {
                   if (registrations[i].conference_id === conferences[j].id) {

@@ -36,7 +36,7 @@ Registrations.getRegistration = function(registrationId, callback) {
         if (error) {
           callback(error, undefined, undefined, undefined)
         } else {
-          db.registered_students.where("teacher_id=$1 AND registration_id>=$2", [registration.teacher_id, registration.id], function(error, students) {
+          db.registered_students.where("teacher_id=$1 AND registration_id=$2", [registration.teacher_id, registration.id], function(error, students) {
             if (error) {
               callback(error, undefined)
             } else {
@@ -51,7 +51,7 @@ Registrations.getRegistration = function(registrationId, callback) {
 
 Registrations.getUserRegistrations = function(userId, callback) {
   const currentYear = moment().format('YYYY');
-  db.registrations.where("teacher_id=$1 AND conference_year<=$2", [userId, currentYear], function(error, registrations) {
+  db.registrations.where("teacher_id=$1 AND conference_year>=$2", [userId, currentYear], function(error, registrations) {
     if (error) {
       callback(error, undefined)
     } else if (!registrations) {
@@ -62,71 +62,97 @@ Registrations.getUserRegistrations = function(userId, callback) {
   })
 };
 
+Registrations.getRegisteredStudents = function(userId, registrationId, callback) {
+  db.registered_students.find({teacher_id: userId,
+                               registration_id: registrationId},
+    function(error, registeredStudents) {
+      if (error) {
+        callback(error, undefined)
+      } else {
+        callback(null, registeredStudents)
+      }
+    }
+  )
+};
+
 Registrations.updateRegisteredStudents = function(userId, registrationId, formData, callback) {
-  db.registered_students.where("teacher_id=$1 AND registration_id>=$2", [userId, registrationId], function(error, registeredStudents) {
-    const add = [];
-    const remove = [];
-    const formParsed = [];
-    const registeredIds = [];
+  db.registered_students.find({teacher_id: userId,
+                               registration_id: registrationId},
+    function(error, registeredStudents) {
+      const add = [];
+      const remove = [];
+      const formParsed = [];
+      const registeredIds = [];
 
-    for (var i=0; i<formData.register.length; i++) {
-      formParsed.push(parseInt(formData.register[i]))
-    }
-
-    for (var i=0; i<registeredStudents.length; i++) {
-      registeredIds.push(registeredStudents[i].student_id)
-    }
-
-    for (var i=0; i<formParsed.length; i++) {
-      if (!_.includes(registeredIds, formParsed[i])) {
-        add.push(formParsed[i])
+      for (var i=0; i<formData.register.length; i++) {
+        formParsed.push(parseInt(formData.register[i]))
       }
-    }
 
-    for (var i=0; i<registeredIds.length; i++) {
-      if (!_.includes(formParsed, registeredIds[i])) {
-        remove.push(registeredIds[i])
+      for (var i=0; i<registeredStudents.length; i++) {
+        registeredIds.push(registeredStudents[i].student_id)
       }
-    }
 
-    var registerStudentPromises = [];
+      for (var i=0; i<formParsed.length; i++) {
+        if (!_.includes(registeredIds, formParsed[i])) {
+          add.push(formParsed[i])
+        }
+      }
 
-    for (var i=0; i<add.length; i++) {
-      (function(i) {
-        var promise = new Promise(function(resolve, reject) {
-          db.registered_students.save({teacher_id: userId,
-                                       student_id: add[i],
-                                       registration_id: registrationId},
-          function(error, registered_student) {
-            if (error) {
-              reject(error)
-            } else {
-              resolve()
-            }
+      for (var i=0; i<registeredIds.length; i++) {
+        if (!_.includes(formParsed, registeredIds[i])) {
+          remove.push(registeredIds[i])
+        }
+      }
+
+      var registerStudentPromises = [];
+      for (var i=0; i<add.length; i++) {
+        (function(i) {
+          var promise = new Promise(function(resolve, reject) {
+            db.registered_students.save({teacher_id: userId,
+                                         student_id: add[i],
+                                         registration_id: registrationId,
+                                         },
+            function(error, registered_student) {
+              if (error) {
+                reject(error)
+              } else {
+                resolve()
+              }
+            })
           })
-        })
-        registerStudentPromises.push(promise)
-      })(i)
-    }
+          registerStudentPromises.push(promise)
+        })(i)
+      }
 
-    for (var j=0; j<remove.length; j++) {
-      (function(j) {
-        var promise = new Promise(function(resolve, reject) {
-          db.registered_students.destroy({teacher_id: userId,
-                                          student_id: remove[j],
-                                          registration_id: registrationId},
-          function(error, deleted_student) {
-            if (error) {
-              reject(error)
-            } else {
-              resolve()
-            }
-          })
-        })
-        registerStudentPromises.push(promise)
-      })(j)
+      for (var j=0; j<remove.length; j++) {
+        (function(j) {
+          var promise = new Promise(function(resolve, reject) {
+            db.registered_students.destroy({teacher_id: userId,
+                                            student_id: remove[j],
+                                            registration_id: registrationId},
+              function(error, deleted_student) {
+                if (error) {
+                  reject(error)
+                } else {
+                  resolve()
+                }
+              })
+            })
+            registerStudentPromises.push(promise)
+          }
+        )(j)
+      }
+
+      Promise.all(registerStudentPromises).then(
+        function() {
+          callback(null, registeredStudents)
+        },
+        function(error) {
+          callback(error, undefined)
+        }
+      )
     }
-  })
+  )
 };
 
 module.exports = Registrations;
