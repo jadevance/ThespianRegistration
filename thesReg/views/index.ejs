@@ -94,45 +94,45 @@
     <% } %>
   </div>
 
-  <div class="student-list">
-    <div class="container all-students">
-      <h2 class="table-head">Your Students:</h2>
-      <p>This table contains all of the students that you have added via the <a href="/students">Students</a> section. By adding students there you will be able to easily register them for multiple Thespian events over their academic careers without having to enter and re-enter their information. You can also edit their information if needed.</p>
-      <% if (students.length === 0) { %>
-        <div class="container no-registrations">
-          <p>You have not added any students, please select 'Add Students' below to add students to your virtual classroom.</p>
-        </div>
-      <% } else { %>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Last Name</th>
-              <th>First Name</th>
-              <th>Graduation Year</th>
-              <th>Thespian Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for (var i=0; i<students.length; i++) { %>
-              <tr>
-                <td><%= students[i].last_name %></td>
-                <td><%= students[i].first_name %></td>
-                <td><%= students[i].graduation_year %></td>
-                <td>
-                  <% if (students[i].thespian_status === true) { %>
-                    Member
-                  <% } else { %>
-                    Non-Member
-                  <% } %>
-                </td>
-              </tr>
-            <% } %>
-          </tbody>
-        </table>
-      <% } %>
-    </div>
-    <a href="/students/new">Add Students</a>
-  </div>
+  <!--<div class="student-list">-->
+    <!--<div class="container all-students">-->
+      <!--<h2 class="table-head">Your Students:</h2>-->
+      <!--<p>This table contains all of the students that you have added via the <a href="/students">Students</a> section. By adding students there you will be able to easily register them for multiple Thespian events over their academic careers without having to enter and re-enter their information. You can also edit their information if needed.</p>-->
+      <!--<% if (students.length === 0) { %>-->
+        <!--<div class="container no-registrations">-->
+          <!--<p>You have not added any students, please select 'Add Students' below to add students to your virtual classroom.</p>-->
+        <!--</div>-->
+      <!--<% } else { %>-->
+        <!--<table class="table table-striped">-->
+          <!--<thead>-->
+            <!--<tr>-->
+              <!--<th>Last Name</th>-->
+              <!--<th>First Name</th>-->
+              <!--<th>Graduation Year</th>-->
+              <!--<th>Thespian Status</th>-->
+            <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody>-->
+            <!--<% for (var i=0; i<students.length; i++) { %>-->
+              <!--<tr>-->
+                <!--<td><%= students[i].last_name %></td>-->
+                <!--<td><%= students[i].first_name %></td>-->
+                <!--<td><%= students[i].graduation_year %></td>-->
+                <!--<td>-->
+                  <!--<% if (students[i].thespian_status === true) { %>-->
+                    <!--Member-->
+                  <!--<% } else { %>-->
+                    <!--Non-Member-->
+                  <!--<% } %>-->
+                <!--</td>-->
+              <!--</tr>-->
+            <!--<% } %>-->
+          <!--</tbody>-->
+        <!--</table>-->
+      <!--<% } %>-->
+    <!--</div>-->
+    <!--<a href="/students/new">Add Students</a>-->
+  <!--</div>-->
 <% } %>
 
 
