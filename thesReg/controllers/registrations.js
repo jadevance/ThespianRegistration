@@ -122,7 +122,6 @@ var RegistrationsController = {
                 }
               }
 
-              console.log(students)
               response.render('registration', {
                 user: request.user,
                 loggedIn: loggedIn,

@@ -48,8 +48,9 @@ DROP TABLE IF EXISTS individual_event;
 CREATE TABLE individual_event(
   id serial PRIMARY KEY,
   event_id integer,
+  registration_id integer,
   primary_student_id integer,
-  partner_id integer,
+  secondary_student_id integer,
   piece_name text,
   piece_author text,
   piece_publisher text
