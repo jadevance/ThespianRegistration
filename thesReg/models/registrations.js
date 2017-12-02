@@ -81,9 +81,8 @@ Registrations.getRegisteredStudents = function(userId, registrationId, callback)
                     if (error) {
                       reject(error)
                     } else {
-                      if (events.length !== 0) {
-                        registeredStudents[i].events = events
-                      }
+                      registeredStudents[i].events = events;
+
                       if (groupEvents.length !== 0) {
                         registeredStudents[i].events.concat(groupEvents)
                       }

@@ -87,7 +87,8 @@ var RegistrationsController = {
                   return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
                 })
 
-                iesModel.getRegistrationsGroupIEs(request.user.id, request.params.registrationId, function(error, groupEvents) {
+                iesModel.getRegistrationsGroupIEs(request.params.registrationId, function(error, groupEvents) {
+                  console.log('got groups', groupEvents)
                   if (error) {
                     var err = new Error;
                     err.status = 500;
