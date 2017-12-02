@@ -1,5 +1,6 @@
 var registrationsModel = require('../models/registrations.js');
 var studentsModel = require('../models/students.js');
+var iesModel = require('../models/ies.js');
 
 var RegistrationsController = {
 
@@ -67,6 +68,16 @@ var RegistrationsController = {
                       registeredStudents[j].graduation_year = students[i].graduation_year;
                       registeredStudents[j].thespian_status = students[i].thespian_status;
                     }
+
+                    // Overachiever loop, allows students to register for more than three events if needed
+                    if ((registeredStudents[j].events.length === 3) &&
+                      (registeredStudents[j].events[0].event_type !== 'technical') &&
+                      (registeredStudents[j].events[1].event_type !== 'technical') &&
+                      (registeredStudents[j].events[1].event_type !== 'technical')) {
+                      registeredStudents[j].overachiever = true;
+                    } else {
+                      registeredStudents[j].overachiever = false;
+                    }
                   }
                 }
 
@@ -76,14 +87,24 @@ var RegistrationsController = {
                   return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
                 })
 
-                response.render('registration', {
-                  user: request.user,
-                  loggedIn: loggedIn,
-                  isAddingOrRemoving: false,
-                  conference: conference,
-                  registration: registration,
-                  students: students,
-                  registered_students: registeredStudents
+                iesModel.getRegistrationsGroupIEs(request.user.id, request.params.registrationId, function(error, groupEvents) {
+                  if (error) {
+                    var err = new Error;
+                    err.status = 500;
+                    err.error = "Error getting group events";
+                    response.json(err)
+                  } else {
+                    response.render('registration', {
+                      user: request.user,
+                      loggedIn: loggedIn,
+                      isAddingOrRemoving: false,
+                      conference: conference,
+                      registration: registration,
+                      students: students,
+                      registered_students: registeredStudents,
+                      group_events: groupEvents
+                    })
+                  }
                 })
               })
             }

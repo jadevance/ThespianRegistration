@@ -69,7 +69,42 @@ Registrations.getRegisteredStudents = function(userId, registrationId, callback)
       if (error) {
         callback(error, undefined)
       } else {
-        callback(null, registeredStudents)
+        var promisesGetIE = [];
+        for (var i=0; i<registeredStudents.length; i++) {
+          (function(i) {
+            var promise = new Promise(function(resolve, reject) {
+              db.solo_duo_ies.where("registration_id=$1 AND primary_student_id=$2 OR secondary_student_id=$2", [registrationId, registeredStudents[i].student_id], function(error, events) {
+                if (error) {
+                  reject(error)
+                } else {
+                  db.group_ies_students.where("registration_id=$1 AND student_id=$2", [registrationId, registeredStudents[i].student_id], function(error, groupEvents) {
+                    if (error) {
+                      reject(error)
+                    } else {
+                      if (events.length !== 0) {
+                        registeredStudents[i].events = events
+                      }
+                      if (groupEvents.length !== 0) {
+                        registeredStudents[i].events.concat(groupEvents)
+                      }
+                      resolve()
+                    }
+                  })
+                }
+              })
+            })
+            promisesGetIE.push(promise)
+          })(i)
+        }
+
+        Promise.all(promisesGetIE).then(
+          function() {
+            callback(null, registeredStudents)
+          },
+          function(error) {
+            callback(error, undefined)
+          }
+        )
       }
     }
   )

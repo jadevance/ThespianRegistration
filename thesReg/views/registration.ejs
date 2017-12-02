@@ -1,8 +1,8 @@
 <%- include('./_header') %>
 
 <h1>Registration</h1>
-<p>Thank you for starting the registration process for for <%=conference.title%>! Please register students below by selecting "Add Existing Students". After a student has been added, you can add up to three individual events per student.</p>
-<p>You can save your progress and come back to edit this registration up until <%=conference.registration_deadline%>. You can do so buy pressing the 'Save' button below. When you are completely finished adding students and their individual events, please press the 'Submit & Generate Invoice' button.</p>
+<p>Thank you for starting the registration process for for <%=conference.title%>! Please register students below by selecting "Add Existing Students". After a student has been added, you can add up to three events per student.</p>
+<p>You can save your progress and come back to edit this registration up until <%=conference.registration_deadline%>, just make sure you press the 'save' button in whatever action you are completing before you navigate away. When you are completely finished adding students and their individual events, please press the 'Submit & Generate Invoice' button.</p>
 <p><b>Please note:</b> you will be unable to edit your registration after you have submitted and generated an invoice, and you <b>must</b> press 'Submit & Generate Invoice' before the registration deadline listed above.</p>
 
 <% if (students.length === 0) { %>
@@ -13,6 +13,9 @@
   <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/editStudents">Add or Remove Existing Students</a>
   <h2>Registered Students</h2>
   <p>This registration contains the following students. If you would like to add or remove students, please select "Add or Remove Existing Students" above. If you would like to register students that you have not yet added to your Student portal, please add them to your Student portal first, and come back here to register them.</p>
+  <p>To register an individual student for an event select the desired IE Action link in the student's row, fill out the form that appears, and press "Save". Select "Add Solo Event" for Monologue and Solo Musical, select "Add Duo Event" for Duo Scene and Duet Musical, and select "Add Technical Event" to add any of the technical categories. Duo events will only need to be added once. After saving a duo event it will register for both students.</p>
+  <p>To view a student's events select "Show Registered Events" in the student's row. Once they appear, you may edit or delete events by selecting the appropriate link. Deleting an event is final. If it needs to be re-added you will have to enter all information again. </p>
+  <p>Group Musical and Group Acting events that you have added are listed in the table below your registered students. To register a Group Musical or Group Acting event, select "Add Group Event". Group events will be listed in any participating student's registered events list, but can only be edited or deleted by selecting edit or delete in the Group Events table.</p>
 
   <table class="table table-striped">
     <thead>
@@ -21,7 +24,7 @@
         <th>First Name</th>
         <th>Graduation Year</th>
         <th>Thespian Status</th>
-        <th></th>
+        <th>IE Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -38,7 +41,14 @@
             <% } %>
           </td>
           <td>
-            Link to Add Solo / Link to Add Duet / Link to Add Group
+            <% if (registered_students[i].events) { %>
+              <a href="">Show Registered Events</a> /
+            <% } %>
+            <% if (registered_students[i].events.length < 3) { %>
+              <a href="">Add Solo Event</a> / <a href="">Add Duo Event</a> /
+            <% } %>
+            <% if ((registered_students[i].events.length <= 2) || ((registered_students[i].events.length === 3) && (registered_students[i].overachiever === true)) ) { %>
+              <a href="">Add Technical Event</a>
           </td>
         </tr>
       <% } %>
@@ -46,7 +56,7 @@
   </table>
 <% } else if (isAddingOrRemoving) { %>
   <h2>Add or Remove Students</h2>
-  <p>To register a student check the box next to their name. To remove a student from this registration, uncheck the box. If you remove a student from a registration, any solo or duo individual events (acting, musical, or tech) that a student is registered for will also be deleted. If the student is a part of a Group Musical individual event, the Group Musical event will *not* be deleted, but the student will be removed from the Group Musical event.</p>
+  <p>To register a student check the box next to their name. To remove a student from this registration, uncheck the box. If you remove a student from a registration, any solo or duo individual events (acting, musical, or tech) that a student is registered for will also be deleted. If the student is a part of a Group Acting or Group Musical individual event, the Group event will *not* be deleted, but the student will be removed from the Group event.</p>
   <p>When you are done adding and removing students, select 'Save' below.</p>
 
   <table class="table table-striped">

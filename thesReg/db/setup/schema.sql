@@ -44,16 +44,38 @@ CREATE TABLE registered_students(
   registration_id integer
 );
 
-DROP TABLE IF EXISTS individual_event;
-CREATE TABLE individual_event(
+DROP TABLE IF EXISTS solo_duo_ies;
+CREATE TABLE solo_duo_ies(
   id serial PRIMARY KEY,
   event_id integer,
+  event_type text,
   registration_id integer,
   primary_student_id integer,
   secondary_student_id integer,
   piece_name text,
   piece_author text,
   piece_publisher text
+);
+
+DROP TABLE IF EXISTS group_ies;
+CREATE TABLE group_ies(
+  id serial PRIMARY KEY,
+  event_id integer,
+  event_type text,
+  registration_id integer,
+  piece_name text,
+  piece_author text,
+  piece_publisher text
+);
+
+DROP TABLE IF EXISTS group_ies_students;
+CREATE TABLE group_ies_students(
+  id serial PRIMARY KEY,
+  event_id integer,
+  registration_id integer,
+  group_ies_id integer,
+  student_id integer,
+  piece_name text
 );
 
 DROP TABLE IF EXISTS invoice;
