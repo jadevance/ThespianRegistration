@@ -17,23 +17,10 @@ router.post('/conferences/:conferenceId/registration/:registrationId/editStudent
 router.get('/conferences/:conferenceId/registration/:registrationId/ies/:studentId', iesController.getStudentIes);
 
 // Solo IES:
-router.get('/conferences/:conferenceId/registration/:registrationId/solo/:studentId/new', iesController.getNewSolo);
-router.post('/conferences/:conferenceId/registration/:registrationId/solo/:studentId/new', iesController.createNewSolo);
-router.get('/conferences/:conferenceId/registration/:registrationId/solo/:studentId/edit/:iesId', iesController.editSolo);
-router.post('/conferences/:conferenceId/registration/:registrationId/solo/:studentId/edit/:iesId', iesController.updateSolo);
-
-// Duo IES:
-router.get('/conferences/:conferenceId/registration/:registrationId/duo/:studentId/new', iesController.getNewDuo);
-router.post('/conferences/:conferenceId/registration/:registrationId/duo/:studentId/new', iesController.createNewDuo);
-router.get('/conferences/:conferenceId/registration/:registrationId/duo/:studentId/edit/:iesId', iesController.editDuo);
-router.post('/conferences/:conferenceId/registration/:registrationId/duo/:studentId/edit/:iesId', iesController.updateDuo);
-
-// Technical IES:
-router.get('/conferences/:conferenceId/registration/:registrationId/tech/:studentId/new', iesController.getNewTech);
-router.post('/conferences/:conferenceId/registration/:registrationId/tech/:studentId/new', iesController.createNewTech);
-router.get('/conferences/:conferenceId/registration/:registrationId/tech/:studentId/edit/:iesId', iesController.editTech);
-router.post('/conferences/:conferenceId/registration/:registrationId/tech/:studentId/edit/:iesId', iesController.updateTech);
-
+router.get('/conferences/:conferenceId/registration/:registrationId/ies/:studentId/new', iesController.getNewIe);
+router.post('/conferences/:conferenceId/registration/:registrationId/ies/:studentId/new', iesController.createNewIe);
+router.get('/conferences/:conferenceId/registration/:registrationId/ies/:studentId/edit/:iesId', iesController.editIe);
+router.post('/conferences/:conferenceId/registration/:registrationId/ies/:studentId/edit/:iesId', iesController.updateIe);
 
 
 

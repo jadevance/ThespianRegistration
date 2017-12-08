@@ -13,8 +13,8 @@
   <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/editStudents">Add or Remove Existing Students</a>
   <h2>Registered Students</h2>
   <p>This registration contains the following students. If you would like to add or remove students, please select "Add or Remove Existing Students" above. If you would like to register students that you have not yet added to your Student portal, please add them to your Student portal first, and come back here to register them.</p>
-  <p>To register an individual student for an event select the desired IE Action link in the student's row, fill out the form that appears, and press "Save". Select "Add Solo Event" for Monologue and Solo Musical, select "Add Duo Event" for Duo Scene and Duet Musical, and select "Add Technical Event" to add any of the technical categories. Duo events will only need to be added once. After saving a duo event it will register for both students.</p>
-  <p>To view a student's events select "Show Registered Events" in the student's row. Once they appear, you may edit or delete events by selecting the appropriate link. Deleting an event is final. If it needs to be re-added you will have to enter all information again. </p>
+  <p>To register an individual student for an IE select 'Add New Event,' fill out the form that appears, and press save. Duo events will only need to be added once. After saving a duo event it will register for both students.</p>
+  <p>To view a student's events select "Show Registered Events" in the student's row. Once they appear, you may edit or delete events by selecting the appropriate link. Deleting an event is final. If it needs to be re-added you will have to enter all information again.</p>
   <p>Group Musical and Group Acting events that you have added are listed in the table below your registered students. To register a Group Musical or Group Acting event, select "Add Group Event". Group events will be listed in any participating student's registered events list, but can only be edited or deleted by selecting edit or delete in the Group Events table.</p>
 
   <table class="table table-striped">
@@ -41,16 +41,111 @@
             <% } %>
           </td>
           <td>
-            <% if (registered_students[i].events) { %>
-              <a href="">Show Registered Events</a> /
+            <% if (registered_students[i].events.length > 0) { %>
+              <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/ies/<%=registered_students[i].student_id%>">Show Registered Events</a> /
             <% } %>
             <% if (registered_students[i].events.length < 3) { %>
-              <a href="">Add Solo Event</a> / <a href="">Add Duo Event</a> /
-            <% } %>
-            <% if ((registered_students[i].events.length <= 2) || ((registered_students[i].events.length === 3) && (registered_students[i].overachiever === true)) ) { %>
-              <a href="">Add Technical Event</a>
+              <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/solo/<%=registered_students[i].student_id%>/new">Add New Event</a>
             <% } %>
           </td>
+
+          <% if (registered_students[i].show_events) { %>
+            <tr>
+              <td colspan="5">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Event Type</th>
+                      <th>Piece Title</th>
+                      <th>Piece Author</th>
+                      <th>Piece Publisher</th>
+                      <th>Partner (if applicable)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for (var j=0; j<registered_students[i].events.length; j++) { %>
+                      <% if (registered_students[i].events[j].isEditing) { %>
+                        <% if (!registered_students[i].events[j].id) { %>
+                          <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/registration/<%=registration.id%>/ies/<%=registered_students[i].student_id%>/new" method="post">
+                        <% } else { %>
+                          <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/registration/<%=registration.id%>/ies/<%=registered_students[i].student_id%>/edit/<%=registered_students[i].events[j].id%>" method="post">
+                        <% } %>
+                            <fieldset>
+                              <tr>
+                                <td>
+                                  <select name="event_type_id" class="form-control" required="true" <%if (!registered_students[i].events[j].isEditing) { %> disabled <% } %>>
+                                    <% for (var k=0; k<registered_students[i].events[j].options.length; k++) { %>
+                                    <option value=<%=registered_students[i].events[j].options[k].id%> <% if (registered_students[i].events[j].event_id == registered_students[i].events[j].options[k].id) { %> selected <% } %>>
+                                      <%=registered_students[i].events[j].options[k].event_name%>
+                                    </option>
+                                    <% } %>
+                                  </select>
+                                </td>
+                                <td>
+                                  <input class="form-control" type="text" name="piece_title" value="<%=registered_students[i].events[j].piece_title%>" required="true">
+                                </td>
+                                <td>
+                                  <input class="form-control" type="text" name="piece_author" value="<%=registered_students[i].events[j].piece_author%>" required="true">
+                                </td>
+                                <td>
+                                  <input class="form-control" type="text" name="piece_publisher" value="<%=registered_students[i].events[j].piece_publisher%>" required="true">
+                                </td>
+                                <td>
+                                  <input type="submit" class="btn btn-primary" value="Save">  <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms" class="btn btn-primary">Cancel</a>
+                                </td>
+                                <td>
+                                  <select name="secondary_student_id" class="form-control" <%if (!registered_students[i].events[j].isEditing) { %> disabled <% } %>>
+                                    <% for (var m=0; m<registered_students.length; m++) { %>
+                                      <option value=<%=registered_students[m].id%> <% if (registered_students[i].events[j].secondary_student_id == registered_students[m].student_id) { %> selected <% } %>>
+                                        <%=registered_students[m].first_name%> <%=registered_students[m].last_name%>
+                                      </option>
+                                    <% } %>
+                                  </select>
+                                </td>
+                              </tr>
+                            </fieldset>
+                          </form>
+                      <% } else { %>
+                        <tr>
+                          <td>
+                            <select name="event_type_id" class="form-control" required="true" disabled>
+                              <% for (var k=0; k<registered_students[i].events[j].options.length; k++) { %>
+                                <option value=<%=registered_students[i].events[j].options[k].id%> <% if (registered_students[i].events[j].event_id == registered_students[i].events[j].options[k].id) { %> selected <% } %>>
+                                  <%=registered_students[i].events[j].options[k].event_name%>
+                                </option>
+                              <% } %>
+                            </select>
+                          </td>
+                          <td>
+                            <%=registered_students[i].events[j].piece_title%>
+                          </td>
+                          <td>
+                            <%=registered_students[i].events[j].piece_author%>
+                          </td>
+                          <td>
+                            <%=registered_students[i].events[j].piece_publisher%>
+                          </td>
+                          <td>
+                            <select name="secondary_student_id" class="form-control" required="true" <%if (!registered_students[i].events[j].isEditing) { %> disabled <% } %>>
+                              <% for (var m=0; m<registered_students.length; m++) { %>
+                              <option value=<%=registered_students[m].id%> <% if (registered_students[i].events[j].secondary_student_id == registered_students[m].student_id) { %> selected <% } %>>
+                                <%=registered_students[m].first_name%> <%=registered_students[m].last_name%>
+                              </option>
+                              <% } %>
+                            </select>
+                          </td>
+                          <td>
+                            <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/ies/<%=registered_students[i].student_id%>/edit/<%=registered_students[i].events[j].id%>">Edit</a> /
+                            <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/ies/<%=registered_students[i].student_id%>/delete/<%=registered_students[i].events[j].id%>">Delete</a>
+                          </td>
+                        </tr>
+                      <% } %>
+                    <% } %>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          <% } %>
         </tr>
       <% } %>
     </tbody>

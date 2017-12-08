@@ -68,16 +68,6 @@ var RegistrationsController = {
                       registeredStudents[j].graduation_year = students[i].graduation_year;
                       registeredStudents[j].thespian_status = students[i].thespian_status;
                     }
-
-                    // Overachiever loop, allows students to register for more than three events if needed
-                    if ((registeredStudents[j].events.length === 3) &&
-                      (registeredStudents[j].events[0].event_type !== 'technical') &&
-                      (registeredStudents[j].events[1].event_type !== 'technical') &&
-                      (registeredStudents[j].events[1].event_type !== 'technical')) {
-                      registeredStudents[j].overachiever = true;
-                    } else {
-                      registeredStudents[j].overachiever = false;
-                    }
                   }
                 }
 
@@ -88,7 +78,6 @@ var RegistrationsController = {
                 })
 
                 iesModel.getRegistrationsGroupIEs(request.params.registrationId, function(error, groupEvents) {
-                  console.log('got groups', groupEvents)
                   if (error) {
                     var err = new Error;
                     err.status = 500;

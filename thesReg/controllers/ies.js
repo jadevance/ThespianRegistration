@@ -1,3 +1,5 @@
+var registrationsModel = require('../models/registrations.js');
+var studentsModel = require('../models/students.js');
 var iesModel = require('../models/ies.js');
 
 var iesController = {
@@ -15,56 +17,22 @@ var iesController = {
     })
   },
 
-  // SOLO:
-  getNewSolo: function(request, response) {
+  // SOLO/DUO/TECH:
+  getNewIe: function(request, response) {
 
   },
 
-  createNewSolo: function(request, response) {
+  createNewIe: function(request, response) {
 
   },
 
-  editSolo: function(request, response) {
+  editIe: function(request, response) {
 
   },
 
-  updateSolo: function(request, response) {
+  updateIe: function(request, response) {
 
-  },
-
-  // DUO:
-  getNewDuo: function(request, response) {
-
-  },
-
-  createNewDuo: function(request, response) {
-
-  },
-
-  editDuo: function(request, response) {
-
-  },
-
-  updateDuo: function(request, response) {
-
-  },
-
-  // TECH:
-  getNewTech: function(request, response) {
-
-  },
-
-  createNewTech: function(request, response) {
-
-  },
-
-  editTech: function(request, response) {
-
-  },
-
-  updateTech: function(request, response) {
-
-  },
+  }
 
 };
 

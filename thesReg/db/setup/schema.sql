@@ -48,11 +48,11 @@ DROP TABLE IF EXISTS solo_duo_ies;
 CREATE TABLE solo_duo_ies(
   id serial PRIMARY KEY,
   event_id integer,
-  event_type text,
+  event_type_id text,
   registration_id integer,
   primary_student_id integer,
   secondary_student_id integer,
-  piece_name text,
+  piece_title text,
   piece_author text,
   piece_publisher text
 );
@@ -61,7 +61,7 @@ DROP TABLE IF EXISTS group_ies;
 CREATE TABLE group_ies(
   id serial PRIMARY KEY,
   event_id integer,
-  event_type text,
+  event_type_id text,
   registration_id integer,
   piece_name text,
   piece_author text,
