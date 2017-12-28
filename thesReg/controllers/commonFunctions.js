@@ -67,6 +67,22 @@ var commonFunctions = {
       isEditing: true
     };
     return student;
+  },
+
+  getEmptyIE: function(registrationId, primaryStudentId) {
+    var IE = {
+      id: null,
+      event_type_id: null,
+      registration_id: registrationId,
+      primary_student_id: primaryStudentId,
+      secondary_student_id: null,
+      piece_title: null,
+      piece_author: null,
+      piece_publisher: null,
+      isEditing: true
+    };
+
+    return IE;
   }
 };
 

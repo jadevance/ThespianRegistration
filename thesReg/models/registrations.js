@@ -81,12 +81,20 @@ Registrations.getRegisteredStudents = function(userId, registrationId, callback)
                     if (error) {
                       reject(error)
                     } else {
-                      registeredStudents[i].events = events;
+                      db.run('select * from events', function(error, eventOptions) {
+                        if (error) {
+                          reject(error)
+                        } else {
+                          eventOptions.splice(13, 1);
+                          registeredStudents[i].events = events;
+                          registeredStudents[i].options = eventOptions;
 
-                      if (groupEvents.length !== 0) {
-                        registeredStudents[i].events.concat(groupEvents)
-                      }
-                      resolve()
+                          if (groupEvents.length !== 0) {
+                            registeredStudents[i].events.concat(groupEvents)
+                          }
+                          resolve()
+                        }
+                      })
                     }
                   })
                 }

@@ -41,11 +41,13 @@
             <% } %>
           </td>
           <td>
-            <% if (registered_students[i].events.length > 0) { %>
+            <% if (registered_students[i].events.length > 0 && !registered_students[i].show_events) { %>
               <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/ies/<%=registered_students[i].student_id%>">Show Registered Events</a> /
+            <% } else if (registered_students[i].events.length > 0 && registered_students[i].show_events) { %>
+              <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/edit">Hide Registered Events</a> /
             <% } %>
             <% if (registered_students[i].events.length < 3) { %>
-              <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/solo/<%=registered_students[i].student_id%>/new">Add New Event</a>
+              <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/ies/<%=registered_students[i].student_id%>/new">Add New Event</a>
             <% } %>
           </td>
 
@@ -74,9 +76,9 @@
                               <tr>
                                 <td>
                                   <select name="event_type_id" class="form-control" required="true" <%if (!registered_students[i].events[j].isEditing) { %> disabled <% } %>>
-                                    <% for (var k=0; k<registered_students[i].events[j].options.length; k++) { %>
-                                    <option value=<%=registered_students[i].events[j].options[k].id%> <% if (registered_students[i].events[j].event_id == registered_students[i].events[j].options[k].id) { %> selected <% } %>>
-                                      <%=registered_students[i].events[j].options[k].event_name%>
+                                    <% for (var k=0; k<registered_students[i].options.length; k++) { %>
+                                    <option value=<%=registered_students[i].options[k].id%> <% if (registered_students[i].events[j].event_type_id == registered_students[i].options[k].id) { %> selected <% } %>>
+                                      <%=registered_students[i].options[k].event_name%>
                                     </option>
                                     <% } %>
                                   </select>
@@ -91,16 +93,21 @@
                                   <input class="form-control" type="text" name="piece_publisher" value="<%=registered_students[i].events[j].piece_publisher%>" required="true">
                                 </td>
                                 <td>
-                                  <input type="submit" class="btn btn-primary" value="Save">  <a href="/conferences/<%=conference.id%>/sessions/<%=sessions[i].id%>/rooms" class="btn btn-primary">Cancel</a>
-                                </td>
-                                <td>
                                   <select name="secondary_student_id" class="form-control" <%if (!registered_students[i].events[j].isEditing) { %> disabled <% } %>>
+                                    <option value=<%='not applicable'%> <% if (registered_students[i].events[j].secondary_student_id == 'not applicable') { %> selected <% } %>>
+                                      Not Applicable
+                                    </option>
                                     <% for (var m=0; m<registered_students.length; m++) { %>
-                                      <option value=<%=registered_students[m].id%> <% if (registered_students[i].events[j].secondary_student_id == registered_students[m].student_id) { %> selected <% } %>>
-                                        <%=registered_students[m].first_name%> <%=registered_students[m].last_name%>
-                                      </option>
+                                    <% if (registered_students[m].student_id !== registered_students[i].student_id) { %>
+                                    <option value=<%=registered_students[m].id%> <% if (registered_students[i].events[j].secondary_student_id == registered_students[m].student_id) { %> selected <% } %>>
+                                      <%=registered_students[m].first_name%> <%=registered_students[m].last_name%>
+                                    </option>
+                                    <% } %>
                                     <% } %>
                                   </select>
+                                </td>
+                                <td>
+                                  <input type="submit" class="btn btn-primary" value="Save">  <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/edit" class="btn btn-primary">Cancel</a>
                                 </td>
                               </tr>
                             </fieldset>
@@ -109,9 +116,9 @@
                         <tr>
                           <td>
                             <select name="event_type_id" class="form-control" required="true" disabled>
-                              <% for (var k=0; k<registered_students[i].events[j].options.length; k++) { %>
-                                <option value=<%=registered_students[i].events[j].options[k].id%> <% if (registered_students[i].events[j].event_id == registered_students[i].events[j].options[k].id) { %> selected <% } %>>
-                                  <%=registered_students[i].events[j].options[k].event_name%>
+                              <% for (var k=0; k<registered_students[i].options.length; k++) { %>
+                                <option value=<%=registered_students[i].options[k].id%> <% if (registered_students[i].events[j].event_id == registered_students[i].options[k].id) { %> selected <% } %>>
+                                  <%=registered_students[i].options[k].event_name%>
                                 </option>
                               <% } %>
                             </select>

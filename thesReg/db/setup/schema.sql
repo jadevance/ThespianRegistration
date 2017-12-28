@@ -47,7 +47,6 @@ CREATE TABLE registered_students(
 DROP TABLE IF EXISTS solo_duo_ies;
 CREATE TABLE solo_duo_ies(
   id serial PRIMARY KEY,
-  event_id integer,
   event_type_id text,
   registration_id integer,
   primary_student_id integer,
