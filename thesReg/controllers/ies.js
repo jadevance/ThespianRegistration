@@ -277,6 +277,29 @@ var iesController = {
     } else {
       response.redirect('/')
     }
+  },
+
+  deleteIe: function(request, response) {
+    const loggedIn = request.isAuthenticated();
+
+    if (loggedIn) {
+      iesModel.deleteIe(request.params, function(error, updatedIes) {
+        if (error) {
+          var err = new Error;
+          err.status = 500;
+          err.error = "Error saving IE";
+          response.json(err)
+        } else {
+          if (updatedIes.length > 0) {
+            response.redirect('/conferences/' + request.params.conferenceId + '/registration/' + request.params.registrationId + '/student/' + request.params.studentId + '/ies')
+          } else {
+            response.redirect('/conferences/' + request.params.conferenceId + '/registration/' + request.params.registrationId + '/edit')
+          }
+        }
+      })
+    } else {
+      response.redirect('/')
+    }
   }
 
 };

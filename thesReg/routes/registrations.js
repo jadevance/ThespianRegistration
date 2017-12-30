@@ -16,11 +16,13 @@ router.post('/conferences/:conferenceId/registration/:registrationId/editStudent
 // Show IES:
 router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies', iesController.getStudentIes);
 
-// Solo IES:
+// Solo/Duo IES:
 router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/new', iesController.getNewIe);
 router.post('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/new', iesController.createNewIe);
 router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/:ieId/edit', iesController.editIe);
 router.post('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/:ieId/edit', iesController.updateIe);
+router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/:ieId/delete', iesController.deleteIe);
+
 
 
 

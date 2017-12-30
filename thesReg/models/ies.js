@@ -56,6 +56,24 @@ Ies.updateIe = function(formData, params, callback) {
       callback(null, updatedIe)
     }
   })
+};
+
+Ies.deleteIe = function(params, callback) {
+  db.solo_duo_ies.destroy({id: params.ieId},
+    function(error, deletedIe) {
+      if (error || !deletedIe) {
+        callback(error, undefined)
+      } else {
+        db.solo_duo_ies.where("primary_student_id=$1 OR secondary_student_id=$1 AND registration_id=$2", [params.studentId, params.registrationId], function(error, ies) {
+          if (error) {
+            callback(error, undefined)
+          } else {
+            callback(null, ies)
+          }
+        })
+      }
+    }
+  )
 }
 
 module.exports = Ies;
