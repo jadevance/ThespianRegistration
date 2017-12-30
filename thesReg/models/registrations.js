@@ -185,40 +185,36 @@ Registrations.updateRegisteredStudents = function(userId, registrationId, formDa
       }
 
       // To delete IEs from students who unregister
-      // var eventsToDestroy = [];
-      // for (var k=0; k<remove.length; k++) {
-      //   function(k) {
-      //     var promise = new Promise(function(resolve, reject) {
-      //       db.individual_event.find({registration_id: registrationId,
-      //                                 primary_student_id: remove[k]},
-      //         function(error, primaryEvents) {
-      //           if (error) {
-      //             callback(error, undefined)
-      //           } else {
-      //             for (var l=0; l<primaryEvents.length; l++) {
-      //               eventsToDestroy.push(primaryEvents[l])
-      //             }
-      //
-      //             db.individual_event.find({registration_id: registrationId,
-      //                                       secondary_student_id: remove[k]},
-      //               function(error, secondaryEvents) {
-      //                 if (error) {
-      //                   callback(error, undefined)
-      //                 } else {
-      //                   for (var m=0; m<secondaryEvents; m++) {
-      //                     eventsToDestroy.push(secondaryEvents[m])
-      //                   }
-      //
-      //
-      //                 }
-      //               }
-      //             )
-      //           }
-      //         }
-      //       )
-      //     })
-      //   }
-      // }
+      for (var k=0; k<remove.length; k++) {
+        (function(k) {
+          var primaryPromise = new Promise(function(resolve, reject) {
+            db.solo_duo_ies.destroy({registration_id: registrationId,
+                                      primary_student_id: remove[k]},
+            function(error, deletedPrimaryRecords) {
+              if (error) {
+                reject(error)
+              } else {
+                resolve()
+              }
+            })
+          })
+          registerStudentPromises.push(primaryPromise);
+
+          var secondaryPromise = new Promise(function(resolve, reject) {
+            db.solo_duo_ies.destroy({registration_id: registrationId,
+                                      secondary_student_id: remove[k]},
+            function(error, deletedSecondaryRecords) {
+              if (error) {
+                reject(error)
+              } else {
+                resolve()
+              }
+            })
+          })
+          registerStudentPromises.push(secondaryPromise);
+
+        })(k)
+      }
 
       Promise.all(registerStudentPromises).then(
         function() {
