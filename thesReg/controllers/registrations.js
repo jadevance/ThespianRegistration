@@ -55,47 +55,55 @@ var RegistrationsController = {
             if (error) {
               var err = new Error;
               err.status = 500;
-              err.error = "Error saving registration";
+              err.error = "Error all students";
               response.json(err)
             } else {
               registrationsModel.getRegisteredStudents(request.user.id, request.params.registrationId, function(error, registeredStudents) {
 
-                for (var i=0; i<students.length; i++) {
-                  for (var j=0; j<registeredStudents.length; j++) {
-                    if (students[i].id == registeredStudents[j].student_id) {
-                      registeredStudents[j].first_name = students[i].first_name;
-                      registeredStudents[j].last_name = students[i].last_name;
-                      registeredStudents[j].graduation_year = students[i].graduation_year;
-                      registeredStudents[j].thespian_status = students[i].thespian_status;
+                if (error) {
+                  console.log(error)
+                  var err = new Error;
+                  err.status = 500;
+                  err.error = "Error getting registered students";
+                  response.json(err)
+                } else {
+                  for (var i = 0; i < students.length; i++) {
+                    for (var j = 0; j < registeredStudents.length; j++) {
+                      if (students[i].id == registeredStudents[j].student_id) {
+                        registeredStudents[j].first_name = students[i].first_name;
+                        registeredStudents[j].last_name = students[i].last_name;
+                        registeredStudents[j].graduation_year = students[i].graduation_year;
+                        registeredStudents[j].thespian_status = students[i].thespian_status;
+                      }
                     }
                   }
+
+                  registeredStudents.sort(function (a, b) {
+                    var nameA = a.last_name.toUpperCase();
+                    var nameB = b.last_name.toUpperCase();
+                    return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+                  })
+
+                  iesModel.getRegistrationsGroupIEs(request.params.registrationId, function (error, groupEvents) {
+                    if (error) {
+                      var err = new Error;
+                      err.status = 500;
+                      err.error = "Error getting group events";
+                      response.json(err)
+                    } else {
+                      response.render('registration', {
+                        user: request.user,
+                        loggedIn: loggedIn,
+                        isAddingOrRemoving: false,
+                        conference: conference,
+                        registration: registration,
+                        students: students,
+                        registered_students: registeredStudents,
+                        group_events: groupEvents
+                      })
+                    }
+                  })
                 }
-
-                registeredStudents.sort(function(a, b) {
-                  var nameA = a.last_name.toUpperCase();
-                  var nameB = b.last_name.toUpperCase();
-                  return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
-                })
-
-                iesModel.getRegistrationsGroupIEs(request.params.registrationId, function(error, groupEvents) {
-                  if (error) {
-                    var err = new Error;
-                    err.status = 500;
-                    err.error = "Error getting group events";
-                    response.json(err)
-                  } else {
-                    response.render('registration', {
-                      user: request.user,
-                      loggedIn: loggedIn,
-                      isAddingOrRemoving: false,
-                      conference: conference,
-                      registration: registration,
-                      students: students,
-                      registered_students: registeredStudents,
-                      group_events: groupEvents
-                    })
-                  }
-                })
               })
             }
           })

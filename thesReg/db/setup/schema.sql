@@ -137,5 +137,6 @@ DROP TABLE IF EXISTS events;
 CREATE TABLE events(
   id serial PRIMARY KEY,
   event_name text,
-  event_type text
+  event_type text,
+  is_group boolean
 );

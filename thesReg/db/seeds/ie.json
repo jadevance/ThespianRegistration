@@ -1,58 +1,72 @@
 [
   {
     "event_name": "Monologue",
-    "event_type": "performance"
+    "event_type": "performance",
+    "is_group": false
   },
   {
     "event_name": "Duo Scene",
-    "event_type": "performance"
+    "event_type": "performance",
+    "is_group": false
   },
   {
     "event_name": "Group Acting",
-    "event_type": "performance"
+    "event_type": "performance",
+    "is_group": true
   },
   {
     "event_name": "Solo Musical",
-    "event_type": "performance"
+    "event_type": "performance",
+    "is_group": false
   },
   {
     "event_name": "Duet Musical",
-    "event_type": "performance"
+    "event_type": "performance",
+    "is_group": false
   },
   {
     "event_name": "Group Musical",
-    "event_type": "performance"
+    "event_type": "performance",
+    "is_group": true
   },
   {
     "event_name": "Costume Design",
-    "event_type": "technical"
+    "event_type": "technical",
+    "is_group": false
   },
   {
     "event_name": "Costume Construction",
-    "event_type": "technical"
+    "event_type": "technical",
+    "is_group": false
   },
   {
     "event_name": "Lighting Design",
-    "event_type": "technical"
+    "event_type": "technical",
+    "is_group": false
   },
   {
     "event_name": "Scenic Design",
-    "event_type": "technical"
+    "event_type": "technical",
+    "is_group": false
   },
   {
     "event_name": "Sound Design",
-    "event_type": "technical"
+    "event_type": "technical",
+    "is_group": false
   },
   {
     "event_name": "Stage Management",
-    "event_type": "technical"
+    "event_type": "technical",
+    "is_group": false
   },
   {
     "event_name": "Theatre Marketing",
-    "event_type": "technical"
+    "event_type": "technical",
+    "is_group": false
   },
   {
     "event_name": "All Technical Events",
-    "event_type": "technical"
+    "event_type": "technical",
+    "is_group": false
   }
 ]

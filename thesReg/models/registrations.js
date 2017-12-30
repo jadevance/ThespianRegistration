@@ -81,11 +81,10 @@ Registrations.getRegisteredStudents = function(userId, registrationId, callback)
                     if (error) {
                       reject(error)
                     } else {
-                      db.run('select * from events', function(error, eventOptions) {
+                      db.events.where("is_group=$1 AND id<$2", [false, 13], function(error, eventOptions) {
                         if (error) {
                           reject(error)
                         } else {
-                          eventOptions.splice(13, 1);
                           registeredStudents[i].events = events;
                           registeredStudents[i].options = eventOptions;
 

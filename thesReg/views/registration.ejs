@@ -78,7 +78,7 @@
                             <fieldset>
                               <tr>
                                 <td>
-                                  <select name="event_type_id" class="form-control" required="true" <%if (!registered_students[i].events[j].isEditing) { %> disabled <% } %>>
+                                  <select name="event_type_id" class="form-control" required="true" <%if (registered_students[i].events[j].id) { %> disabled <% } %>>
                                     <% for (var k=0; k<registered_students[i].options.length; k++) { %>
                                     <option value=<%=registered_students[i].options[k].id%> <% if (registered_students[i].events[j].event_type_id == registered_students[i].options[k].id) { %> selected <% } %>>
                                       <%=registered_students[i].options[k].event_name%>
@@ -96,7 +96,7 @@
                                   <input class="form-control" type="text" name="piece_publisher" value="<%=registered_students[i].events[j].piece_publisher%>" required="true">
                                 </td>
                                 <td>
-                                  <select name="secondary_student_id" class="form-control" <% if (!registered_students[i].events[j].isEditing) { %> disabled <% } %>>
+                                  <select name="secondary_student_id" class="form-control" <% if (registered_students[i].events[j].id) { %> disabled <% } %>>
                                     <% for (var m=0; m<registered_students.length; m++) { %>
                                       <% if (m === 0) { %>
                                         <option value=<%=0%> <% if (registered_students[i].events[j].secondary_student_id === 0) { %> selected <% } %>>
