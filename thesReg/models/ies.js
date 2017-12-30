@@ -44,4 +44,18 @@ Ies.createNewIe = function(formData, params, callback) {
   })
 };
 
+Ies.updateIe = function(formData, params, callback) {
+  db.solo_duo_ies.save({id: params.ieId,
+                        piece_title: formData.piece_title,
+                        piece_author: formData.piece_author,
+                        piece_publisher: formData.piece_publisher},
+  function(error, updatedIe) {
+    if (error || !updatedIe) {
+      callback(error, undefined)
+    } else {
+      callback(null, updatedIe)
+    }
+  })
+}
+
 module.exports = Ies;

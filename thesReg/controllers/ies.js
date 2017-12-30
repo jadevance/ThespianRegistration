@@ -261,7 +261,22 @@ var iesController = {
   },
 
   updateIe: function(request, response) {
+    const loggedIn = request.isAuthenticated();
 
+    if (loggedIn) {
+      iesModel.updateIe(request.body, request.params, function(error, newIE) {
+        if (error) {
+          var err = new Error;
+          err.status = 500;
+          err.error = "Error saving IE";
+          response.json(err)
+        } else {
+          response.redirect('/conferences/' + request.params.conferenceId + '/registration/' + request.params.registrationId + '/student/' + request.params.studentId + '/ies')
+        }
+      })
+    } else {
+      response.redirect('/')
+    }
   }
 
 };
