@@ -83,6 +83,21 @@ var commonFunctions = {
     };
 
     return IE;
+  },
+
+  getEmptyGroupIE: function(registrationId) {
+    var groupIE = {
+      id: null,
+      event_type_id: null,
+      registration_id: registrationId,
+      secondary_student_id: null,
+      piece_title: null,
+      piece_author: null,
+      piece_publisher: null,
+      isEditing: true
+    };
+
+    return groupIE;
   }
 };
 

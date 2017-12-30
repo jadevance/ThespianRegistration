@@ -23,6 +23,13 @@ router.get('/conferences/:conferenceId/registration/:registrationId/student/:stu
 router.post('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/:ieId/edit', iesController.updateIe);
 router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/:ieId/delete', iesController.deleteIe);
 
+// Group IES:
+router.get('/conferences/:conferenceId/registration/:registrationId/group/new', iesController.getNewGroupIe);
+router.post('/conferences/:conferenceId/registration/:registrationId/group/new', iesController.createNewGroupIe);
+router.get('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/edit', iesController.editGroupIe);
+router.post('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/edit', iesController.updateGroupIe);
+router.get('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/delete', iesController.deleteGroupIe);
+
 
 
 

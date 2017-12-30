@@ -10,9 +10,15 @@ var Ies = function() {};
 Ies.getRegistrationsGroupIEs = function(registrationId, callback) {
   db.group_ies.find({registration_id: registrationId}, function(error, groupEvents) {
     if (error) {
-      callback(error, undefined)
+      callback(error, undefined, undefined)
     } else {
-      callback(null, groupEvents)
+      db.events.where("is_group=$1 AND id=$2 OR id=$3", [false, 2, 6], function(error, eventOptions) {
+        if (error) {
+          callback(error, undefined, undefined)
+        } else {
+          callback(null, groupEvents, eventOptions)
+        }
+      })
     }
   })
 };

@@ -172,6 +172,81 @@
       <% } %>
     </tbody>
   </table>
+
+<% if (group_events.length > 0) { %>
+  <h2>Registered Group Events</h2>
+  <p>You have registered for the following group events.</p>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Event Type</th>
+        <th>Piece Title</th>
+        <th>Piece Author</th>
+        <th>Piece Publisher</th>
+        <th>Add/Remove Students</th>
+        <th>Edit/Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (var i=0; i<group_events.length; i++) { %>
+        <% if (!group_events[i].isEditing) { %>
+          <td>
+            <select name="event_type_id" class="form-control" required="true" disabled>
+              <% for (var j=0; j<group_events[i].options.length; i++) { %>
+                <option value=<%=group_events[i].options[j].id%> <% if (group_events[i].event_type_id == group_events[i].options[j].id) { %> selected <% } %>>
+                  <%=group_events[i].options[j].event_name%>
+                </option>
+              <% } %>
+            </select>
+          </td>
+          <td>group_events[i].piece_title</td>
+          <td>group_events[i].piece_author</td>
+          <td>group_events[i].piece_publisher</td>
+          <td><a href="">Add or Remove Students From Group</a></td>
+          <td><a href="">Edit</a> / <a href="">Delete</a></td>
+        <% } else { %>
+          <% if (group_events[i].isEditing && !group_events[i].id) { %>
+            <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/registration/<%=registration.id%>/group/new" method="post">
+          <% } else if (group_events[i].isEditing) { %>
+            <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/registration/<%=registration.id%>/group/<%=group_events[i].id%>/edit" method="post">
+          <% } %>
+              <fieldset>
+                <tr>
+                  <td>
+                    <select name="event_type_id" class="form-control" required="true" disabled>
+                      <% for (var j=0; j<group_events[i].options.length; i++) { %>
+                        <option value=<%=group_events[i].options[j].id%> <% if (group_events[i].event_type_id == group_events[i].options[j].id) { %> selected <% } %>>
+                          <%=group_events[i].options[j].event_name%>
+                        </option>
+                      <% } %>
+                    </select>
+                  </td>
+                  <td>
+                    <input class="form-control" type="text" name="piece_title" value="<%=group_events[i].piece_title%>" required="true">
+                  </td>
+                  <td>
+                    <input class="form-control" type="text" name="piece_author" value="<%=group_events[i].piece_author%>" required="true">
+                  </td>
+                  <td>
+                    <input class="form-control" type="text" name="piece_publisher" value="<%=group_events[i].piece_publisher%>" required="true">
+                  </td>
+                  <td></td>
+                  <td>
+                    <input type="submit" class="btn btn-primary" value="Save">
+                    <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/edit" class="btn btn-primary">Cancel</a>
+                  </td>
+                </tr>
+              </fieldset>
+            </form>
+        <% } %>
+      <% } %>
+    </tbody>
+  </table>
+<% } %>
+
+<a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/group/new">Add Group Event</a>
+
 <% } else if (isAddingOrRemoving) { %>
   <h2>Add or Remove Students</h2>
   <p>To register a student check the box next to their name. To remove a student from this registration, uncheck the box. If you remove a student from a registration, any solo or duo individual events (acting, musical, or tech) that a student is registered for will also be deleted. If the student is a part of a Group Acting or Group Musical individual event, the Group event will *not* be deleted, but the student will be removed from the Group event.</p>
