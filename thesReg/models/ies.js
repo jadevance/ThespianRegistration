@@ -17,6 +17,16 @@ Ies.getRegistrationsGroupIEs = function(registrationId, callback) {
   })
 };
 
+Ies.getStudentIes = function(registrationId, studentId, callback) {
+  db.solo_duo_ies.where("primary_student_id=$1 OR secondary_student_id=$1 AND registration_id=$2", [studentId, registrationId], function(error, studentEvents) {
+    if (error) {
+      callback(error, undefined)
+    } else {
+      callback(null, studentEvents)
+    }
+  })
+};
+
 Ies.createNewIe = function(formData, params, callback) {
   db.solo_duo_ies.save({event_type_id: formData.event_type_id,
                         registration_id: params.registrationId,

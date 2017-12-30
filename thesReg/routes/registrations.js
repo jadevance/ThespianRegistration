@@ -14,13 +14,13 @@ router.get('/conferences/:conferenceId/registration/:registrationId/editStudents
 router.post('/conferences/:conferenceId/registration/:registrationId/editStudents', registrationsController.saveAddOrRemoveStudents);
 
 // Show IES:
-router.get('/conferences/:conferenceId/registration/:registrationId/ies/:studentId', iesController.getStudentIes);
+router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies', iesController.getStudentIes);
 
 // Solo IES:
-router.get('/conferences/:conferenceId/registration/:registrationId/ies/:studentId/new', iesController.getNewIe);
-router.post('/conferences/:conferenceId/registration/:registrationId/ies/:studentId/new', iesController.createNewIe);
-router.get('/conferences/:conferenceId/registration/:registrationId/ies/:studentId/edit/:iesId', iesController.editIe);
-router.post('/conferences/:conferenceId/registration/:registrationId/ies/:studentId/edit/:iesId', iesController.updateIe);
+router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/new', iesController.getNewIe);
+router.post('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/new', iesController.createNewIe);
+router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/:ieId/edit', iesController.editIe);
+router.post('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/:ieId/edit', iesController.updateIe);
 
 
 
