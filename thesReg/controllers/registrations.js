@@ -61,7 +61,6 @@ var RegistrationsController = {
               registrationsModel.getRegisteredStudents(request.user.id, request.params.registrationId, function(error, registeredStudents) {
 
                 if (error) {
-                  console.log(error)
                   var err = new Error;
                   err.status = 500;
                   err.error = "Error getting registered students";
@@ -84,22 +83,47 @@ var RegistrationsController = {
                     return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
                   })
 
-                  iesModel.getRegistrationsGroupIEs(request.params.registrationId, function (error, groupEvents) {
+                  iesModel.getRegistrationsGroupIEs(request.params.registrationId, function (error, groupEvents, eventOptions) {
                     if (error) {
                       var err = new Error;
                       err.status = 500;
                       err.error = "Error getting group events";
                       response.json(err)
                     } else {
-                      response.render('registration', {
-                        user: request.user,
-                        loggedIn: loggedIn,
-                        isAddingOrRemoving: false,
-                        conference: conference,
-                        registration: registration,
-                        students: students,
-                        registered_students: registeredStudents,
-                        group_events: groupEvents
+                      iesModel.getGroupStudents(request.params, function(error, groupStudents) {
+                        if (error) {
+                          var err = new Error;
+                          err.status = 500;
+                          err.error = "Error getting group's students";
+                          response.json(err)
+                        } else {
+                          for (var i = 0; i<groupEvents.length; i++) {
+                            groupEvents[i].showParticipatingStudents = false;
+
+                            var participatingStudents = [];
+                            for (var j = 0; j<registeredStudents.length; j++) {
+                              for (var k = 0; k<groupStudents.length; k++) {
+                                if (registeredStudents.student_id == groupStudents.student_id) {
+                                  participatingStudents.push(registeredStudents[j])
+                                }
+                              }
+                            }
+
+                            groupEvents[i].participatingStudents = participatingStudents;
+                          }
+
+                          response.render('registration', {
+                            user: request.user,
+                            loggedIn: loggedIn,
+                            isAddingOrRemoving: false,
+                            conference: conference,
+                            registration: registration,
+                            students: students,
+                            registered_students: registeredStudents,
+                            group_events: groupEvents,
+                            group_options: eventOptions
+                          })
+                        }
                       })
                     }
                   })

@@ -30,6 +30,11 @@ router.get('/conferences/:conferenceId/registration/:registrationId/group/:group
 router.post('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/edit', iesController.updateGroupIe);
 router.get('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/delete', iesController.deleteGroupIe);
 
+// Add/Remove Students to Group IE
+router.get('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/showStudents', iesController.getGroupStudents);
+router.get('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/editStudents', iesController.addOrRemoveStudentsToGroup);
+router.post('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/editStudents', iesController.saveAddOrRemoveStudentsToGroup);
+
 
 
 

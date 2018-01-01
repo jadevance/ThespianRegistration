@@ -69,11 +69,8 @@ CREATE TABLE group_ies(
 DROP TABLE IF EXISTS group_ies_students;
 CREATE TABLE group_ies_students(
   id serial PRIMARY KEY,
-  event_id integer,
-  registration_id integer,
   group_ies_id integer,
   student_id integer,
-  piece_name text
 );
 
 DROP TABLE IF EXISTS invoice;

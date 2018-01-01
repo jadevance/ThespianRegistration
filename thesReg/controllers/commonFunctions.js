@@ -88,7 +88,7 @@ var commonFunctions = {
   getEmptyGroupIE: function(registrationId) {
     var groupIE = {
       id: null,
-      event_type_id: null,
+      event_type_id: 0,
       registration_id: registrationId,
       secondary_student_id: null,
       piece_title: null,

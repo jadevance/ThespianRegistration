@@ -184,27 +184,84 @@
         <th>Piece Title</th>
         <th>Piece Author</th>
         <th>Piece Publisher</th>
-        <th>Add/Remove Students</th>
+        <th>
+          <% if (group_events[0].id) { %>
+            Add/Remove Students
+          <% } %>
+        </th>
         <th>Edit/Delete</th>
       </tr>
     </thead>
     <tbody>
       <% for (var i=0; i<group_events.length; i++) { %>
         <% if (!group_events[i].isEditing) { %>
-          <td>
-            <select name="event_type_id" class="form-control" required="true" disabled>
-              <% for (var j=0; j<group_events[i].options.length; i++) { %>
-                <option value=<%=group_events[i].options[j].id%> <% if (group_events[i].event_type_id == group_events[i].options[j].id) { %> selected <% } %>>
-                  <%=group_events[i].options[j].event_name%>
-                </option>
+          <tr>
+            <td>
+              <select name="group_event_type_id" class="form-control" required="true" disabled>
+                <% for (var j=0; j<group_options.length; j++) { %>
+                  <option value=<%=group_options[j].id%> <% if (group_events[i].event_type_id == group_options[j].id) { %> selected <% } %>>
+                    <%=group_options[j].event_name%>
+                  </option>
+                <% } %>
+              </select>
+            </td>
+            <td><%=group_events[i].piece_title%></td>
+            <td><%=group_events[i].piece_author%></td>
+            <td><%=group_events[i].piece_publisher%></td>
+            <td>
+              <% if (!group_events[i].showParticipatingStudents && group_events[i].participatingStudents.length > 0) { %>
+                <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/group/<%=group_events[i].id%>/showStudents">Show Participating Students</a> /
+              <% } else if (group_events[i].showParticipatingStudents) { %>
+                <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/edit">Hide Participating Students</a> /
               <% } %>
-            </select>
-          </td>
-          <td>group_events[i].piece_title</td>
-          <td>group_events[i].piece_author</td>
-          <td>group_events[i].piece_publisher</td>
-          <td><a href="">Add or Remove Students From Group</a></td>
-          <td><a href="">Edit</a> / <a href="">Delete</a></td>
+              <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/group/<%=group_events[i].id%>/editStudents">Add or Remove Students</a></td>
+            <td>
+              <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/group/<%=group_events[i].id%>/edit">Edit</a> /
+              <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/group/<%=group_events[i].id%>/delete">Delete</a>
+            </td>
+          </tr>
+          <% if (group_events[i].isAddingOrRemovingGroup) { %>
+            <tr>
+              <table class="table table-striped">
+                <tbody>
+                  <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/registration/<%=registration.id%>/group/<%=group_events[i].id%>/editStudents" method="post">
+                    <fieldset>
+                      <% for (var j=0; j<group_events[i].participatingStudents.length; j++) { %>
+                        <tr>
+                          <td>
+                            <input id="group-student" type="checkbox" name="add_remove_toggle" value="<%=group_events[i].participatingStudents[j].student_id%>" <% if (group_events[i].participatingStudents[j].participating === true) { %> checked <% } %>>
+                          </td>
+                          <td>
+                            <%= group_events[i].participatingStudents[j].first_name %> <%= group_events[i].participatingStudents[j].last_name %>
+                          </td>
+                        </tr>
+                      <% } %>
+                      <input type="submit" class="btn btn-primary" value="Save"> <a href="/conferences/<%=conference.id%>/registration/<%=registration.id%>/group/<%=group_events[i].id%>/showStudents" class="btn btn-primary">Cancel</a>
+                    </fieldset>
+                  </form>
+                </tbody>
+              </table>
+            </tr>
+          <% } else if (group_events[i].showParticipatingStudents) { %>
+            <tr>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <td>Participating Students</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (var j=0; j<group_events[i].participatingStudents.length; j++) { %>
+                    <tr>
+                      <td>
+                        <%= group_events[i].participatingStudents[j].first_name %> <%= group_events[i].participatingStudents[j].last_name %>
+                      </td>
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </tr>
+          <% } %>
         <% } else { %>
           <% if (group_events[i].isEditing && !group_events[i].id) { %>
             <form class="form-horizontal" role="form" action="/conferences/<%=conference.id%>/registration/<%=registration.id%>/group/new" method="post">
@@ -214,22 +271,22 @@
               <fieldset>
                 <tr>
                   <td>
-                    <select name="event_type_id" class="form-control" required="true" disabled>
-                      <% for (var j=0; j<group_events[i].options.length; i++) { %>
-                        <option value=<%=group_events[i].options[j].id%> <% if (group_events[i].event_type_id == group_events[i].options[j].id) { %> selected <% } %>>
-                          <%=group_events[i].options[j].event_name%>
+                    <select name="group_event_type_id" class="form-control" required="true">
+                      <% for (var j=0; j<group_options.length; j++) { %>
+                        <option value=<%=group_options[j].id%> <% if (group_events[i].event_type_id == group_options[j].id) { %> selected <% } %>>
+                          <%=group_options[j].event_name%>
                         </option>
                       <% } %>
                     </select>
                   </td>
                   <td>
-                    <input class="form-control" type="text" name="piece_title" value="<%=group_events[i].piece_title%>" required="true">
+                    <input class="form-control" type="text" name="group_piece_title" value="<%=group_events[i].piece_title%>" required="true">
                   </td>
                   <td>
-                    <input class="form-control" type="text" name="piece_author" value="<%=group_events[i].piece_author%>" required="true">
+                    <input class="form-control" type="text" name="group_piece_author" value="<%=group_events[i].piece_author%>" required="true">
                   </td>
                   <td>
-                    <input class="form-control" type="text" name="piece_publisher" value="<%=group_events[i].piece_publisher%>" required="true">
+                    <input class="form-control" type="text" name="group_piece_publisher" value="<%=group_events[i].piece_publisher%>" required="true">
                   </td>
                   <td></td>
                   <td>
