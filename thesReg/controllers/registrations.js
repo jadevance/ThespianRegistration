@@ -90,7 +90,7 @@ var RegistrationsController = {
                       err.error = "Error getting group events";
                       response.json(err)
                     } else {
-                      iesModel.getGroupStudents(request.params, function(error, groupStudents) {
+                      iesModel.getAllGroupStudents(groupEvents, function(error, groupStudentsArray) {
                         if (error) {
                           var err = new Error;
                           err.status = 500;
@@ -100,16 +100,17 @@ var RegistrationsController = {
                           for (var i = 0; i<groupEvents.length; i++) {
                             groupEvents[i].showParticipatingStudents = false;
 
-                            var participatingStudents = [];
-                            for (var j = 0; j<registeredStudents.length; j++) {
-                              for (var k = 0; k<groupStudents.length; k++) {
-                                if (registeredStudents.student_id == groupStudents.student_id) {
-                                  participatingStudents.push(registeredStudents[j])
+                            for (var j = 0; j<groupStudentsArray.length; j++) {
+                              if (groupStudentsArray[j].length !== 0) {
+                                if (groupEvents[i].id == groupStudentsArray[j][0].group_ies_id) {
+                                  groupEvents[i].participatingStudents = groupStudentsArray[j]
                                 }
                               }
                             }
 
-                            groupEvents[i].participatingStudents = participatingStudents;
+                            if (!groupEvents[i].participatingStudents) {
+                              groupEvents[i].participatingStudents = []
+                            }
                           }
 
                           response.render('registration', {

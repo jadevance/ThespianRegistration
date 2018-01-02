@@ -123,7 +123,7 @@ Ies.deleteGroupIe = function(params, callback) {
 };
 
 Ies.getGroupStudents = function(params, callback) {
-  db.group_ies_students.where("group_ies_id=$1", [params.groupIeId], function(error, groupStudents) {
+  db.group_ies_students.where("group_ies_id=$1", [params.groupIeId], function (error, groupStudents) {
     if (error) {
       callback(error, undefined)
     } else {
@@ -132,8 +132,36 @@ Ies.getGroupStudents = function(params, callback) {
   })
 };
 
+Ies.getAllGroupStudents = function(groupEvents, callback) {
+  var promisesGetAllStudents = [];
+
+  for (var i=0; i<groupEvents.length; i++) {
+    (function(i) {
+      var promise = new Promise(function(resolve, reject) {
+        db.group_ies_students.where("group_ies_id=$1", groupEvents[i].id, function(error, groupStudents) {
+          if (error) {
+            reject(error)
+          } else {
+            resolve(groupStudents)
+          }
+        })
+      })
+      promisesGetAllStudents.push(promise)
+    })(i)
+  }
+
+  Promise.all(promisesGetAllStudents).then(
+    function(results) {
+      callback(null, results)
+    },
+    function(error) {
+      callback(error, undefined)
+    }
+  )
+};
+
 Ies.updateGroupStudents = function(params, formData, callback) {
-  db.group_ies_students.where("id=$1", [params.groupIeId],
+  db.group_ies_students.where("group_ies_id=$1", [params.groupIeId],
     function(error, groupStudents) {
       const add = [];
       const remove = [];
@@ -145,7 +173,7 @@ Ies.updateGroupStudents = function(params, formData, callback) {
       }
 
       for (var i=0; i<groupStudents.length; i++) {
-        participatingIds.push(groupStudents[i].student_id)
+        participatingIds.push(parseInt(groupStudents[i].student_id))
       }
 
       for (var i=0; i<formParsed.length; i++) {
@@ -165,6 +193,7 @@ Ies.updateGroupStudents = function(params, formData, callback) {
         (function(i) {
           var promise = new Promise(function(resolve, reject) {
             db.group_ies_students.save({group_ies_id: params.groupIeId,
+                                        registration_id: params.registrationId,
                                         student_id: add[i]},
               function(error, registered_student) {
                 if (error) {
@@ -180,16 +209,16 @@ Ies.updateGroupStudents = function(params, formData, callback) {
 
       for (var j=0; j<remove.length; j++) {
         (function(j) {
-            var promise = new Promise(function(resolve, reject) {
-              db.group_ies_students.destroy({group_ies_id: params.groupIeId,
+          var promise = new Promise(function(resolve, reject) {
+            db.group_ies_students.destroy({group_ies_id: params.groupIeId,
                                             student_id: remove[j]},
-                function(error, deleted_student) {
-                  if (error) {
-                    reject(error)
-                  } else {
-                    resolve()
-                  }
-                })
+              function(error, deleted_student) {
+                if (error) {
+                  reject(error)
+                } else {
+                  resolve()
+                }
+              })
             })
             registerStudentPromises.push(promise)
           }

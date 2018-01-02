@@ -50,7 +50,7 @@ Registrations.getRegistration = function(registrationId, callback) {
 };
 
 Registrations.getUserRegistrations = function(userId, callback) {
-  const currentYear = moment().format('YYYY');
+  const currentYear = moment().subtract(1, 'years').format('YYYY');
   db.registrations.where("teacher_id=$1 AND conference_year>=$2", [userId, currentYear], function(error, registrations) {
     if (error) {
       callback(error, undefined)
@@ -64,7 +64,7 @@ Registrations.getUserRegistrations = function(userId, callback) {
 
 Registrations.getRegisteredStudents = function(userId, registrationId, callback) {
   db.registered_students.find({teacher_id: userId,
-                               registration_id: registrationId},
+                                registration_id: registrationId},
     function(error, registeredStudents) {
       if (error) {
         callback(error, undefined)
@@ -212,6 +212,19 @@ Registrations.updateRegisteredStudents = function(userId, registrationId, formDa
             })
           })
           registerStudentPromises.push(secondaryPromise);
+
+          var tertiaryPromise = new Promise(function(resolve, reject) {
+            db.group_ies_students.destroy({registration_id: registrationId,
+                                            student_id: remove[k]},
+            function(error, deletedTertiaryRecords) {
+              if (error) {
+                reject(error)
+              } else {
+                resolve()
+              }
+            })
+          })
+          registerStudentPromises.push(tertiaryPromise)
 
         })(k)
       }
