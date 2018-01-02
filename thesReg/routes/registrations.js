@@ -35,7 +35,8 @@ router.get('/conferences/:conferenceId/registration/:registrationId/group/:group
 router.get('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/editStudents', iesController.addOrRemoveStudentsToGroup);
 router.post('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/editStudents', iesController.saveAddOrRemoveStudentsToGroup);
 
-
+// Submit registration, generate invoice
+router.post('/conferences/:conferenceId/registration/:registrationId/submit', registrationsController.submitRegistration);
 
 
 module.exports = router;

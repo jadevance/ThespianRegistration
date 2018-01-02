@@ -352,4 +352,11 @@
     </tbody>
   </table>
 <% } %>
+
+<% if (registered_students.length > 0) { %>
+  <form method="post" action="/conferences/<%=conference.id%>/registration/<%=registration.id%>/submit">
+    <input type="hidden" name="submit_registration" value=<%=registration.id%>>
+    <input type="submit" value="Submit & Generate Invoice">
+  </form>
+<% } %>
 <%- include('./_footer') %>

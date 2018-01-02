@@ -241,4 +241,15 @@ Registrations.updateRegisteredStudents = function(userId, registrationId, formDa
   )
 };
 
+Registrations.submitRegistration = function(user, params, formData, callback) {
+  db.registrations.save({id: params.registrationId,
+                        status: 'submitted'}, function(error, completeRegistration) {
+    if (error) {
+      callback(error, undefined)
+    } else {
+      callback(null, completeRegistration)
+    }
+  })
+};
+
 module.exports = Registrations;

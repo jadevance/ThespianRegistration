@@ -201,6 +201,71 @@ var RegistrationsController = {
     } else {
       response.redirect('/')
     }
+  },
+
+  submitRegistration: function(request, response) {
+    const loggedIn = request.isAuthenticated();
+
+    if (loggedIn) {
+      registrationsModel.submitRegistration(request.user, request.params, request.body, function(error, invoice) {
+        if (error) {
+          var err = new Error;
+          err.status = 500;
+          err.error = "Error submitting registration";
+          response.json(err)
+        } else {
+          studentsModel.getAllUsersStudents(request.user.id, function(error, students) {
+            if (error) {
+              var err = new Error;
+              err.status = 500;
+              err.error = "Error getting all students";
+              response.json(err)
+            } else {
+              registrationsModel.getRegisteredStudents(request.user.id, request.params.registrationId, function(error, registeredStudents) {
+                if (error) {
+                  var err = new Error;
+                  err.status = 500;
+                  err.error = "Error getting registered students";
+                  response.json(err)
+                } else {
+                  for (var i = 0; i < students.length; i++) {
+                    for (var j = 0; j < registeredStudents.length; j++) {
+                      if (students[i].id == registeredStudents[j].student_id) {
+                        registeredStudents[j].first_name = students[i].first_name;
+                        registeredStudents[j].last_name = students[i].last_name;
+                        registeredStudents[j].graduation_year = students[i].graduation_year;
+                        registeredStudents[j].thespian_status = students[i].thespian_status;
+                      }
+                    }
+                  }
+
+                  registeredStudents.sort(function (a, b) {
+                    var nameA = a.last_name.toUpperCase();
+                    var nameB = b.last_name.toUpperCase();
+                    return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+                  })
+
+                  var thespians = 0;
+                  var nonThespians = 0;
+
+                  for (var i=0; i<registeredStudents.length; i++) {
+                    if (registeredStudents[i].thespian_status === 'Member') {
+                      thespians++
+                    } else {
+                      nonThespians++
+                    }
+                  }
+
+
+                }
+              })
+            }
+          })
+        }
+      })
+    } else {
+      response.redirect('/')
+    }
   }
 };
 

@@ -79,10 +79,10 @@
                 <td><%= registrations[i].conference_name %></td>
                 <td><%= registrations[i].status %></td>
                 <td>
-                  <% if (registrations[i].id) { %>
+                  <% if (registrations[i].id && registrations[i].status === 'open (not yet submitted)') { %>
                     <a href="/conferences/<%=registrations[i].conference_id%>/registration/<%=registrations[i].id%>/edit">Edit Registration</a>
-                   <% } else { %>
-                    <p>Registration is now closed.</p>
+                   <% } else if (registrations[i].id && registrations[i].status === 'submitted') { %>
+                    <p>Registration has been submitted. <a href="">See invoice</a></p>
                   <% } %>
                 </td>
               </tr>
