@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var registrationsController = require('../controllers/registrations.js');
 var iesController = require('../controllers/ies.js');
+var invoicesController = require('../controllers/invoices.js');
 
 // New Reg
 router.post('/conferences/:conferenceId/registration/new', registrationsController.createNewRegistration);
@@ -13,12 +14,15 @@ router.get('/conferences/:conferenceId/registration/:registrationId/edit', regis
 router.get('/conferences/:conferenceId/registration/:registrationId/editStudents', registrationsController.addOrRemoveStudents);
 router.post('/conferences/:conferenceId/registration/:registrationId/editStudents', registrationsController.saveAddOrRemoveStudents);
 
-// Show IES:
-router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies', iesController.getStudentIes);
+// Submit registration, generate invoice
+router.post('/conferences/:conferenceId/registration/:registrationId/invoice/new', registrationsController.submitRegistration);
+router.get('/conferences/:conferenceId/registration/:registrationId/invoice/:invoiceId', invoicesController.getSingleInvoice);
+
 
 // Solo/Duo IES:
 router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/new', iesController.getNewIe);
 router.post('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/new', iesController.createNewIe);
+router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies', iesController.getStudentIes);
 router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/:ieId/edit', iesController.editIe);
 router.post('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/:ieId/edit', iesController.updateIe);
 router.get('/conferences/:conferenceId/registration/:registrationId/student/:studentId/ies/:ieId/delete', iesController.deleteIe);
@@ -34,9 +38,6 @@ router.get('/conferences/:conferenceId/registration/:registrationId/group/:group
 router.get('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/showStudents', iesController.getGroupStudents);
 router.get('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/editStudents', iesController.addOrRemoveStudentsToGroup);
 router.post('/conferences/:conferenceId/registration/:registrationId/group/:groupIeId/editStudents', iesController.saveAddOrRemoveStudentsToGroup);
-
-// Submit registration, generate invoice
-router.post('/conferences/:conferenceId/registration/:registrationId/submit', registrationsController.submitRegistration);
 
 
 module.exports = router;

@@ -1,0 +1,11 @@
+<%- include('./_header') %>
+
+<% if (singleInvoice) { %>
+  <%=invoice%>
+<% } else { %>
+  <h1>Invoices</h1>
+  <p>In this portal you can see all invoices for events you have registered for. To view an individual invoice select "View Invoice" in the row that corresponds to the invoice you'd like to view.</p>
+  <%=invoices%>
+<% } %>
+
+<%- include('./_footer') %>

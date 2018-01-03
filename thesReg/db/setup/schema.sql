@@ -74,8 +74,8 @@ CREATE TABLE group_ies_students(
   student_id integer
 );
 
-DROP TABLE IF EXISTS invoice;
-CREATE TABLE invoice(
+DROP TABLE IF EXISTS invoices;
+CREATE TABLE invoices(
   id serial PRIMARY KEY,
   teacher_id integer,
   school_id integer,

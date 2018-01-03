@@ -67,12 +67,14 @@ var users = require('./routes/users.js');
 var conferences = require('./routes/conferences.js');
 var registrations = require('./routes/registrations.js');
 var students = require('./routes/students.js');
+var invoices = require('./routes/invoices.js');
 
 app.use('/', index);
 app.use('/', users);
 app.use('/', conferences);
 app.use('/', registrations);
 app.use('/', students);
+app.use('/', invoices);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

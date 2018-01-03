@@ -1,6 +1,7 @@
 var registrationsModel = require('../models/registrations.js');
 var studentsModel = require('../models/students.js');
 var iesModel = require('../models/ies.js');
+var invoicesModel = require('../models/invoices.js');
 
 var RegistrationsController = {
 
@@ -207,7 +208,7 @@ var RegistrationsController = {
     const loggedIn = request.isAuthenticated();
 
     if (loggedIn) {
-      registrationsModel.submitRegistration(request.user, request.params, request.body, function(error, invoice) {
+      registrationsModel.submitRegistration(request.user, request.params, request.body, function(error, completeRegistration) {
         if (error) {
           var err = new Error;
           err.status = 500;
@@ -239,12 +240,6 @@ var RegistrationsController = {
                     }
                   }
 
-                  registeredStudents.sort(function (a, b) {
-                    var nameA = a.last_name.toUpperCase();
-                    var nameB = b.last_name.toUpperCase();
-                    return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
-                  })
-
                   var thespians = 0;
                   var nonThespians = 0;
 
@@ -256,7 +251,26 @@ var RegistrationsController = {
                     }
                   }
 
+                  var thespianTotal = (thespians * 30);
+                  var nonThespianTotal = (nonThespians * 40);
+                  var overallTotal = (thespianTotal + nonThespianTotal);
 
+                  var thespiansData = {
+                    thespians: thespians,
+                    nonThespians: nonThespians,
+                    overallTotal: overallTotal
+                  };
+
+                  invoicesModel.createNewInvoice(request.user, request.params, thespiansData, function(error, newInvoice) {
+                    if (error) {
+                      var err = new Error;
+                      err.status = 500;
+                      err.error = "Error creating invoice";
+                      response.json(err)
+                    } else {
+                      response.redirect('/invoices/' + newInvoice.id)
+                    }
+                  })
                 }
               })
             }
