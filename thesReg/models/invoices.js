@@ -10,7 +10,7 @@ var Invoices = function() {};
 Invoices.createNewInvoice = function(user, params, thespianData, callback) {
   db.invoices.save({teacher_id: user.id,
                   school_id: user.school_id,
-                  conference_id: params.conferendId,
+                  conference_id: params.conferenceId,
                   registration_id: params.registrationId,
                   total_thespians: thespianData.thespians,
                   total_non_thespians: thespianData.nonThespians,
@@ -29,7 +29,32 @@ Invoices.getAllUserInvoices = function(userId, callback) {
     if (error) {
       callback(error, undefined)
     } else {
-      callback(null, invoices)
+      var invoicePromises = [];
+      for (var i=0; i<invoices.length; i++) {
+        (function(i) {
+          var promise = new Promise(function(resolve, reject) {
+            db.conferences.findOne({id: invoices[i].conference_id},
+            function(error, conference) {
+              if (error) {
+                reject(error)
+              } else {
+                invoices[i].conference_title = conference.title;
+                resolve()
+              }
+            })
+          })
+          invoicePromises.push(promise)
+        })(i)
+      }
+
+      Promise.all(invoicePromises).then(
+        function() {
+          callback(null, invoices)
+        },
+        function(error) {
+          callback(error, undefined)
+        }
+      )
     }
   })
 };

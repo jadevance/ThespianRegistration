@@ -5,7 +5,29 @@
 <% } else { %>
   <h1>Invoices</h1>
   <p>In this portal you can see all invoices for events you have registered for. To view an individual invoice select "View Invoice" in the row that corresponds to the invoice you'd like to view.</p>
-  <%=invoices%>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Invoice Id</th>
+        <th>Conference</th>
+        <th>Invoice Total</th>
+        <th>View</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (var i=0; i<invoices.length; i++) { %>
+        <tr>
+          <td><%= invoices[i].id %></td>
+          <td><%= invoices[i].conference_title %></td>
+          <td><%= invoices[i].total_cost %></td>
+          <td>
+            <a href="/invoices/<%=invoices[i].id%>">View Invoice</a>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
 <% } %>
 
 <%- include('./_footer') %>
