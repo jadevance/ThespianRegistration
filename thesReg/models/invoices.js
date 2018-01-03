@@ -59,12 +59,29 @@ Invoices.getAllUserInvoices = function(userId, callback) {
   })
 };
 
-Invoices.getSingleInvoice = function(invoiceId, callback) {
-  db.invoices.find({id: invoiceId}, function(error, invoice) {
+Invoices.getSingleInvoice = function(user, invoiceId, callback) {
+  db.invoices.findOne({id: invoiceId}, function(error, invoice) {
     if (error) {
       callback(error, undefined)
     } else {
-      callback(null, invoice)
+      db.conferences.findOne({id: invoice.conference_id}, function(error, conference) {
+        if (error) {
+          callback(error, undefined)
+        } else {
+          invoice.conference_title = conference.title;
+          invoice.conference_date = conference.conference_date;
+
+          db.schools.findOne({id: user.school_id}, function(error, school) {
+            if (error) {
+              callback(error, undefined)
+            } else {
+              invoice.school_name = school.school_name;
+
+              callback(null, invoice)
+            }
+          })
+        }
+      })
     }
   })
 };

@@ -83,6 +83,7 @@ Conferences.getSingleConference = function(conferenceId, callback) {
 Conferences.createNewConference = function(formData, callback) {
   db.conferences.save({title: formData.conference_title,
                         year: formData.year,
+                        conference_date: formData.conference_date,
                         registration_status: formData.registration_status,
                         registration_deadline: formData.registration_deadline,
                         location_name: formData.location_name,
@@ -108,6 +109,7 @@ Conferences.updateConference = function(conferenceId, formData, callback) {
       db.conferences.save({id: conference.id,
                             title: formData.conference_title,
                             year: formData.year,
+                            conference_date: formData.conference_date,
                             registration_status: formData.registration_status,
                             location_name: formData.location_name,
                             location_address: formData.location_address,

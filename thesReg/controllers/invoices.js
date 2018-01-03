@@ -30,7 +30,7 @@ var InvoicesController = {
     const loggedIn = request.isAuthenticated();
 
     if (loggedIn) {
-      invoicesModel.getSingleInvoice(request.params.invoiceId, function(error, invoice) {
+      invoicesModel.getSingleInvoice(request.user, request.params.invoiceId, function(error, invoice) {
         if (error) {
           var err = new Error;
           err.status = 500;
@@ -48,6 +48,14 @@ var InvoicesController = {
     } else {
       response.redirect('/')
     }
+  },
+
+  printInvoice(request, response) {
+
+  },
+
+  downloadInvoice(request, response) {
+
   }
 };
 

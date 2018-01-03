@@ -92,6 +92,7 @@ CREATE TABLE conferences(
   id serial PRIMARY KEY,
   title text,
   year integer,
+  conference_date text,
   registration_status text,
   registration_deadline text,
   location_name text,

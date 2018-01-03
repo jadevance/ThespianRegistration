@@ -1,8 +1,51 @@
 <%- include('./_header') %>
 
 <% if (singleInvoice) { %>
-  <%=invoice%>
-<% } else { %>
+  <h1>Washington State Thespians Invoice</h1>
+  <b>
+    <ol>
+      <li>Please print and give to your financial officer to begin payment process immediately.</li>
+      <li>Please label all checks with school name & event.</li>
+      <li>All payments are final at close of registration.  No refunds will be given.</li>
+    </ol>
+  </b>
+  <a href="/invoices/<%=invoice.id%>/print">Print</a> / <a href="/invoices/<%=invoice.id%>/download">Download PDF</a> / <a href="">Pay with Paypal</a>
+
+  <h2>PAYABLE TO:	Washington State Thespian Society</h2>
+    <p>Attn: Beth Orme
+    Washington St. Thespians
+    1037 NE 65th St STE #241
+    Seattle WA 98115<p>
+
+  <h2>EVENT: <%=invoice.conference_title%>, <%=invoice.conference_date%></h2>
+
+  <h2>DESCRIPTION:	Registration</h2>
+
+  <h2>TO:	<%=invoice.school_name%>		attn: Drama</h2>
+
+  <h2>COST:</h2>
+  <table border="1" style="border-collapse: collapse;">
+    <tr>
+      <td><%=invoice.total_thespians%></td>
+      <td>Thespians @ $30</td>
+      <td>$<%=(parseInt(invoice.total_thespians) * 30)%></td>
+    </tr>
+    <tr>
+      <td><%=invoice.total_non_thespians%></td>
+      <td>Non-Thespians @ $40</td>
+      <td>$<%=(parseInt(invoice.total_non_thespians) * 40)%></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><b>Total</b></td>
+      <td>$<%=invoice.total_cost%></td>
+    </tr>
+  </table>
+
+<p>Please contact Beth Orme at baorme@seattleschools.org if you have any questions or concerns.</p>
+
+
+  <% } else { %>
   <h1>Invoices</h1>
   <p>In this portal you can see all invoices for events you have registered for. To view an individual invoice select "View Invoice" in the row that corresponds to the invoice you'd like to view.</p>
 
