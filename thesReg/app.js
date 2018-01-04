@@ -93,16 +93,16 @@ function createPdfBinary(pdfDoc, callback) {
 }
 
 // Copied from dev-playground. How work?
-// app.post('/pdf', function (req, res) {
-//
-//   createPdfBinary(req.body, function(binary) {
-//     res.contentType('application/pdf');
-//     res.send(binary);
-//   }, function(error) {
-//     res.send('ERROR:' + error);
-//   });
-//
-// });
+app.post('/pdf', function (req, res) {
+
+  createPdfBinary(req.body, function(binary) {
+    res.contentType('application/pdf');
+    res.send(binary);
+  }, function(error) {
+    res.send('ERROR:' + error);
+  });
+
+});
 
 
 
