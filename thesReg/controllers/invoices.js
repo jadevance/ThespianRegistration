@@ -54,10 +54,13 @@ var InvoicesController = {
   printInvoice(request, response) {
     const loggedIn = request.isAuthenticated();
 
-
-    var docDefinition = {content: 'This is an sample PDF printed with pdfMake'};
-    pdfMake.createPdf(docDefinition).print();
-
+    if (loggedIn) {
+      var docDefinition = {content: 'This is an sample PDF printed with pdfMake'};
+      pdfMake.createPdf(docDefinition).print();
+      //  What the fuck do I render?
+    } else {
+      response.redirect('/')
+    }
   },
 
   downloadInvoice(request, response) {

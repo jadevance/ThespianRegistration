@@ -92,35 +92,6 @@ function createPdfBinary(pdfDoc, callback) {
   doc.end();
 }
 
-function createPdfBinary(pdfDoc, callback) {
-
-  var fontDescriptors = {
-    Roboto: {
-      normal: path.join(__dirname, '..', 'examples', '/fonts/Roboto-Regular.ttf'),
-      bold: path.join(__dirname, '..', 'examples', '/fonts/Roboto-Medium.ttf'),
-      italics: path.join(__dirname, '..', 'examples', '/fonts/Roboto-Italic.ttf'),
-      bolditalics: path.join(__dirname, '..', 'examples', '/fonts/Roboto-MediumItalic.ttf')
-    }
-  };
-
-  var printer = new pdfMakePrinter(fontDescriptors);
-
-  var doc = printer.createPdfKitDocument(pdfDoc);
-
-  var chunks = [];
-  var result;
-
-  doc.on('data', function (chunk) {
-    chunks.push(chunk);
-  });
-  doc.on('end', function () {
-    result = Buffer.concat(chunks);
-    callback('data:application/pdf;base64,' + result.toString('base64'));
-  });
-  doc.end();
-
-}
-
 // Copied from dev-playground. How work?
 // app.post('/pdf', function (req, res) {
 //
