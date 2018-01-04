@@ -1,5 +1,6 @@
 var invoicesModel = require('../models/invoices.js');
 var pdfMake = require('pdfmake');
+var pdfBuild = require('pdfmake/build/pdfmake.js');
 
 var InvoicesController = {
 
@@ -56,7 +57,7 @@ var InvoicesController = {
 
     if (loggedIn) {
       var docDefinition = {content: 'This is an sample PDF printed with pdfMake'};
-      pdfMake.createPdf(docDefinition).print();
+      pdfBuild.createPdf(docDefinition).print();
       //  What the fuck do I render?
     } else {
       response.redirect('/')
