@@ -9,6 +9,7 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var massive = require('massive');
 var config = require("./config.js");
+var pdfMakePrinter = require('../src/printer');
 
 var app = module.exports = express();
 

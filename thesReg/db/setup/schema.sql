@@ -83,7 +83,7 @@ CREATE TABLE invoices(
   registration_id integer,
   total_thespians integer,
   total_non_thespians integer,
-  total_cost money
+  total_cost integer
 );
 
 -- Admins only:

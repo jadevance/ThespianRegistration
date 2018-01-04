@@ -30,7 +30,7 @@ Users.findOrMakeUser = function(userSessionInfo, callback) {
 					}
 				})
 		} else {
-      db.run("select * from schools", function(error, schools) {
+      db.run("select * from schools ORDER BY school_name ASC", function(error, schools) {
       	if (error) {
       		callback(error, undefined)
 				} else {

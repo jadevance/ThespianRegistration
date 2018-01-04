@@ -1,6 +1,7 @@
 var app = require('../app.js');
 var db = app.get('db');
 var Promise = require('bluebird');
+var pdfMake = require('pdfMake');
 var _ = require('lodash');
 var moment = require('moment');
 var common = require('../controllers/commonFunctions.js');

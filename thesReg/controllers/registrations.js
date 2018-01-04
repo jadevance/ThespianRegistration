@@ -244,7 +244,7 @@ var RegistrationsController = {
                   var nonThespians = 0;
 
                   for (var i=0; i<registeredStudents.length; i++) {
-                    if (registeredStudents[i].thespian_status === 'Member') {
+                    if (registeredStudents[i].thespian_status) {
                       thespians++
                     } else {
                       nonThespians++

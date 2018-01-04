@@ -1,4 +1,5 @@
 var invoicesModel = require('../models/invoices.js');
+var pdfMake = require('pdfmake');
 
 var InvoicesController = {
 
@@ -51,6 +52,11 @@ var InvoicesController = {
   },
 
   printInvoice(request, response) {
+    const loggedIn = request.isAuthenticated();
+
+
+    var docDefinition = {content: 'This is an sample PDF printed with pdfMake'};
+    pdfMake.createPdf(docDefinition).print();
 
   },
 
