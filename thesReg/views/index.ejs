@@ -34,7 +34,8 @@
                 <td>
                   <% if (user.user_level === 1) { %>
                     <a href="/conferences/<%=conferences[i].id%>">View </a>/<a href="conferences/<%=conferences[i].id%>/edit"> Edit</a>
-                  <% } else if (conferences[i].registration_status === "open" && !conferences[i].hideActions) { %>
+                  <% } %>
+                  <% if (conferences[i].registration_status === "open" && !conferences[i].hideActions) { %>
                     <form method="post" action="/conferences/<%=conferences[i].id%>/registration/new" class="inline">
                       <input type="hidden" name="register-form">
                       <button type="submit" class="link-button">

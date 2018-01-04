@@ -9,7 +9,8 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var massive = require('massive');
 var config = require("./config.js");
-var pdfMakePrinter = require('../src/printer');
+// Where do I get pdfMakePrinter from? This line is from playground:
+// var pdfMakePrinter = require('../src/printer');
 
 var app = module.exports = express();
 
